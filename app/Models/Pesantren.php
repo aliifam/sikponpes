@@ -11,6 +11,14 @@ class Pesantren extends Model
 
     protected $table = "pesantrens";
 
+    protected $fillable = [
+        'name',
+        'address',
+        'phone_number',
+        'is_active',
+        'user_id'
+    ];
+
     public function employee()
     {
         return $this->hasMany(Employee::class);

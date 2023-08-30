@@ -5,10 +5,16 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PesantrenResource\Pages;
 use App\Filament\Resources\PesantrenResource\RelationManagers;
 use App\Models\Pesantren;
-use Filament\Forms;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,7 +33,27 @@ class PesantrenResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Section::make('')
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Nama Pesantren')
+                            ->autofocus()
+                            ->required()
+                            ->placeholder('Nama Pesantren'),
+                        Textarea::make('address')
+                            ->label('Alamat Pesantren')
+                            ->autofocus()
+                            ->required()
+                            ->placeholder('Alamat Pesantren'),
+                        TextInput::make('phone_number')
+                            ->autofocus()
+                            ->required()
+                            ->placeholder('Nomor Telepon Pesantren'),
+                        Toggle::make('is_active')
+                            ->label('Status Aktif'),
+                        Hidden::make('user_id')
+                            ->default(auth()->user()->id)
+                    ])
             ]);
     }
 
@@ -35,7 +61,21 @@ class PesantrenResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Nama Pesantren')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('address')
+                    ->label('Alamat Pesantren')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('phone_number')
+                    ->label('Nomor Telepon Pesantren')
+                    ->searchable()
+                    ->sortable(),
+                ToggleColumn::make('is_active')
+                    ->label('Status Aktif')
+                    ->sortable(),
             ])
             ->filters([
                 //
