@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class InitialBalance extends Model
 {
     use HasFactory;
+
+    protected $table = "initial_balances";
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+
+    protected $table = "employees";
+
+    public function pesantren()
+    {
+        return $this->belongsTo(Pesantren::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

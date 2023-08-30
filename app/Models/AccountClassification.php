@@ -9,6 +9,8 @@ class AccountClassification extends Model
 {
     use HasFactory;
 
+    protected $table = "account_classifications";
+
     public function account()
     {
         return $this->hasMany(Account::class);

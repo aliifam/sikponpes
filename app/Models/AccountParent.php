@@ -9,6 +9,8 @@ class AccountParent extends Model
 {
     use HasFactory;
 
+    protected $table = "account_parents";
+
     public function pesantren()
     {
         return $this->belongsTo(Pesantren::class);

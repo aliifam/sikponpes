@@ -9,6 +9,8 @@ class Account extends Model
 {
     use HasFactory;
 
+    protected $table = "accounts";
+
     public function classification()
     {
         return $this->belongsTo(AccountClassification::class);
@@ -19,10 +21,10 @@ class Account extends Model
         return $this->hasMany(InitialBalance::class);
     }
 
-    public function journalEntry()
+    public function journal()
     {
-        return $this->hasMany(JournalEntry::class);
+        return $this->hasMany(GeneralJournal::class);
     }
 
-    
+
 }
