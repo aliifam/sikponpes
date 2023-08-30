@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('initial_balances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('account_id')->constrained('accounts')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->interger('amount');
+            $table->integer('amount');
             $table->date('date');
             $table->timestamps();
         });
