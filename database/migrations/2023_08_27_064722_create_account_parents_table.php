@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('account_parents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pesantren_id');
-            $table->foreign('pesantren_id')->references('id')->on('pesantrens')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('pesantren_id')->constrained('pesantrens')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('parent_code');
             $table->string('parent_name');
             $table->timestamps();

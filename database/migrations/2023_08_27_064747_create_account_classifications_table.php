@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('account_classifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id');
-            $table->foreign('parent_id')->references('id')->on('account_parents')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('parent_id')->constrained('account_parents')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('classification_code');
             $table->string('classification_name');
             $table->timestamps();

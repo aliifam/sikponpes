@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('initial_balances', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('account_id');
-            $table->foreign('account_id')->references('id')->on('accounts')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('account_id')->constrained('accounts')->cascadeOnDelete()->cascadeOnUpdate();
             $table->interger('amount');
             $table->date('date');
             $table->timestamps();
