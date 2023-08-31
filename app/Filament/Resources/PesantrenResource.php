@@ -24,6 +24,7 @@ class PesantrenResource extends Resource
     protected static ?string $model = Pesantren::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
+    protected static ?string $navigationGroup = 'Manajemen Pesantren';
 
     protected static ?string $navigationLabel = 'Kelola Pesantren';
     protected static ?string $pluralModelLabel = 'Kelola Pesantren';

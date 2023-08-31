@@ -11,6 +11,12 @@ class AccountClassification extends Model
 
     protected $table = "account_classifications";
 
+    protected $fillable = [
+        'parent_id',
+        'classification_code',
+        'classification_name',
+    ];
+
     public function account()
     {
         return $this->hasMany(Account::class);

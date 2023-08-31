@@ -11,6 +11,12 @@ class AccountParent extends Model
 
     protected $table = "account_parents";
 
+    protected $fillable = [
+        'pesantren_id',
+        'parent_code',
+        'parent_name',
+    ];
+
     public function pesantren()
     {
         return $this->belongsTo(Pesantren::class);
