@@ -6,7 +6,9 @@ use App\Filament\Resources\AccountClassificationResource\Pages;
 use App\Filament\Resources\AccountClassificationResource\RelationManagers;
 use App\Models\AccountClassification;
 use App\Models\AccountParent;
+use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -53,7 +55,9 @@ class AccountClassificationResource extends Resource
                     ->label('Kode Klasifikasi Akun')
                     ->autofocus()
                     ->placeholder('Masukkan Kode Klasifikasi Akun')
-                    ->required()
+                    ->required(),
+                Hidden::make('pesantren_id')
+                    ->default(Filament::getTenant()->id)
             ])->columns(1);
     }
 

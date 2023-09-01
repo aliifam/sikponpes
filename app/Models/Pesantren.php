@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Pesantren extends Model
 {
@@ -31,8 +32,13 @@ class Pesantren extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function accountParent()
+    public function accountClassifications(): HasMany
     {
-        return $this->hasMany(AccountParent::class);
+        return $this->hasMany(AccountClassification::class);
+    }
+
+    public function accounts(): BelongsToMany
+    {
+        return $this->belongsToMany(Account::class);
     }
 }

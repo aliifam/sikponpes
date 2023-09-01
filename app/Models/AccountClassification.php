@@ -13,6 +13,7 @@ class AccountClassification extends Model
 
     protected $fillable = [
         'parent_id',
+        'pesantren_id',
         'classification_code',
         'classification_name',
     ];
