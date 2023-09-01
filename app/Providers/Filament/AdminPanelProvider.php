@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Register;
+use App\Filament\Pages\Tenancy\RegisterPesantren;
+use App\Models\Pesantren;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -27,8 +29,10 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('dashboard')
+            ->tenant(Pesantren::class)
+            ->tenantRegistration(RegisterPesantren::class)
             ->login()
-            ->registration(Register::class)
+            ->registration()
             ->profile()
             ->sidebarCollapsibleOnDesktop()
             ->colors([

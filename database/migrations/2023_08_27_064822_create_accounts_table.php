@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pesantren_id')->constrained('pesantrens')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('classification_id')->constrained('account_classifications')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('account_code');
             $table->string('account_name');

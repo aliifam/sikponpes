@@ -26,4 +26,9 @@ class AccountClassification extends Model
     {
         return $this->belongsTo(AccountParent::class);
     }
+
+    public function pesantren()
+    {
+        return $this->belongsTo(Pesantren::class);
+    }
 }

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('account_parents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pesantren_id')->constrained('pesantrens')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('parent_code');
             $table->string('parent_name');
             $table->timestamps();
