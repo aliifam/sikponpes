@@ -5,7 +5,11 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers;
 use App\Models\Account;
+use App\Models\AccountParent;
 use Filament\Forms;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,7 +32,46 @@ class AccountResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Select::make('parent_id')
+                    ->label('Akun Utama')
+                    ->reactive()
+                    ->options(
+                        AccountParent::all()->pluck('parent_name', 'id')
+                    )
+                    ->placeholder('Pilih Akun Utama')
+                    ->afterStateUpdated(function (callable $set) {
+                        $set('classification_id', null);
+                    })
+                    ->required(),
+                Select::make('classification_id')
+                    ->label('Klasifikasi Akun')
+                    ->options(
+                        function (callable $get) {
+                            $akunutama = AccountParent::find($get('parent_id'));
+                            if ($akunutama) {
+                                return $akunutama->classification->pluck('classification_name', 'id');
+                            }
+                            return [];
+                        }
+                    ),
+                TextInput::make('account_name')
+                    ->label('Nama Akun')
+                    ->autofocus()
+                    ->placeholder('Masukkan Nama Akun')
+                    ->required(),
+                TextInput::make('account_code')
+                    ->label('Kode Akun')
+                    ->autofocus()
+                    ->placeholder('Masukkan Kode Akun')
+                    ->required(),
+                Radio::make('account_type')
+                    ->label('Tipe Akun')
+                    ->options([
+                        'debit' => 'Debit',
+                        'kredit' => 'Kredit',
+                    ])
+                    ->default('debit')
+                    ->required(),
             ]);
     }
 
