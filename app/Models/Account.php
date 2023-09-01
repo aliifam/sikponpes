@@ -11,6 +11,14 @@ class Account extends Model
 
     protected $table = "accounts";
 
+    protected $fillable = [
+        'pesantren_id',
+        'classification_id',
+        'account_code',
+        'account_name',
+        'position',
+    ];
+
     public function classification()
     {
         return $this->belongsTo(AccountClassification::class);

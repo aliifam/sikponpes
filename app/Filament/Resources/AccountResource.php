@@ -6,13 +6,16 @@ use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers;
 use App\Models\Account;
 use App\Models\AccountParent;
+use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -64,7 +67,7 @@ class AccountResource extends Resource
                     ->autofocus()
                     ->placeholder('Masukkan Kode Akun')
                     ->required(),
-                Radio::make('account_type')
+                Radio::make('position')
                     ->label('Tipe Akun')
                     ->options([
                         'debit' => 'Debit',
@@ -72,6 +75,8 @@ class AccountResource extends Resource
                     ])
                     ->default('debit')
                     ->required(),
+                Hidden::make('pesantren_id')
+                    ->default(Filament::getTenant()->id)
             ]);
     }
 
@@ -79,7 +84,26 @@ class AccountResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('classification.parent.parent_name')
+                    ->label('Akun Utama')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('classification.classification_name')
+                    ->label('Klasifikasi Akun')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('account_name')
+                    ->label('Nama Akun')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('account_code')
+                    ->label('Kode Akun')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('position')
+                    ->label('Tipe Akun')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 //

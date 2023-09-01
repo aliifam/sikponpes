@@ -37,8 +37,8 @@ class Pesantren extends Model
         return $this->hasMany(AccountClassification::class);
     }
 
-    public function accounts(): BelongsToMany
+    public function accounts(): HasMany
     {
-        return $this->belongsToMany(Account::class);
+        return $this->hasMany(Account::class);
     }
 }
