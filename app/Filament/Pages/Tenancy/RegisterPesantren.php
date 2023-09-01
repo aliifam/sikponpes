@@ -49,6 +49,19 @@ class RegisterPesantren extends RegisterTenant
 
         $team->user()->attach(auth()->user());
 
+        $defaultAccountClassificationData = [
+            [
+                'pesantren_id' => $team->id,
+                'parent_id' => 1,
+                'classification_code' => '1.1',
+                'classification_name' => 'Kas',
+            ],
+            [
+                'pesantren_id' => $team->id,
+                'classification_id' => 1,
+            ]
+        ];
+
         return $team;
     }
 }
