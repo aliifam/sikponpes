@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class RegisterPesantren extends RegisterTenant
 {
@@ -49,6 +50,27 @@ class RegisterPesantren extends RegisterTenant
         $pesantren = Pesantren::create($data);
 
         $pesantren->user()->attach(auth()->user());
+
+        function insertData($data, $parent_id = null, $classification_id = null)
+        {
+            foreach ($data as $key => $value) {
+                // Sisipkan data saat ini ke dalam tabel yang sesuai
+                $table = ($parent_id === null) ? 'account_parents' : (($classification_id === null) ? 'account_classifications' : 'accounts_table'); // Ganti dengan nama tabel yang sesuai
+                $element_id = DB::table($table)->insertGetId([
+                    'parent_id' => $parent_id,
+                    'classification_id' => $classification_id,
+                    'name' => $value['name'],
+                    'code' => $value['code'],
+                    'position' => isset($value['position']) ? $value['position'] : null,
+                ]);
+
+                if (isset($value['classification']) && is_array($value['classification'])) {
+                    // Jika ada klasifikasi, panggil rekursi dengan parent_id dan classification_id saat ini
+                    insertData($value['classification'], $element_id, $element_id);
+                }
+            }
+        }
+
 
         $defaultPesantrenData = array(
             "1" => array(
@@ -292,46 +314,14 @@ class RegisterPesantren extends RegisterTenant
                 '5.1' => 'Biaya'
             ),
         );
-        $akun_array = array(
-            array(
-                "Kas" => array("1.1.1" => "Debit"),
-                "Bank" => array("1.1.2" => "Debit"),
-                "Piutang Usaha" => array("1.1.3" => "Debit"),
-                "Piutang Santri" => array("1.1.4" => "Debit"),
-                "Penyisihan Piutang" => array("1.1.5" => "Kredit"),
-                "Persediaan/Inventaris" => array("1.1.6" => "Debit"),
-                "Perlengkapan" => array("1.1.7" => "Debit"),
-                "Pembayaran Dimuka" => array("1.1.8" => "Debit"),
-                "Aset Lancar Lain" => array("1.1.9" => "Debit")
-            ),
-            array(
-                "Tanah" => array("1.2.1" => "Debit"),
-                "Kendaraan" => array("1.2.2" => "Debit"),
-                "Peralatan dan Mesin" => array("1.2.3" => "Kredit"),
-                "Gedung dan Bangunan" => array("1.2.4" => "Debit"),
-                "Akumulasi Penyusutan Kendaraan" => array("1230-1" => "Kredit"),
-                "Peralatan Kantor" => array("1240" => "Debit"),
-                "Akumulasi Penyusutan Peralatan Kantor" => array("1240-1" => "Kredit")
-            ),
-            array(
-                "Aset Lainnya" => array("1310" => "Debit")
-            ),
-            array(
-                "Utang Dagang" => array("2110" => "Kredit"), "Utang Gaji" => array("2120" => "Kredit"), "Utang Bank" => array("2130" => "Kredit")
-            ),
-            array("Obligasi" => array("2210" => "Kredit")),
-            array("Modal Disetor" => array("3100" => "Kredit"), "Saldo Laba Ditahan" => array("3110" => "Kredit"), "Saldo Laba Tahun Berjalan" => array("3120" => "Kredit")),
-            array("Pendapatan Wisata" => array("4110" => "Kredit"), "Pendapatan Homestay" => array("4120" => "Kredit"), "Pendapatan Resto" => array("4130" => "Kredit"), "Pendapatan Event" => array("4140" => "Kredit")),
-            array("Biaya Gaji" => array("5110" => "Debit"), "Biaya Listrik, Air dan Telepon" => array("5120" => "Debit"), "Biaya Administrasi dan Umum" => array("5130" => "Debit"), "Biaya Pemasaran" => array("5140" => "Debit"), "Biaya Perlengkapan Kantor" => array("5150" => "Debit"), "Biaya Sewa" => array("5160" => "Debit"), "Biaya Asuransi" => array("5170" => "Debit"), "Biaya Penyusutan Gedung" => array("5180" => "Debit"), "Biaya Penyusutan Kendaraan" => array("5190" => "Debit"), "Biaya Penyusutan Peralatan Kantor" => array("5200" => "Debit")),
-            array("Pendapatan Lain-Lain" => array("6110" => "Kredit")),
-            array("Biaya Lain-Lain" => array("7110" => "Debit"))
-        );
 
         try {
-            $pesantren->accountClassification()->createMany($defaultAccountClassificationData);
-            $pesantren->account()->createMany($defaultAccountData);
-        } catch (\Throwable $th) {
-            throw $th;
+            DB::beginTransaction();
+            insertData($defaultPesantrenData);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
         }
 
         return $pesantren;
