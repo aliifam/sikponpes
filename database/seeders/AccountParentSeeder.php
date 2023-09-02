@@ -17,17 +17,17 @@ class AccountParentSeeder extends Seeder
             [
                 "id" => 1,
                 "name" => "Aset",
-                "code" => "1",
+                "code" => "1.0.00.00",
             ],
             [
                 "id" => 2,
                 "name" => "Liabilitas",
-                "code" => "2",
+                "code" => "2.0.00.00",
             ],
             [
                 "id" => 3,
                 "name" => "Ekuitas",
-                "code" => "3",
+                "code" => "3.0.00.00",
             ],
             [
                 "id" => 4,
