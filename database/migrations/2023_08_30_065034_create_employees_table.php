@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('id_pesantren');
-            $table->foreign('id_pesantren')->references('id')->on('pesantrens')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('pesantren_id')->constrained('pesantrens')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

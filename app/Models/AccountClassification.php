@@ -13,7 +13,6 @@ class AccountClassification extends Model
 
     protected $fillable = [
         'parent_id',
-        'pesantren_id',
         'classification_code',
         'classification_name',
     ];
@@ -30,6 +29,6 @@ class AccountClassification extends Model
 
     public function pesantren()
     {
-        return $this->belongsTo(Pesantren::class);
+        return $this->parent->belongsTo(Pesantren::class);
     }
 }

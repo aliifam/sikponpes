@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('general_journals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_journal_detail')->constrained('journal_details')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('id_account')->constrained('accounts')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('journal_detail_id')->constrained('journal_details')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('account_id')->constrained('accounts')->cascadeOnDelete()->cascadeOnUpdate();
             $table->enum('position', ['debit', 'credit']);
             $table->integer('amount');
             $table->timestamps();

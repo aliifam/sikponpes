@@ -12,7 +12,6 @@ class Account extends Model
     protected $table = "accounts";
 
     protected $fillable = [
-        'pesantren_id',
         'classification_id',
         'account_code',
         'account_name',
@@ -24,6 +23,16 @@ class Account extends Model
         return $this->belongsTo(AccountClassification::class);
     }
 
+    public function parent()
+    {
+        return $this->classification->belongsTo(AccountParent::class);
+    }
+
+    public function pesantren()
+    {
+        return $this->parent->belongsTo(Pesantren::class);
+    }
+
     public function initialBalance()
     {
         return $this->hasMany(InitialBalance::class);
@@ -32,10 +41,5 @@ class Account extends Model
     public function journal()
     {
         return $this->hasMany(GeneralJournal::class);
-    }
-
-    public function pesantren()
-    {
-        return $this->belongsTo(Pesantren::class);
     }
 }

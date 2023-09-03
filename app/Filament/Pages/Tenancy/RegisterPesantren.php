@@ -47,27 +47,39 @@ class RegisterPesantren extends RegisterTenant
 
     protected function handleRegistration(array $data): Pesantren
     {
-        $pesantren = Pesantren::create($data);
 
-        $pesantren->user()->attach(auth()->user());
-
-        function insertData($data, $parent_id = null, $classification_id = null)
+        function insertParentData($parentData, $pesantrenId, $parentCode)
         {
-            foreach ($data as $key => $value) {
-                // Sisipkan data saat ini ke dalam tabel yang sesuai
-                $table = ($parent_id === null) ? 'account_parents' : (($classification_id === null) ? 'account_classifications' : 'accounts_table'); // Ganti dengan nama tabel yang sesuai
-                $element_id = DB::table($table)->insertGetId([
-                    'parent_id' => $parent_id,
-                    'classification_id' => $classification_id,
-                    'name' => $value['name'],
-                    'code' => $value['code'],
-                    'position' => isset($value['position']) ? $value['position'] : null,
-                ]);
+            // Memasukkan data parent
+            $parentId = DB::table('account_parents')->insertGetId([
+                'parent_name' => $parentData['name'],
+                'parent_code' => $parentCode, // Use the provided parent code
+                'pesantren_id' => $pesantrenId,
+            ]);
 
-                if (isset($value['classification']) && is_array($value['classification'])) {
-                    // Jika ada klasifikasi, panggil rekursi dengan parent_id dan classification_id saat ini
-                    insertData($value['classification'], $element_id, $element_id);
-                }
+            // Memasukkan data classification
+            foreach ($parentData['classification'] as $classificationCode => $classificationData) {
+                insertClassificationData($classificationData, $parentId, $classificationCode);
+            }
+        }
+
+        function insertClassificationData($classificationData, $parentId, $classificationCode)
+        {
+            // Memasukkan data classification
+            $classificationId = DB::table('account_classifications')->insertGetId([
+                'classification_name' => $classificationData['name'],
+                'classification_code' => $classificationCode, // Use the provided classification code
+                'parent_id' => $parentId,
+            ]);
+
+            // Memasukkan data account
+            foreach ($classificationData['account'] as $accountCode => $accountData) {
+                DB::table('accounts')->insert([
+                    'account_name' => $accountData['name'],
+                    'account_code' => $accountCode, // Use the provided account code
+                    'position' => $accountData['position'],
+                    'classification_id' => $classificationId,
+                ]);
             }
         }
 
@@ -198,7 +210,7 @@ class RegisterPesantren extends RegisterTenant
                 ),
             ),
             "2" => array(
-                "name " => "Liabilitas",
+                "name" => "Liabilitas",
                 "code" => "2",
                 "classification" => array(
                     "2.1" => array(
@@ -377,7 +389,7 @@ class RegisterPesantren extends RegisterTenant
                     "5.2" => array(
                         "name" => "Biaya Keuangan",
                         "code" => "5.2",
-                        "classification" => array(
+                        "account" => array(
                             "5.2.1" => array(
                                 "name" => "Bunga Bank",
                                 "code" => "5.2.1",
@@ -393,7 +405,7 @@ class RegisterPesantren extends RegisterTenant
                     "5.3" => array(
                         "name" => "Biaya Lainnya",
                         "code" => "5.3",
-                        "classification" => array(
+                        "account" => array(
                             "5.3.1" => array(
                                 "name" => "Penyusutan Aset Tetap",
                                 "code" => "5.3.1",
@@ -422,7 +434,15 @@ class RegisterPesantren extends RegisterTenant
 
         try {
             DB::beginTransaction();
-            insertData($defaultPesantrenData);
+            $pesantren = Pesantren::create($data);
+            $pesantren->user()->attach(auth()->user());
+            $pesantren_id = $pesantren->id;
+
+            // Memasukkan data parent
+            foreach ($defaultPesantrenData as $parentCode => $parentData) {
+
+                insertParentData($parentData, $pesantren_id, $parentCode);
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

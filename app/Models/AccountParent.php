@@ -22,13 +22,13 @@ class AccountParent extends Model
         return $this->belongsTo(Pesantren::class);
     }
 
-    public function accounts()
-    {
-        return $this->hasMany(Account::class);
-    }
-
     public function classification()
     {
-        return $this->hasMany(AccountClassification::class, 'parent_id');
+        return $this->hasMany(AccountClassification::class);
+    }
+
+    public function account()
+    {
+        return $this->classification->hasMany(Account::class);
     }
 }

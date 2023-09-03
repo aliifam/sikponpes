@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Pesantren extends Model
 {
@@ -32,13 +33,18 @@ class Pesantren extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function accountClassifications(): HasMany
+    public function parents(): HasMany
     {
-        return $this->hasMany(AccountClassification::class);
+        return $this->hasMany(AccountParent::class);
     }
 
-    public function accounts(): HasMany
+    public function classifications(): HasManyThrough
     {
-        return $this->hasMany(Account::class);
+        return $this->hasManyThrough(AccountClassification::class, AccountParent::class);
+    }
+
+    public function accounts(): HasManyThrough
+    {
+        return $this->hasManyThrough(Account::class, AccountParent::class, 'pesantren_id', 'classification_id');
     }
 }
