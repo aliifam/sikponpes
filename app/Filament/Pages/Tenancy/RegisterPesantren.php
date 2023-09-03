@@ -282,36 +282,141 @@ class RegisterPesantren extends RegisterTenant
                     )
                 )
             ),
-            "4" => array(),
-            "5" => array(),
-        );
-
-        $parent_array = array(
-            '1' => 'Asset',
-            '2' => 'Liabilitas',
-            '3' => 'Ekuitas',
-            '4' => 'Pendapatan',
-            '5' => 'Biaya',
-        );
-
-        $class_array = array(
-            array(
-                '1.1' => 'Aset Lancar',
-                '1.2' => 'Investasi',
-                '1.3' => 'Aset Tetap'
+            "4" => array(
+                "name" => "Pendapatan",
+                "code" => "4",
+                "classification" => array(
+                    "4.1" => array(
+                        "name" => "Pendapatan",
+                        "code" => "4.1",
+                        "account" => array(
+                            "4.1.1" => array(
+                                "name" => "Pendapatan Bantuan/Sumbangan/Hibah",
+                                "code" => "4.1.1",
+                                "position" => "kredit"
+                            ),
+                            "4.1.2" => array(
+                                "name" => "Pendapatan Uang Pendaftaran Santri",
+                                "code" => "4.1.2",
+                                "position" => "kredit"
+                            ),
+                            "4.1.3" => array(
+                                "name" => "Pendapatan Sewa Tempat",
+                                "code" => "4.1.3",
+                                "position" => "kredit"
+                            ),
+                            "4.1.4" => array(
+                                "name" => "Pendapatan SPP",
+                                "code" => "4.1.4",
+                                "position" => "kredit"
+                            ),
+                            "4.1.5" => array(
+                                "name" => "Pendapatan Lainnya",
+                                "code" => "4.1.5",
+                                "position" => "kredit"
+                            ),
+                        )
+                    )
+                )
             ),
-            array(
-                '2.1' => 'Utang Jangka Pendek',
-                '2.2' => 'Utang Jangka Panjang'
-            ),
-            array(
-                '3.1' => 'Ekuitas'
-            ),
-            array(
-                '4.1' => 'Pendapatan'
-            ),
-            array(
-                '5.1' => 'Biaya'
+            "5" => array(
+                "name" => "Biaya",
+                "code" => "5",
+                "classification" => array(
+                    "5.1" => array(
+                        "name" => "Biaya Operasional",
+                        "code" => "5.1",
+                        "account" => array(
+                            "5.1.1" => array(
+                                "name" => "Gaji Guru dan Staff",
+                                "code" => "5.1.1",
+                                "position" => "debit"
+                            ),
+                            "5.1.2" => array(
+                                "name" => "Honorarium Pengajar",
+                                "code" => "5.1.2",
+                                "position" => "debit"
+                            ),
+                            "5.1.3" => array(
+                                "name" => "Pemeliharaan dan Perbaikan Gedung",
+                                "code" => "5.1.3",
+                                "position" => "debit"
+                            ),
+                            "5.1.4" => array(
+                                "name" => "Listrik, Air, dan Telepon",
+                                "code" => "5.1.4",
+                                "position" => "debit"
+                            ),
+                            "5.1.5" => array(
+                                "name" => "Pendidian dan Pelatihan",
+                                "code" => "5.1.5",
+                                "position" => "debit"
+                            ),
+                            "5.1.6" => array(
+                                "name" => "Pengadaan Bahan Ajar dan Perlengkapan",
+                                "code" => "5.1.6",
+                                "position" => "debit"
+                            ),
+                            "5.1.7" => array(
+                                "name" => "Administrasi dan Umum",
+                                "code" => "5.1.7",
+                                "position" => "debit"
+                            ),
+                            "5.1.8" => array(
+                                "name" => "Asuransi",
+                                "code" => "5.1.8",
+                                "position" => "debit"
+                            ),
+                            "5.1.9" => array(
+                                "name" => "Pajak dan Retribusi",
+                                "code" => "5.1.9",
+                                "position" => "debit"
+                            ),
+                        )
+                    ),
+                    "5.2" => array(
+                        "name" => "Biaya Keuangan",
+                        "code" => "5.2",
+                        "classification" => array(
+                            "5.2.1" => array(
+                                "name" => "Bunga Bank",
+                                "code" => "5.2.1",
+                                "position" => "debit"
+                            ),
+                            "5.2.2" => array(
+                                "name" => "Bunga Pinjaman",
+                                "code" => "5.2.2",
+                                "position" => "debit"
+                            ),
+                        )
+                    ),
+                    "5.3" => array(
+                        "name" => "Biaya Lainnya",
+                        "code" => "5.3",
+                        "classification" => array(
+                            "5.3.1" => array(
+                                "name" => "Penyusutan Aset Tetap",
+                                "code" => "5.3.1",
+                                "position" => "debit"
+                            ),
+                            "5.3.2" => array(
+                                "name" => "Kerugian Piutang",
+                                "code" => "5.3.2",
+                                "position" => "debit"
+                            ),
+                            "5.3.3" => array(
+                                "name" => "Kerugian Investasi",
+                                "code" => "5.3.3",
+                                "position" => "debit"
+                            ),
+                            "5.3.4" => array(
+                                "name" => "Donasi dan Bantuan",
+                                "code" => "5.3.4",
+                                "position" => "debit"
+                            ),
+                        )
+                    ),
+                )
             ),
         );
 
