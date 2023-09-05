@@ -25,6 +25,8 @@ class AccountClassificationResource extends Resource
 {
     protected static ?string $model = AccountClassification::class;
 
+    protected static ?string $tenantOwnershipRelationshipName = 'pesantren';
+
     protected static ?string $navigationIcon = 'heroicon-o-square-3-stack-3d';
 
     protected static ?string $navigationLabel = 'Kelola Klasifikasi Akun';
@@ -64,6 +66,7 @@ class AccountClassificationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->paginated(false)
             ->columns([
                 TextColumn::make('parent.parent_name')
                     ->label('Akun Utama')

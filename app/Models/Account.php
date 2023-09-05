@@ -30,7 +30,7 @@ class Account extends Model
 
     public function pesantren()
     {
-        return $this->parent->belongsTo(Pesantren::class);
+        return $this->belongsTo(Pesantren::class, 'pesantren_id');
     }
 
     public function initialBalance()

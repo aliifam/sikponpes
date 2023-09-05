@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,11 +25,11 @@ class AccountClassification extends Model
 
     public function parent()
     {
-        return $this->belongsTo(AccountParent::class);
+        return $this->belongsTo(AccountParent::class, 'parent_id');
     }
 
     public function pesantren()
     {
-        return $this->parent->belongsTo(Pesantren::class);
+        return $this->belongsTo(Pesantren::class, 'pesantren_id');
     }
 }

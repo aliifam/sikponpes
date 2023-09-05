@@ -9,8 +9,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class RegisterPesantren extends RegisterTenant
@@ -59,17 +57,18 @@ class RegisterPesantren extends RegisterTenant
 
             // Memasukkan data classification
             foreach ($parentData['classification'] as $classificationCode => $classificationData) {
-                insertClassificationData($classificationData, $parentId, $classificationCode);
+                insertClassificationData($classificationData, $parentId, $classificationCode, $pesantrenId);
             }
         }
 
-        function insertClassificationData($classificationData, $parentId, $classificationCode)
+        function insertClassificationData($classificationData, $parentId, $classificationCode, $pesantrenId)
         {
             // Memasukkan data classification
             $classificationId = DB::table('account_classifications')->insertGetId([
                 'classification_name' => $classificationData['name'],
                 'classification_code' => $classificationCode, // Use the provided classification code
                 'parent_id' => $parentId,
+                'pesantren_id' => $pesantrenId,
             ]);
 
             // Memasukkan data account
@@ -79,6 +78,7 @@ class RegisterPesantren extends RegisterTenant
                     'account_code' => $accountCode, // Use the provided account code
                     'position' => $accountData['position'],
                     'classification_id' => $classificationId,
+                    'pesantren_id' => $pesantrenId,
                 ]);
             }
         }
