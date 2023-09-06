@@ -19,6 +19,8 @@ class ManageAccounts extends ManageRecords
                 ->modalWidth('xl')
                 ->modalAlignment(Alignment::Center)
                 ->createAnother(false),
+            //auto select and fill current data
+
         ];
     }
 }

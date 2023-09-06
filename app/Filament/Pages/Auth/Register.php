@@ -11,7 +11,10 @@ use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Pages\Auth\Register as BaseRegister;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\HtmlString;
+use Illuminate\Validation\Rules\Password as RulesPassword;
+use Phpsa\FilamentPasswordReveal\Password;
 
 class Register extends BaseRegister
 {
@@ -19,47 +22,28 @@ class Register extends BaseRegister
     {
         return $form
             ->schema([
-                Wizard::make([
-                    Step::make('Account')
-                        ->icon('heroicon-m-user-circle')
-                        ->schema([
-                            $this->getNameFormComponent(),
-                            $this->getEmailFormComponent(),
-                            $this->getPasswordFormComponent(),
-                            $this->getPasswordConfirmationFormComponent(),
-                        ]),
-                    Step::make('Pesantren')
-                        ->icon('heroicon-m-building-library')
-                        ->schema([
-                            TextInput::make('name')
-                                ->label('Nama Pesantren')
-                                ->autofocus()
-                                ->required()
-                                ->placeholder('Nama Pesantren'),
-                            Textarea::make('address')
-                                ->label('Alamat Pesantren')
-                                ->autofocus()
-                                ->required()
-                                ->placeholder('Alamat Pesantren'),
-                            TextInput::make('phone_number')
-                                ->autofocus()
-                                ->required()
-                                ->placeholder('Nomor Telepon Pesantren'),
-                            Toggle::make('is_active')
-                                ->label('Status Aktif'),
-                        ]),
-                ])->submitAction(
-                    Action::make('register')
-                        ->label('Daftar')
-                )->persistStepInQueryString()
+                $this->getNameFormComponent(),
+                $this->getEmailFormComponent(),
+                Password::make('password')
+                    ->label('Password')
+                    ->required()
+                    ->rule(RulesPassword::default())
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->same('password_confirmation')
+                    ->validationAttribute(__('filament-panels::pages/auth/register.form.password.validation_attribute')),
+                Password::make('password_confirmation')
+                    ->label('Konfirmasi Password')
+                    ->dehydrated(false)
+                    ->required(),
+                // $this->getPasswordConfirmationFormComponent()
             ]);
     }
 
-    public function getRegisterFormAction(): Action
-    {
-        return Action::make('register')
-            ->label('Register')
-            //visibility false
-            ->visible(false);
-    }
+    // public function getRegisterFormAction(): Action
+    // {
+    //     return Action::make('register')
+    //         ->label('Register')
+    //         //visibility false
+    //         ->visible(false);
+    // }
 }
