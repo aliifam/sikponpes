@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
+use App\Filament\Pages\Tenancy\EditPesantrenProfile;
 use App\Filament\Pages\Tenancy\RegisterPesantren;
 use App\Models\Pesantren;
 use Filament\Http\Middleware\Authenticate;
@@ -32,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('dashboard')
             ->tenant(Pesantren::class, ownershipRelationship: 'pesantren')
             ->tenantRegistration(RegisterPesantren::class)
+            ->tenantProfile(EditPesantrenProfile::class)
             ->login(Login::class)
             ->registration(Register::class)
             ->profile()
