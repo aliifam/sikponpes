@@ -13,5 +13,4 @@ Sistem informasi keuangan pondok pesantren
 7. Jalankan `php artisan migrate`
 8. jalankan `npm install`
 9. jalankan `npm run dev`
-10. jalankan `php artisan db:seed`
-11. Jalankan `php artisan serve`
+10. Jalankan `php artisan serve`
