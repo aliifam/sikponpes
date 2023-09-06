@@ -15,7 +15,7 @@ class ManageAccountClassifications extends ManageRecords
     {
         return [
             Actions\CreateAction::make()
-                ->modalHeading('Tambah Klasifikasi Utama')
+                ->modalHeading('Tambah Klasifikasi Akun')
                 ->modalWidth('xl')
                 ->modalAlignment(Alignment::Center)
                 ->createAnother(false),

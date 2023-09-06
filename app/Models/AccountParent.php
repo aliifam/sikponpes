@@ -24,7 +24,7 @@ class AccountParent extends Model
 
     public function classification()
     {
-        return $this->hasMany(AccountClassification::class);
+        return $this->hasMany(AccountClassification::class, 'parent_id');
     }
 
     public function account()

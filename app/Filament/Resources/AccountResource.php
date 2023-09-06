@@ -39,8 +39,18 @@ class AccountResource extends Resource
                     ->label('Akun Utama')
                     ->reactive()
                     ->options(
-                        AccountParent::all()->pluck('parent_name', 'id')
+                        //where pesantren_id = pesantren_id
+                        //label = parent_code + parent_name
+                        //value = id
+                        AccountParent::where('pesantren_id', Filament::getTenant()->id)
+                            ->get()
+                            ->mapWithKeys(
+                                function ($item) {
+                                    return [$item['id'] => $item['parent_code'] . ' - ' . $item['parent_name']];
+                                }
+                            )
                     )
+                    ->searchable()
                     ->placeholder('Pilih Akun Utama')
                     ->afterStateUpdated(function (callable $set) {
                         $set('classification_id', null);
@@ -48,13 +58,23 @@ class AccountResource extends Resource
                     ->required(),
                 Select::make('classification_id')
                     ->label('Klasifikasi Akun')
+                    ->required()
                     ->options(
+                        //where pesantren_id = pesantren_id and parent_id = parent_id
+                        //label = classification_code + classification_name
+                        //value = id
                         function (callable $get) {
-                            $akunutama = AccountParent::find($get('parent_id'));
-                            if ($akunutama) {
-                                return $akunutama->classification->pluck('classification_name', 'id');
+                            $parent = AccountParent::find($get('parent_id'));
+                            if (!$parent) {
+                                return [];
                             }
-                            return [];
+                            return $parent->classification()
+                                ->get()
+                                ->mapWithKeys(
+                                    function ($item) {
+                                        return [$item['id'] => $item['classification_code'] . ' - ' . $item['classification_name']];
+                                    }
+                                );
                         }
                     ),
                 TextInput::make('account_name')
@@ -83,6 +103,7 @@ class AccountResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->paginated(false)
             ->columns([
                 TextColumn::make('classification.parent.parent_name')
                     ->label('Akun Utama')
@@ -112,11 +133,11 @@ class AccountResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
+            // ->bulkActions([
+            //     Tables\Actions\BulkActionGroup::make([
+            //         Tables\Actions\DeleteBulkAction::make(),
+            //     ]),
+            // ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
             ]);

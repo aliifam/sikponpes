@@ -15,6 +15,7 @@ class ManageAccountParents extends ManageRecords
     {
         return [
             Actions\CreateAction::make()
+                ->modalHeading('Tambah Akun Parent')
                 ->modalWidth('xl')
                 ->modalAlignment(Alignment::Center)
                 ->createAnother(false),

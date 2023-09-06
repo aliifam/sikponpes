@@ -19,6 +19,8 @@ class AccountParentResource extends Resource
 {
     protected static ?string $model = AccountParent::class;
 
+    protected static ?string $tenantRelationshipName = 'parents';
+
     protected static ?string $navigationIcon = 'heroicon-o-square-3-stack-3d';
 
     protected static ?string $navigationLabel = 'Kelola Parent Akun';
@@ -64,11 +66,11 @@ class AccountParentResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
+            // ->bulkActions([
+            //     Tables\Actions\BulkActionGroup::make([
+            //         Tables\Actions\DeleteBulkAction::make(),
+            //     ]),
+            // ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
             ]);

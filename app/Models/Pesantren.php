@@ -38,13 +38,13 @@ class Pesantren extends Model
         return $this->hasMany(AccountParent::class);
     }
 
-    public function classifications(): HasManyThrough
+    public function classifications(): HasMany
     {
-        return $this->hasManyThrough(AccountClassification::class, AccountParent::class);
+        return $this->hasMany(AccountClassification::class);
     }
 
-    public function accounts(): HasManyThrough
+    public function accounts(): HasMany
     {
-        return $this->hasManyThrough(Account::class, AccountParent::class, 'pesantren_id', 'classification_id');
+        return $this->hasMany(Account::class);
     }
 }
