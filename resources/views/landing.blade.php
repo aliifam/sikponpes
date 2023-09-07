@@ -106,7 +106,7 @@
                         Platform pengelolaan dan pembuatan laporan keuangan yang dikhususkan untuk Pondok Pesantren.</p>
                 </div>
                 <div class="space-y-4">
-                    <img src="https://bumdes.sikbumdes.com/dashboard/BUMDESLanding/material/about.png" alt="">
+                    <img src="{{ asset('images/image3.png') }}" alt="">
                 </div>
             </div>
         </div>
