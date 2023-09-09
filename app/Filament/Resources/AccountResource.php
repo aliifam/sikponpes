@@ -121,26 +121,23 @@ class AccountResource extends Resource
             ->defaultGroup('classification.classification_name')
             ->paginated(false)
             ->columns([
-                TextColumn::make('classification.parent.parent_name')
-                    ->label('Parent')
-                    ->searchable()
-                    ->sortable(),
+                // TextColumn::make('classification.parent.parent_name')
+                //     ->label('Parent')
+                //     ->searchable()
+                //     ->sortable(),
                 // TextColumn::make('classification.classification_name')
                 //     ->label('Klasifikasi Akun')
                 //     ->searchable()
                 //     ->sortable(),
                 TextColumn::make('account_name')
                     ->label('Nama Akun')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 TextColumn::make('account_code')
                     ->label('Kode Akun')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 TextColumn::make('position')
                     ->label('Tipe Akun')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
             ])
             ->filters([
                 // SelectFilter::make('parent_name')
@@ -187,7 +184,7 @@ class AccountResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageAccounts::route('/'),
+            'index' => Pages\ListAccounts::route('/'),
         ];
     }
 }
