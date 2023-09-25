@@ -11,8 +11,20 @@ class InitialBalance extends Model
 
     protected $table = "initial_balances";
 
+    protected $fillable = [
+        'pesantren_id',
+        'account_id',
+        'date',
+        'amount',
+    ];
+
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+
+    public function pesantren()
+    {
+        return $this->belongsTo(Pesantren::class);
     }
 }

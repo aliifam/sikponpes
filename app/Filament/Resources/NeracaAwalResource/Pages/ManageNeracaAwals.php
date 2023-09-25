@@ -5,6 +5,7 @@ namespace App\Filament\Resources\NeracaAwalResource\Pages;
 use App\Filament\Resources\NeracaAwalResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use Filament\Support\Enums\Alignment;
 
 class ManageNeracaAwals extends ManageRecords
 {
@@ -13,7 +14,11 @@ class ManageNeracaAwals extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->modalHeading('Tambah Neraca Awal')
+                ->modalWidth('xl')
+                ->modalAlignment(Alignment::Center)
+                ->createAnother(false),
         ];
     }
 }
