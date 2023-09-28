@@ -4,7 +4,9 @@ namespace App\Filament\Resources\NeracaAwalResource\Pages;
 
 use App\Filament\Resources\NeracaAwalResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Support\Enums\Alignment;
 use Illuminate\Contracts\View\View;
@@ -55,6 +57,6 @@ class ManageNeracaAwals extends ManageRecords
 
         $status = $totalDebit == $totalKredit ? 'Balance' : 'Unbalance';
 
-        return view('filament.custom.neraca-awal.footer');
+        return view('filament.custom.neraca-awal.footer', compact('totalDebit', 'totalKredit', 'status'));
     }
 }

@@ -115,4 +115,16 @@ class NeracaAwalResource extends Resource
             'index' => Pages\ManageNeracaAwals::route('/'),
         ];
     }
+
+    //display only active initial balance by year
+    public static function getEloquentQuery(): Builder
+    {
+        $latestYear = InitialBalance::whereHas('pesantren', function ($query) {
+            $query->where('id', Filament::getTenant()->id);
+        })->selectRaw('YEAR(date) as year')->distinct()->orderBy('year', 'desc')->first();
+
+        return parent::getEloquentQuery()->whereHas('pesantren', function ($query) {
+            $query->where('id', Filament::getTenant()->id);
+        })->whereYear('date', $latestYear->year);
+    }
 }
