@@ -19,12 +19,16 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Closure;
 use Filament\Forms\Components\Hidden;
+use stdClass;
 
 class NeracaAwalResource extends Resource
 {
     protected static ?string $model = InitialBalance::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationLabel = 'Neraca Awal';
+    protected static ?string $pluralModelLabel = 'Neraca Awal';
 
     public static function form(Form $form): Form
     {
@@ -41,6 +45,7 @@ class NeracaAwalResource extends Resource
                     ->placeholder("Pilih Akun")
                     ->searchable()
                     ->options(
+                        //account where not in initial balance in the same year and pesantren_id
                         Account::where('pesantren_id', Filament::getTenant()->id)
                             ->get()
                             ->mapWithKeys(
@@ -61,14 +66,14 @@ class NeracaAwalResource extends Resource
             ])->columns(1);
     }
 
+    public Account $account;
+
     public static function table(Table $table): Table
     {
         return $table
+            ->paginated(false)
+            ->defaultGroup('account.classification.parent.parent_name')
             ->columns([
-                Tables\Columns\TextColumn::make('date')
-                    ->label('Tanggal')
-                    ->searchable()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('account.account_code')
                     ->label('Kode Akun')
                     ->searchable()
@@ -77,10 +82,15 @@ class NeracaAwalResource extends Resource
                     ->label('Nama Akun')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('account.position')
+                    ->label('Posisi')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
                     ->label('Jumlah')
                     ->searchable()
                     ->sortable(),
+
             ])
             ->filters([
                 //

@@ -20,11 +20,21 @@ class InitialBalance extends Model
 
     public function account()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Account::class, 'account_id')->orderby('account_code');
     }
 
     public function pesantren()
     {
         return $this->belongsTo(Pesantren::class);
     }
+
+    // public function debit()
+    // {
+    //     return $this->account()->where('position', 'Debit');
+    // }
+
+    // public function credit()
+    // {
+    //     return $this->account()->where('position', 'Kredit');
+    // }
 }
