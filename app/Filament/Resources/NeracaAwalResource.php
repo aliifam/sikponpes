@@ -25,7 +25,7 @@ class NeracaAwalResource extends Resource
 {
     protected static ?string $model = InitialBalance::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-scale';
 
     protected static ?string $navigationLabel = 'Neraca Awal';
     protected static ?string $pluralModelLabel = 'Neraca Awal';

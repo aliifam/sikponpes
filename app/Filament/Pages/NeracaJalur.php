@@ -6,7 +6,7 @@ use Filament\Pages\Page;
 
 class NeracaJalur extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-scale';
 
     protected static string $view = 'filament.pages.neraca-jalur';
 }
