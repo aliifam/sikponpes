@@ -19,6 +19,9 @@ class GeneralJournalResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Jurnal Umum';
+    protected static ?string $pluralModelLabel = 'Jurnal Umum';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -48,20 +51,20 @@ class GeneralJournalResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGeneralJournals::route('/'),
+            'index' => Pages\GeneralJournal::route('/'),
             'create' => Pages\CreateGeneralJournal::route('/create'),
             'edit' => Pages\EditGeneralJournal::route('/{record}/edit'),
         ];
-    }    
+    }
 }

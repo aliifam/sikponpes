@@ -112,7 +112,8 @@ class NeracaAwalResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageNeracaAwals::route('/'),
+            'index' => Pages\NeracaAwal::route('/'),
+            // 'index' => Pages\ManageNeracaAwals::route('/'),
         ];
     }
 

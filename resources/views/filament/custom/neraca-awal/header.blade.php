@@ -10,3 +10,7 @@
         @endforeach
     </x-filament::input.select>
 </x-filament::input.wrapper>
+
+//when year selected data in table will change
+
+// Path: resources/views/filament/custom/neraca-awal/table.blade.php

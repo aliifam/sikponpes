@@ -16,6 +16,11 @@ class GeneralJournal extends Model
         return $this->belongsTo(Account::class);
     }
 
+    public function pesantren()
+    {
+        return $this->belongsTo(Pesantren::class);
+    }
+
     public function journal_detail()
     {
         return $this->hasMany(JournalDetail::class);
