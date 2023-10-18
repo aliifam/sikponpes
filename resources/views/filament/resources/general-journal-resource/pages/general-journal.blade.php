@@ -108,13 +108,4 @@
             </tbody>
         </table>
 
-        <script>
-            //on select year change
-            document.addEventListener('livewire:load', function() {
-                Livewire.on('selectYearChanged', function(e) {
-                    console.log(e);
-                })
-            })
-        </script>
-
 </x-filament-panels::page>
