@@ -21,7 +21,7 @@ class AccountParentResource extends Resource
 
     protected static ?string $tenantRelationshipName = 'parents';
 
-    protected static ?string $navigationIcon = 'heroicon-o-square-3-stack-3d';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $navigationLabel = 'Kelola Parent Akun';
     protected static ?string $pluralModelLabel = 'Kelola Parent Akun';

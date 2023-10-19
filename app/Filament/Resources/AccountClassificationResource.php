@@ -31,7 +31,7 @@ class AccountClassificationResource extends Resource
 
     protected static ?string $tenantOwnershipRelationshipName = 'pesantren';
 
-    protected static ?string $navigationIcon = 'heroicon-o-square-3-stack-3d';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $navigationLabel = 'Kelola Klasifikasi Akun';
     protected static ?string $pluralModelLabel = 'Kelola Klasifikasi Akun';

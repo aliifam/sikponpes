@@ -52,6 +52,39 @@ class NeracaAwal extends Page
         $this->years = $years;
         //set the selected year to the newest year
         $this->year = $years[0];
+
+        $initialBalancesbyYear = InitialBalance::where('pesantren_id', Filament::getTenant()->id)
+            ->whereYear('date', $this->year)
+            ->get();
+        //get the parent account, account > classification > parent
+        $initialBalancesbyYear->map(function ($item) {
+            $item->account->load('classification.parent');
+        });
+        //convert to so can be used in the view by ->
+        //sort by account_code
+        $initialBalancesbyYear = $initialBalancesbyYear->sortBy('account.account_code');
+
+        $this->totalDebit = 0;
+        $this->totalKredit = 0;
+
+        //get the total debit and kredit this year
+        foreach ($initialBalancesbyYear as $initialBalance) {
+            if ($initialBalance->account->position == 'debit') {
+                $this->totalDebit = $this->totalDebit + $initialBalance->amount;
+            }
+            if ($initialBalance->account->position == 'kredit') {
+                $this->totalKredit = $this->totalKredit + $initialBalance->amount;
+            }
+        }
+
+        //get the balance status
+        if ($this->totalDebit != $this->totalKredit) {
+            $this->balanceStatus = 'Unbalance';
+        } else {
+            $this->balanceStatus = 'Balance';
+        }
+
+        $this->initialBalances = $initialBalancesbyYear;
     }
 
     //submit the year
@@ -68,6 +101,9 @@ class NeracaAwal extends Page
         //convert to so can be used in the view by ->
         //sort by account_code
         $initialBalancesbyYear = $initialBalancesbyYear->sortBy('account.account_code');
+
+        $this->totalDebit = 0;
+        $this->totalKredit = 0;
 
         //get the total debit and kredit this year
         foreach ($initialBalancesbyYear as $initialBalance) {

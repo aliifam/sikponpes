@@ -5,23 +5,25 @@ namespace App\Filament\Resources\NeracaAwalResource\Pages;
 use App\Filament\Resources\NeracaAwalResource;
 use App\Models\InitialBalance;
 use Filament\Actions;
-use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Carbon;
 
-class CreateNeracaAwal extends CreateRecord
+class EditNeracaAwal extends EditRecord
 {
     protected static string $resource = NeracaAwalResource::class;
 
-    //change title
-    public static ?string $title = 'Tambah Neraca Awal';
+    public static ?string $title = 'Edit Neraca Awal';
 
-    //disable create another
-    protected static bool $canCreateAnother = false;
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\DeleteAction::make(),
+        ];
+    }
 
     //validate data before create by check if the account_id already exist in the same year
-    protected function beforeCreate(): void
+    protected function beforeSave(): void
     {
         //get the current pesantren id
         $currentPesantren = $this->data['pesantren_id'];
@@ -35,7 +37,7 @@ class CreateNeracaAwal extends CreateRecord
             ->where('account_id', $currentAccount)
             ->whereYear('date', Carbon::parse($currentDate)->format('Y'))
             ->first();
-        if ($check) {
+        if ($check && $check->id != $this->record->id) {
             Notification::make()
                 ->title('Gagal Menambahkan Neraca Awal')
                 ->body('Akun sudah ada di Neraca Awal Tahun ini')

@@ -9,4 +9,6 @@ class LaporanAktivitas extends Page
     protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-line';
 
     protected static string $view = 'filament.pages.laporan-aktivitas';
+
+    protected static ?string $navigationGroup = 'Manajemen Laporan';
 }

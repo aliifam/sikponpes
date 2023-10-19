@@ -30,6 +30,8 @@ class NeracaAwalResource extends Resource
     protected static ?string $navigationLabel = 'Neraca Awal';
     protected static ?string $pluralModelLabel = 'Neraca Awal';
 
+    protected static ?string $navigationGroup = 'Manajemen Neraca';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -114,6 +116,7 @@ class NeracaAwalResource extends Resource
         return [
             'index' => Pages\NeracaAwal::route('/'),
             'create' => Pages\CreateNeracaAwal::route('/create'),
+            'edit' => Pages\EditNeracaAwal::route('/{record}/edit')
             // 'index' => Pages\ManageNeracaAwals::route('/'),
         ];
     }

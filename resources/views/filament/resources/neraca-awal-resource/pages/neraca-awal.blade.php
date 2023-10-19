@@ -59,8 +59,8 @@
                             </td>
                         @endif
                         <td class="px-6 py-3">
-                            <button class="btn btn-sm btn-primary">Edit</button>
-                            <button class="btn btn-sm btn-danger">Hapus</button>
+                            <a href="neraca-awals/{{ $initialBalance->id }}/edit">Edit</a>
+                            <a>Hapus</a>
                         </td>
                     </tr>
                 @endforeach

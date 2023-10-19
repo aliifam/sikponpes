@@ -9,4 +9,6 @@ class LaporanPerubahanEkuitas extends Page
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
 
     protected static string $view = 'filament.pages.laporan-perubahan-ekuitas';
+
+    protected static ?string $navigationGroup = 'Manajemen Laporan';
 }
