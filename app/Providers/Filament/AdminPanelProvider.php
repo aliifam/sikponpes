@@ -32,7 +32,6 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('dashboard')
-
             ->tenant(Pesantren::class, ownershipRelationship: 'pesantren')
             ->tenantRegistration(RegisterPesantren::class)
             ->tenantProfile(EditPesantrenProfile::class)

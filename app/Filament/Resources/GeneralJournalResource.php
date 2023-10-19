@@ -37,6 +37,7 @@ class GeneralJournalResource extends Resource
             ->schema([
                 TextInput::make('kwitansi')
                     ->label('Kwitansi')
+                    ->placeholder('Masukkan Kwitansi')
                     ->prefixIcon('heroicon-o-calculator')
                     ->required(),
                 DatePicker::make('date')
@@ -51,6 +52,7 @@ class GeneralJournalResource extends Resource
                     ->placeholder('Masukkan Keterangan')
                     ->required(),
                 TableRepeater::make('transactions')
+                    ->minItems(1)
                     ->withoutHeader()
                     ->schema([
                         Select::make('account_id')

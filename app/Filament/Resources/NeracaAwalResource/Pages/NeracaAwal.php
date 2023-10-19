@@ -7,8 +7,10 @@ use App\Models\AccountParent;
 use App\Models\InitialBalance;
 use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Page;
 
 class NeracaAwal extends Page
@@ -123,5 +125,19 @@ class NeracaAwal extends Page
         }
 
         $this->initialBalances = $initialBalancesbyYear;
+    }
+
+    public function delete($id)
+    {
+        $initialBalance = InitialBalance::find($id);
+        $initialBalance->delete();
+
+        Notification::make()
+            ->title('Berhasil Menghapus Neraca Awal')
+            ->body('Neraca Awal berhasil dihapus')
+            ->success()
+            ->send();
+
+        $this->redirect('/dashboard/' . Filament::getTenant()->id . '/neraca-awals');
     }
 }

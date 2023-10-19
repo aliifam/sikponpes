@@ -60,7 +60,7 @@
                         @endif
                         <td class="px-6 py-3">
                             <a href="neraca-awals/{{ $initialBalance->id }}/edit">Edit</a>
-                            <a>Hapus</a>
+                            <a class="cursor-pointer" wire:click="delete({{ $initialBalance->id }})">Delete</a>
                         </td>
                     </tr>
                 @endforeach
