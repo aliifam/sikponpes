@@ -15,4 +15,9 @@ class JournalDetail extends Model
     {
         return $this->hasMany(GeneralJournal::class);
     }
+
+    public function pesantren()
+    {
+        return $this->belongsTo(Pesantren::class);
+    }
 }

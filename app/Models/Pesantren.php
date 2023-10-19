@@ -52,4 +52,9 @@ class Pesantren extends Model
     {
         return $this->hasMany(InitialBalance::class);
     }
+
+    public function journalDetails(): HasMany
+    {
+        return $this->hasMany(JournalDetail::class);
+    }
 }

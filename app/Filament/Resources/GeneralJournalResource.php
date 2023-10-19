@@ -6,25 +6,29 @@ use App\Filament\Resources\GeneralJournalResource\Pages;
 use App\Filament\Resources\GeneralJournalResource\RelationManagers;
 use App\Models\Account;
 use App\Models\GeneralJournal;
+use App\Models\JournalDetail;
 use Awcodes\FilamentTableRepeater\Components\TableRepeater;
 use Dompdf\FrameDecorator\Text;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GeneralJournalResource extends Resource
 {
-    protected static ?string $model = GeneralJournal::class;
+    protected static ?string $model = JournalDetail::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
@@ -36,7 +40,7 @@ class GeneralJournalResource extends Resource
         return $form
             ->schema([
                 TextInput::make('kwitansi')
-                    ->label('Kwitansi')
+                    ->label('receipt')
                     ->placeholder('Masukkan Kwitansi')
                     ->prefixIcon('heroicon-o-calculator')
                     ->required(),
@@ -51,7 +55,9 @@ class GeneralJournalResource extends Resource
                     ->label('Keterangan')
                     ->placeholder('Masukkan Keterangan')
                     ->required(),
-                TableRepeater::make('transactions')
+                Hidden::make('pesantren_id')
+                    ->default(Filament::getTenant()->id),
+                TableRepeater::make('journals')
                     ->minItems(1)
                     ->withoutHeader()
                     ->schema([
@@ -70,17 +76,19 @@ class GeneralJournalResource extends Resource
                                     )
                             )
                             ->required(),
-                        TextInput::make('debit')
-                            ->label('Debit')
-                            ->numeric()
-                            ->prefix('Rp. ')
-                            ->placeholder('Masukkan Debit ')
+                        Select::make('position')
+                            ->label('Posisi')
+                            ->placeholder('Pilih Posisi')
+                            ->options([
+                                'debit' => 'Debit',
+                                'kredit' => 'Kredit',
+                            ])
                             ->required(),
-                        TextInput::make('kredit')
-                            ->label('Kredit')
+                        TextInput::make('amount')
+                            ->label('amount')
                             ->numeric()
                             ->prefix('Rp. ')
-                            ->placeholder('Masukkan Kredit ')
+                            ->placeholder('Masukkan Jumlah ')
                             ->required(),
                     ])
             ])->columns(1);
@@ -97,6 +105,7 @@ class GeneralJournalResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -122,5 +131,13 @@ class GeneralJournalResource extends Resource
             'create' => Pages\CreateGeneralJournal::route('/create'),
             'edit' => Pages\EditGeneralJournal::route('/{record}/edit'),
         ];
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                // ...
+            ]);
     }
 }

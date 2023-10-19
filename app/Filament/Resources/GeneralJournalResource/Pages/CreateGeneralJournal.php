@@ -20,15 +20,18 @@ class CreateGeneralJournal extends CreateRecord
     public function beforeCreate()
     {
         //get filament repeater value
-        $transactions = $this->data['transactions'];
+        $transactions = $this->data['journals'];
 
         //check if the debit and credit is balance
         $debit = 0;
         $credit = 0;
 
         foreach ($transactions as $transaction) {
-            $debit += $transaction['debit'];
-            $credit += $transaction['credit'];
+            if ($this->data['position'] == 'debit') {
+                $debit += $this->data['amount'];
+            } else if ($this->data['position'] == 'kredit') {
+                $credit += $this->data['amount'];
+            }
         }
 
         if ($debit != $credit) {
@@ -41,16 +44,21 @@ class CreateGeneralJournal extends CreateRecord
             $this->halt();
         }
 
-
-
-        dd($transactions);
-        //halting
-        $this->halt();
-        $this->validate([
-            'record.kwitansi' => 'required',
-            'record.date' => 'required',
-            'record.description' => 'required',
-            'record.transactions' => 'required',
-        ]);
+        //foreach into general journal table
+        foreach ($transactions as $transaction) {
+            $journal = new \App\Models\GeneralJournal();
+            $journal->journal_detail_id = $this->record->id;
+            $journal->account_id = $transaction['account_id'];
+            $journal->pesantren_id = $this->data['pesantren_id'];
+            //check position debit or credit
+            if ($transaction['debit'] != 0) {
+                $journal->debit = $transaction['debit'];
+                $journal->credit = 0;
+            } else if ($transaction['kredit'] != 0) {
+                $journal->debit = 0;
+                $journal->credit = $transaction['kredit'];
+            }
+            $journal->save();
+        }
     }
 }
