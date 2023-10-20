@@ -18,7 +18,7 @@ class CreateGeneralJournal extends CreateRecord
     protected static bool $canCreateAnother = false;
 
     //change title
-    public static ?string $title = 'Tambah Jurnal';
+    public static ?string $title = 'Tambah Jurnal Umum';
 
     //validation before submit
     public function beforeCreate()
@@ -84,11 +84,11 @@ class CreateGeneralJournal extends CreateRecord
         }
 
         // redirect to index page
-        $this->redirect('/dasboard/' . Filament::getTenant()->id . '/general-journals');
+        $this->redirect('/dashboard/' . Filament::getTenant()->id . '/general-journals');
         //notifikasi
         Notification::make()
             ->title('Berhasil Menambahkan Jurnal')
-            ->body('Jurnal berhasil ditambahkan')
+            ->body('Jurnal umum berhasil ditambahkan')
             ->success()
             ->send();
         //halting

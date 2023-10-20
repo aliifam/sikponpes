@@ -21,8 +21,10 @@ use Filament\Forms\Form;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -58,9 +60,9 @@ class GeneralJournalResource extends Resource
                     ->required(),
                 Hidden::make('pesantren_id')
                     ->default(Filament::getTenant()->id),
-                TableRepeater::make('journals')
-                    ->minItems(1)
-                    ->withoutHeader()
+                Repeater::make('journals')
+                    ->grid(2)
+                    ->minItems(2)
                     ->schema([
                         Select::make('account_id')
                             ->label('Nama Akun')
@@ -99,12 +101,14 @@ class GeneralJournalResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')
+                TextColumn::make('receipt')
                     ->label('Kwitansi')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('date')
                     ->label('Tanggal')
+                    //i want to format the date like 1 november 2021
+                    ->date('d F Y')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('description')
@@ -113,11 +117,27 @@ class GeneralJournalResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                Filter::make('date')
+                    ->form([
+                        DatePicker::make('created_from'),
+                        DatePicker::make('created_until'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 ViewAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
