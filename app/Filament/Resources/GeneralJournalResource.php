@@ -22,6 +22,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -39,8 +40,8 @@ class GeneralJournalResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('kwitansi')
-                    ->label('receipt')
+                TextInput::make('receipt')
+                    ->label('Kwitansi')
                     ->placeholder('Masukkan Kwitansi')
                     ->prefixIcon('heroicon-o-calculator')
                     ->required(),
@@ -81,7 +82,7 @@ class GeneralJournalResource extends Resource
                             ->placeholder('Pilih Posisi')
                             ->options([
                                 'debit' => 'Debit',
-                                'kredit' => 'Kredit',
+                                'credit' => 'Kredit',
                             ])
                             ->required(),
                         TextInput::make('amount')
@@ -98,7 +99,18 @@ class GeneralJournalResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')
+                    ->label('Kwitansi')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('date')
+                    ->label('Tanggal')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('description')
+                    ->label('Keterangan')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 //

@@ -140,13 +140,11 @@
                                     fill="#6A64F1"></path>
                             </svg></div>
                         <div>
-                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Free to
-                                Get
-                                Started
+                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Kelola
+                                Akun Utama
                             </h3>
-                            <p class="text-base font-medium text-body-color">FormBold is free to use, we are offering a
-                                decent free
-                                plan for experiments, personal projects and projects.</p>
+                            <p class="text-base font-medium text-body-color">Pengelolaan akun utama atau parent
+                                account.</p>
                         </div>
                     </div>
                 </div>
@@ -167,12 +165,11 @@
                                     fill="white"></path>
                             </svg></div>
                         <div>
-                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Link
-                                Multiple Emails
+                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
+                                Klasifikasi Akun
                             </h3>
-                            <p class="text-base font-medium text-body-color">Link multiple email address under your
-                                parent account,
-                                use any of them for your forms to recieve submissions.</p>
+                            <p class="text-base font-medium text-body-color">Pengelolaan akun berdasarkan klasifikasi
+                                akun</p>
                         </div>
                     </div>
                 </div>
@@ -191,21 +188,20 @@
                                     d="M37.8959 38.7891C37.8959 38.2368 38.3436 37.7891 38.8959 37.7891H49.7859C51.995 37.7891 53.7859 39.5799 53.7859 41.7891V50.5679C53.7859 51.1202 53.3382 51.5679 52.7859 51.5679C52.2336 51.5679 51.7859 51.1202 51.7859 50.5679V41.7891C51.7859 40.6845 50.8905 39.7891 49.7859 39.7891H38.8959C38.3436 39.7891 37.8959 39.3413 37.8959 38.7891Z"
                                     fill="#ABA8F7"></path>
                                 <rect width="20.0016" height="13.3344" rx="2" fill="#6A64F1"></rect>
-                                <rect x="19" y="33" width="21" height="11" rx="2"
-                                    fill="#ABA8F7"></rect>
+                                <rect x="19" y="33" width="21" height="11" rx="2" fill="#ABA8F7">
+                                </rect>
                                 <rect x="39.8958" y="47.666" width="24.6688" height="11.3344" rx="2"
                                     fill="white" stroke="#6A64F1" stroke-width="2"></rect>
-                                <rect x="21" y="18" width="45" height="10" rx="2"
-                                    fill="white" stroke="#6A64F1" stroke-width="2">
+                                <rect x="21" y="18" width="45" height="10" rx="2" fill="white"
+                                    stroke="#6A64F1" stroke-width="2">
                                 </rect>
                             </svg></div>
                         <div>
-                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Easy to
-                                Use
+                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Manajemen
+                                Akun
                             </h3>
-                            <p class="text-base font-medium text-body-color">Simple and easy-to use form API all you
-                                need to paste
-                                your end-point URL on your form, rest assured by FormBold.</p>
+                            <p class="text-base font-medium text-body-color">Manajemen akun - akun dari sistem keuangan
+                                Pondok Pesantren</p>
                         </div>
                     </div>
                 </div>
@@ -217,8 +213,8 @@
                         class="mb-9 bg-white rounded-xl py-8 px-7 shadow-md transition-all hover:shadow-lg sm:p-9 lg:px-6 xl:px-9">
                         <div class="mx-auto mb-7 inline-block"><svg width="58" height="60"
                                 viewBox="0 0 58 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="1" y="1" width="24" height="26" rx="2"
-                                    stroke="#6A64F1" stroke-width="2"></rect>
+                                <rect x="1" y="1" width="24" height="26" rx="2" stroke="#6A64F1"
+                                    stroke-width="2"></rect>
                                 <path
                                     d="M14.6146 17.1967C14.8371 17.4191 14.8392 17.7843 14.5838 17.9678C13.9915 18.3933 13.2769 18.6264 12.5382 18.6264C11.6083 18.6264 10.7165 18.257 10.059 17.5994C9.40148 16.9419 9.03209 16.0501 9.03209 15.1203C9.03209 14.3816 9.26519 13.667 9.69065 13.0747C9.87417 12.8192 10.2393 12.8214 10.4617 13.0438L14.6146 17.1967Z"
                                     fill="#6A64F1"></path>
@@ -240,13 +236,13 @@
                                 <path
                                     d="M14.309 14.5276C14.5046 14.332 14.8217 14.332 15.0173 14.5276C15.2129 14.7232 15.2129 15.0403 15.0173 15.2359L13.8368 16.4165L13.1284 15.7081L14.309 14.5276Z"
                                     fill="#6A64F1"></path>
-                                <rect x="31" y="23" width="27" height="37" rx="3"
-                                    fill="#6A64F1"></rect>
+                                <rect x="31" y="23" width="27" height="37" rx="3" fill="#6A64F1">
+                                </rect>
                                 <path
                                     d="M44.7681 36C43.323 36 42.1462 37.1768 42.1462 38.6219C42.1462 39.4842 42.5743 40.2411 43.2196 40.7194L41.925 42.8578C41.9148 42.8548 41.9035 42.8527 41.8923 42.8496C41.6219 42.7769 41.3402 42.8169 41.0975 42.9561C40.5967 43.246 40.4236 43.8892 40.7124 44.39C40.906 44.7259 41.2593 44.9144 41.6219 44.9144C41.8001 44.9144 41.9814 44.8703 42.1462 44.7751C42.389 44.6348 42.5651 44.4064 42.6378 44.136C42.7106 43.8656 42.6716 43.584 42.5313 43.3412C42.4873 43.2654 42.4269 43.1979 42.3675 43.1364L43.7931 40.7931L43.9324 40.5637L43.703 40.4326C43.0854 40.068 42.6706 39.3931 42.6706 38.6219C42.6706 37.4605 43.6067 36.5244 44.7681 36.5244C45.9295 36.5244 46.8656 37.4605 46.8656 38.6219C46.8656 38.838 46.8359 39.0408 46.7755 39.2364L47.2753 39.392C47.3511 39.1473 47.39 38.8902 47.39 38.6219C47.39 37.1768 46.2132 36 44.7681 36ZM44.7681 37.5731C44.1895 37.5731 43.7194 38.0432 43.7194 38.6219C43.7194 39.2005 44.1895 39.6706 44.7681 39.6706C44.8552 39.6706 44.9412 39.6583 45.0221 39.6378L46.2839 41.9238L46.4068 42.1532L46.6444 42.0303C46.9445 41.8644 47.2845 41.7681 47.6522 41.7681C48.8136 41.7681 49.7497 42.7042 49.7497 43.8656C49.7497 45.027 48.8136 45.9631 47.6522 45.9631C47.0858 45.9631 46.5717 45.7368 46.1938 45.3732L45.8333 45.7501C46.3044 46.2038 46.9475 46.4875 47.6522 46.4875C49.0973 46.4875 50.274 45.3107 50.274 43.8656C50.274 42.4205 49.0973 41.2437 47.6522 41.2437C47.2886 41.2437 46.9516 41.339 46.6362 41.4732L45.4809 39.3839C45.6858 39.1923 45.8169 38.924 45.8169 38.6219C45.8169 38.0432 45.3468 37.5731 44.7681 37.5731ZM40.9828 41.3175C39.8408 41.6022 39 42.6397 39 43.8656C39 45.3107 40.1768 46.4875 41.6219 46.4875C42.9738 46.4875 44.0563 45.4439 44.1946 44.1278H46.6444C46.7611 44.5795 47.1647 44.9144 47.6522 44.9144C48.2308 44.9144 48.7009 44.4443 48.7009 43.8656C48.7009 43.287 48.2308 42.8169 47.6522 42.8169C47.1647 42.8169 46.7611 43.1518 46.6444 43.6034H43.7194V43.8656C43.7194 45.027 42.7833 45.9631 41.6219 45.9631C40.4605 45.9631 39.5244 45.027 39.5244 43.8656C39.5244 42.8804 40.2024 42.061 41.1139 41.8337L40.9828 41.3175Z"
                                     fill="white"></path>
-                                <rect x="32" y="1" width="25" height="16" rx="2"
-                                    stroke="#6A64F1" stroke-width="2"></rect>
+                                <rect x="32" y="1" width="25" height="16" rx="2" stroke="#6A64F1"
+                                    stroke-width="2"></rect>
                                 <g clip-path="url(#clip0_971_7928)">
                                     <path
                                         d="M42.9 9.52246C42.3264 9.52246 41.8348 10.0141 41.8348 10.5876V13.2422C41.8348 13.8158 42.3264 14.3074 42.9 14.3074C43.4735 14.3074 43.9651 13.8158 43.9651 13.2422V10.5876C43.9651 9.98129 43.5063 9.52246 42.9 9.52246Z"
@@ -273,8 +269,8 @@
                                         d="M48.2584 9.52246H45.5874C45.0138 9.52246 44.5222 10.0141 44.5222 10.5876C44.5222 11.1611 45.0138 11.6527 45.5874 11.6527H48.2584C48.8319 11.6527 49.3235 11.1611 49.3235 10.5876C49.3235 9.98129 48.8319 9.52246 48.2584 9.52246Z"
                                         fill="#6A64F1"></path>
                                 </g>
-                                <rect x="1" y="34" width="24" height="25" rx="2"
-                                    stroke="#6A64F1" stroke-width="2"></rect>
+                                <rect x="1" y="34" width="24" height="25" rx="2" stroke="#6A64F1"
+                                    stroke-width="2"></rect>
                                 <g clip-path="url(#clip1_971_7928)">
                                     <path
                                         d="M17.6477 43.6591L16.2036 50.4186C16.0961 50.8949 15.8195 51.0024 15.4201 50.7873L13.254 49.1896L12.194 50.2036C12.0864 50.3111 11.9789 50.4186 11.7331 50.4186L11.9021 48.1911L15.9424 44.5194C16.1114 44.3504 15.8963 44.289 15.6813 44.4273L10.6577 47.5919L8.49161 46.9313C8.01537 46.7777 8.01537 46.4551 8.59915 46.24L17.0178 42.9678C17.4326 42.8449 17.7859 43.06 17.6477 43.6591Z"
@@ -283,8 +279,8 @@
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M31 10.5H26V8.5H31V10.5Z"
                                     fill="#6A64F1">
                                 </path>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M31 47H26V45H31V47Z"
-                                    fill="#ABA8F7"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M31 47H26V45H31V47Z" fill="#ABA8F7">
+                                </path>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M14 28L14 33L12 33L12 28L14 28Z"
                                     fill="#6A64F1">
                                 </path>
@@ -302,11 +298,10 @@
                                 </defs>
                             </svg></div>
                         <div>
-                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Connect
-                                Apps</h3>
-                            <p class="text-base font-medium text-body-color">Connect apps and integrations with your
-                                form, get
-                                notified with submitter data when you recieve new submissions.</p>
+                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Neraca
+                                Awal Tahunan</h3>
+                            <p class="text-base font-medium text-body-color">Pengelolaan neraca awal tahunan podok
+                                pesantren</p>
                         </div>
                     </div>
                 </div>
@@ -325,12 +320,10 @@
                                     fill="#6A64F1"></path>
                             </svg></div>
                         <div>
-                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Spam Free
-                                &amp;
-                                Encrypted</h3>
-                            <p class="text-base font-medium text-body-color">We use server-side mechanism to make sure
-                                submissions
-                                are spam free and all messages are end-to-end encrypted.</p>
+                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
+                                Pengelolaan Jurnal Umum</h3>
+                            <p class="text-base font-medium text-body-color">Pengelolaan jurnal jurnal transaksi pondok
+                                pesantren</p>
                         </div>
                     </div>
                 </div>
@@ -367,12 +360,11 @@
                                     fill="#6A64F1"></path>
                             </svg></div>
                         <div>
-                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Attach
-                                Large Files
+                            <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Manajemen
+                                Laporan
                             </h3>
-                            <p class="text-base font-medium text-body-color">You can allow end users to attach or
-                                upload
-                                attachments, you will recieve a CDN link with submission data.</p>
+                            <p class="text-base font-medium text-body-color">Pengelolaan laporan-laporan keuangan
+                                pondok pesantren.</p>
                         </div>
                     </div>
                 </div>
@@ -546,7 +538,7 @@
                         class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
                         data-accordion-target="#accordion-flush-body-1" aria-expanded="true"
                         aria-controls="accordion-flush-body-1">
-                        <span>What is Flowbite?</span>
+                        <span>Apakah SIK Ponpes Gratis?</span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -556,13 +548,12 @@
                 </h2>
                 <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
                     <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of
-                            interactive components built on top of Tailwind CSS including buttons, dropdowns, modals,
-                            navbars, and more.</p>
-                        <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Sampai saat ini SIK Ponpes masih gratis dan
+                            bebas untuk digunakan untuk kepentingan pondok pesantren</p>
+                        {{-- <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a
                                 href="/docs/getting-started/introduction/"
                                 class="text-green-600 dark:text-green-500 hover:underline">get started</a> and start
-                            developing websites even faster with components on top of Tailwind CSS.</p>
+                            developing websites even faster with components on top of Tailwind CSS.</p> --}}
                     </div>
                 </div>
                 <h2 id="accordion-flush-heading-2">
@@ -570,7 +561,7 @@
                         class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
                         data-accordion-target="#accordion-flush-body-2" aria-expanded="false"
                         aria-controls="accordion-flush-body-2">
-                        <span>Is there a Figma file available?</span>
+                        <span>Kenapa harus pakai SIK Ponpes?</span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -580,14 +571,14 @@
                 </h2>
                 <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
                     <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is first conceptualized and designed
-                            using the Figma software so everything you see in the library has a design equivalent in our
-                            Figma file.</p>
-                        <p class="text-gray-500 dark:text-gray-400">Check out the <a
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">
+                            Dengan menggunakan SIK Ponpes maka akan membuat pengelolaan keuangan pesantren anda semakin
+                            mudah karena sudah terdigitalisasi</p>
+                        {{-- <p class="text-gray-500 dark:text-gray-400">Check out the <a
                                 href="https://flowbite.com/figma/"
                                 class="text-green-600 dark:text-green-500 hover:underline">Figma design system</a>
                             based
-                            on the utility classes from Tailwind CSS and components from Flowbite.</p>
+                            on the utility classes from Tailwind CSS and components from Flowbite.</p> --}}
                     </div>
                 </div>
                 <h2 id="accordion-flush-heading-3">
@@ -595,7 +586,7 @@
                         class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
                         data-accordion-target="#accordion-flush-body-3" aria-expanded="false"
                         aria-controls="accordion-flush-body-3">
-                        <span>What are the differences between Flowbite and Tailwind UI?</span>
+                        <span>Apakah data saya aman di dalam SIK Ponpes?</span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -605,11 +596,9 @@
                 </h2>
                 <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
                     <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core
-                            components from Flowbite are open source under the MIT license, whereas Tailwind UI is a
-                            paid product. Another difference is that Flowbite relies on smaller and standalone
-                            components, whereas Tailwind UI offers sections of pages.</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Tentunya data anda aman tersimpan di database
+                            SIK Ponpes yang sudah terproteksi di layanan hosting yang terpercaya.</p>
+                        {{-- <p class="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both
                             Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you
                             from using the best of two worlds.</p>
                         <p class="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
@@ -618,7 +607,7 @@
                                     class="text-green-600 dark:text-green-500 hover:underline">Flowbite Pro</a></li>
                             <li><a href="https://tailwindui.com/" rel="nofollow"
                                     class="text-green-600 dark:text-green-500 hover:underline">Tailwind UI</a></li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
             </div>

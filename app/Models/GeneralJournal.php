@@ -11,6 +11,15 @@ class GeneralJournal extends Model
 
     protected $table = "general_journals";
 
+    protected $fillable = [
+        'id',
+        'journal_detail_id',
+        'account_id',
+        'pesantren_id',
+        'debit',
+        'credit',
+    ];
+
     public function account()
     {
         return $this->belongsTo(Account::class);
