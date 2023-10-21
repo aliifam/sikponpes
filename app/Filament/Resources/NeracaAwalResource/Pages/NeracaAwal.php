@@ -53,7 +53,16 @@ class NeracaAwal extends Page
 
         $this->years = $years;
         //set the selected year to the newest year
-        $this->year = $years[0];
+
+        //if years is empty, set the year to null
+        if (empty($years)) {
+            //get now year
+            $this->year = date('Y');
+        } else {
+            $this->year = $years[0];
+        }
+
+        //if years is null, set the year to null
 
         $initialBalancesbyYear = InitialBalance::where('pesantren_id', Filament::getTenant()->id)
             ->whereYear('date', $this->year)
