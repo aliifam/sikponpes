@@ -38,6 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->login(Login::class)
             ->registration(Register::class)
             ->profile()
+            ->favicon('/images/favicon.svg')
             ->sidebarCollapsibleOnDesktop()
             ->colors([
                 'primary' => Color::Green,
