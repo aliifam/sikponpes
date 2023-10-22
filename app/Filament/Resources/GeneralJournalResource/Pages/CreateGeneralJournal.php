@@ -84,7 +84,8 @@ class CreateGeneralJournal extends CreateRecord
         }
 
         // redirect to index page
-        $this->redirect('/dashboard/' . Filament::getTenant()->id . '/general-journals');
+        // $this->redirect('/dashboard/' . Filament::getTenant()->id . '/general-journals');
+        $this->redirect(GeneralJournalResource::getUrl('index'));
         //notifikasi
         Notification::make()
             ->title('Berhasil Menambahkan Jurnal')

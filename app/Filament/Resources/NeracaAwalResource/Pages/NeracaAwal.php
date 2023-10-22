@@ -23,9 +23,11 @@ class NeracaAwal extends Page
     {
         //route to the create pageof the resource to http://127.0.0.1:8000/dashboard/1/neraca-awals/create hardcoded
 
-        $currentPesantren = Filament::getTenant()->id;
+        // $currentPesantren = Filament::getTenant()->id;
 
-        $this->redirect('/dashboard/' . $currentPesantren . '/neraca-awals/create');
+        // $this->redirect('/dashboard/' . $currentPesantren . '/neraca-awals/create');
+        //redirect to filament.admin.resources.general-journals.create route
+        $this->redirect(NeracaAwalResource::getUrl('create'));
     }
 
     public array $years = [];
