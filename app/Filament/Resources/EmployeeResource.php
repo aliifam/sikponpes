@@ -11,6 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -54,7 +55,16 @@ class EmployeeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([])
+            ->columns([
+                TextColumn::make('name')
+                    ->label('Nama Karyawan')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('email')
+                    ->label('Email Karyawan')
+                    ->searchable()
+                    ->sortable()
+            ])
             ->filters([
                 //
             ])

@@ -54,10 +54,11 @@ class NeracaAwal extends Page
         $this->years = $years;
         //set the selected year to the newest year
 
-        //if years is empty, set the year to null
+        //if years is empty, set the year to array including now year
         if (empty($years)) {
             //get now year
             $this->year = date('Y');
+            $this->years = [date('Y')];
         } else {
             $this->year = $years[0];
         }

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Facades\DB;
 
 class Pesantren extends Model
 {
@@ -23,10 +25,10 @@ class Pesantren extends Model
         'user_id'
     ];
 
-    public function employee()
-    {
-        return $this->hasMany(Employee::class);
-    }
+    // public function employee()
+    // {
+    //     return $this->hasMany(Employee::class);
+    // }
 
     public function user(): BelongsToMany
     {
@@ -56,5 +58,10 @@ class Pesantren extends Model
     public function journalDetails(): HasMany
     {
         return $this->hasMany(JournalDetail::class);
+    }
+
+    public function pesantren(): BelongsTo
+    {
+        return $this->belongsTo(Pesantren::class, 'id');
     }
 }

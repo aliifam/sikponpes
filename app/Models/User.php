@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Filament\Facades\Filament;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
@@ -57,10 +58,10 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     }
 
 
-    public function employee()
-    {
-        return $this->hasMany(Employee::class);
-    }
+    // public function employee()
+    // {
+    //     return $this->hasMany(Employee::class);
+    // }
 
     public function getTenants(Panel $panel): Collection
     {
@@ -75,5 +76,10 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     public function canAccessTenant(Model $tenant): bool
     {
         return $this->pesantrens->contains($tenant);
+    }
+
+    public function pesantren()
+    {
+        return $this->pesantrens()->where('pesantren_id', Filament::getTenant()->id);
     }
 }
