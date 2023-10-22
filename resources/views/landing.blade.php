@@ -7,6 +7,9 @@
 
     <title>SIK PonPes (Sistem Informasi Keuangan Pondok Pesantren)</title>
 
+    {{-- favicon --}}
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
