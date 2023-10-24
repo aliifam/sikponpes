@@ -78,7 +78,7 @@
 
     {{-- hero --}}
     <section
-        class="bg-center bg-no-repeat bg-[url('https://al-muhajirin.id/media_library/posts/mceclip03.png')] bg-green-900 bg-blend-multiply">
+        class="bg-center bg-no-repeat bg-[url('https://gcdnb.pbrd.co/images/HaBxvOKdwPnN.webp')] bg-green-900 bg-blend-multiply">
         <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
                 Kelola Keuangan Pondok Pesantren dengan Mudah</h1>
@@ -115,7 +115,7 @@
                         Platform pengelolaan dan pembuatan laporan keuangan yang dikhususkan untuk Pondok Pesantren.</p>
                 </div>
                 <div class="space-y-4">
-                    <img src="{{ asset('images/image3.png') }}" alt="">
+                    <img src="{{ asset('images/about.png') }}" alt="">
                 </div>
             </div>
         </div>
