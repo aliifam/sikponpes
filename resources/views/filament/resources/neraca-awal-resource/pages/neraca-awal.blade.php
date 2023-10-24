@@ -92,7 +92,4 @@
 
             </tbody>
         </table>
-        <script>
-            console.log('hello');
-        </script>
 </x-filament-panels::page>
