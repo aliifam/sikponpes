@@ -52,6 +52,7 @@ class BukuBesar extends Page
             $beginning_balance = $checkAccount->initialBalance()->whereYear('date', $year)->first()->amount;
         }
 
+        $log['id_akun'] = $checkAccount->id;
         $log['nama_akun'] = $checkAccount->account_name;
         $log['position'] = $checkAccount->position;
         $log['saldo_awal'] = $beginning_balance;

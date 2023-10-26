@@ -138,8 +138,8 @@ class GeneralJournalResource extends Resource
                     ->label('Pilih rentang tanggal')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 ViewAction::make(),
+                Tables\Actions\EditAction::make(),
                 DeleteAction::make(),
             ])
             ->bulkActions([
