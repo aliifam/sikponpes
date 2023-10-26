@@ -19,6 +19,9 @@ class JournalDetail extends Model
 
     protected $keyType = 'string';
 
+    protected $orderBy = 'date';
+    protected $orderDirection = 'DESC';
+
     protected $fillable = [
         'id',
         'receipt',

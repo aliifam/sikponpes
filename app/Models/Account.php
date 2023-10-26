@@ -35,7 +35,7 @@ class Account extends Model
 
     public function initialBalance()
     {
-        return $this->hasMany(InitialBalance::class);
+        return $this->hasMany(InitialBalance::class, 'account_id')->orderBy('date');
     }
 
     public function journal()

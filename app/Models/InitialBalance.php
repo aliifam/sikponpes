@@ -28,6 +28,14 @@ class InitialBalance extends Model
         return $this->belongsTo(Pesantren::class);
     }
 
+    public function getDates()
+    {
+        //define the datetime table column names as below in an array, and you will get the
+        //carbon objects for these fields in model objects.
+
+        return array('created_at', 'updated_at', 'date');
+    }
+
     // public function debit()
     // {
     //     return $this->account()->where('position', 'Debit');
