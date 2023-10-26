@@ -1,7 +1,5 @@
 <x-filament-panels::page>
-    <h1>{{ $count }}</h1>
-
-    <button wire:click="increment">+</button>
-
-    <button wire:click="decrement">-</button>
+    <h2 class="text-lg font-semibold mt-0">Periode 2023</h2>
+    {{-- start dropdown and submit --}}
+    {{-- end dropdown and submit --}}
 </x-filament-panels::page>

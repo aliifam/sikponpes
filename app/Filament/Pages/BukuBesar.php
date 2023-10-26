@@ -85,6 +85,16 @@ class BukuBesar extends Page
                     $q->where('pesantren_id', $session);
                 }))->orderBy('year', 'DESC')->get();
 
+        // if years is empty, set default year to current year
+        if ($years->isEmpty()) {
+            //same data structure as $years
+            $years = collect([
+                (object) [
+                    'year' => date('Y')
+                ]
+            ]);
+        }
+
         $accounts = Account::with('classification.parent')
             ->whereHas('classification.parent', function ($q) use ($session) {
                 $q->where('pesantren_id', $session);
