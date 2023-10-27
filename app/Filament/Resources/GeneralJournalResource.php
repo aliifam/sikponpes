@@ -18,6 +18,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -79,6 +80,9 @@ class GeneralJournalResource extends Resource
                                         }
                                     )
                             )
+                            ->disableOptionWhen(function ($value, $state, Get $get) {
+                                return collect($get('../*.account_id'))->contains($value);
+                            })
                             ->required(),
                         Select::make('position')
                             ->label('Posisi')

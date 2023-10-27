@@ -20,7 +20,7 @@ class AccountClassification extends Model
 
     public function account()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(Account::class, 'classification_id');
     }
 
     public function parent()

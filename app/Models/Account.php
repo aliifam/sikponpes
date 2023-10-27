@@ -20,7 +20,7 @@ class Account extends Model
 
     public function classification()
     {
-        return $this->belongsTo(AccountClassification::class);
+        return $this->belongsTo(AccountClassification::class, 'classification_id');
     }
 
     public function parent()
