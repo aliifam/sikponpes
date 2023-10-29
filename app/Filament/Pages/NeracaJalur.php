@@ -29,6 +29,7 @@ class NeracaJalur extends Page
     public $balance;
     public $years;
     public $year;
+    public $month;
 
 
     public function mount()
@@ -135,5 +136,6 @@ class NeracaJalur extends Page
         $this->balance = $balance;
         $this->years = $years;
         $this->year = $year;
+        $this->month = $month;
     }
 }
