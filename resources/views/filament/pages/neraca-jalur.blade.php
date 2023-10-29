@@ -217,7 +217,9 @@
         document.getElementById('export').addEventListener('click', function() {
             var year = document.querySelector('#years').value;
             var month = document.querySelector('#months').value;
-            window.open('neraca-jalur/export?year=' + year + '&month=' + month);
+            var id = "{{ $session }}"
+            //url parameter id, year, month
+            window.open('/export/neraca_lajur?id=' + id + '&year=' + year + '&month=' + month, '_blank');
         });
     </script>
 </x-filament-panels::page>
