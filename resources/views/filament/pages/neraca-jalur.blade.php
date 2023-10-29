@@ -13,14 +13,51 @@
         $jumlah_debit = 0;
         $jumlah_kredit = 0;
 
-        $dateObj = DateTime::createFromFormat('!m', $month);
-        $monthName = $dateObj->format('F'); // March
+        //switch month to indonesian name
+        switch ($month) {
+            case '01':
+                $monthName = 'Januari';
+                break;
+            case '02':
+                $monthName = 'Februari';
+                break;
+            case '03':
+                $monthName = 'Maret';
+                break;
+            case '04':
+                $monthName = 'April';
+                break;
+            case '05':
+                $monthName = 'Mei';
+                break;
+            case '06':
+                $monthName = 'Juni';
+                break;
+            case '07':
+                $monthName = 'Juli';
+                break;
+            case '08':
+                $monthName = 'Agustus';
+                break;
+            case '09':
+                $monthName = 'September';
+                break;
+            case '10':
+                $monthName = 'Oktober';
+                break;
+            case '11':
+                $monthName = 'November';
+                break;
+            case '12':
+                $monthName = 'Desember';
+                break;
+        }
     @endphp
-    <h2 class="text-lg font-semibold mt-0">Periode {{ strftime('%B', strtotime($monthName)) }} {{ $dt }}</h2>
+    <h2 class="text-lg font-semibold mt-0">Periode {{ $monthName }} {{ $dt }}</h2>
     {{-- start dropdown and submit --}}
 
     <div class="flex items-center">
-        <div class="mr-4">
+        <div class="mr-2">
             <label for="years" class="text-sm font-medium text-gray-900 dark:text-white">
                 Tahun:</label>
             <select id="years"
@@ -31,7 +68,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="ml-4 mr-4">
+        <div class="ml-2 mr-4">
             <label class="text-sm font-medium text-gray-900 dark:text-white">
                 Bulan :</label>
             <select id="months"
@@ -54,6 +91,11 @@
             class="self-end focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-2  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
             Submit
         </button>
+        <div class="flex-grow"></div>
+        <button type="button" id="export"
+            class="self-end focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-2  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            Export PDF
+        </button>
     </div>
     {{-- end dropdown and submit --}}
 
@@ -70,7 +112,8 @@
             </thead>
             <tbody>
                 @for ($i = 0; $i < sizeof($balance); $i++)
-                    <tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-2">
                             <strong>{{ $balance[$i]['parent_code'] }} - {{ $balance[$i]['parent_name'] }}</strong>
                         </td>
@@ -80,7 +123,8 @@
                     </tr>
                     @if (isset($balance[$i]['classification']))
                         @for ($j = 0; $j < sizeof($balance[$i]['classification']); $j++)
-                            <tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td style="padding-left: 1.5rem!important;" class="px-1 py-1">
                                     {{ $balance[$i]['classification'][$j]['classification_name'] }}
                                 </td>
@@ -91,7 +135,8 @@
                             @if (isset($balance[$i]['classification'][$j]['account']))
                                 @for ($k = 0; $k < sizeof($balance[$i]['classification'][$j]['account']); $k++)
                                     @if ($balance[$i]['classification'][$j]['account'][$k]['saldo_akhir'] != '0')
-                                        <tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td style="padding-left: 3rem!important;">
                                                 {{ $balance[$i]['classification'][$j]['account'][$k]['account_code'] }}
                                                 -
