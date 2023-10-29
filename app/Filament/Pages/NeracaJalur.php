@@ -133,6 +133,16 @@ class NeracaJalur extends Page
 
         // dd($years->toArray());
 
+        // if years is empty, set default year to current year
+        if ($years->isEmpty()) {
+            //same data structure as $years
+            $years = collect([
+                (object) [
+                    'year' => date('Y')
+                ]
+            ]);
+        }
+
         //send data to view
         $this->balance = $balance;
         $this->years = $years;

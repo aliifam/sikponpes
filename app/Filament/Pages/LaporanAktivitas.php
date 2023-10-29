@@ -11,4 +11,15 @@ class LaporanAktivitas extends Page
     protected static string $view = 'filament.pages.laporan-aktivitas';
 
     protected static ?string $navigationGroup = 'Manajemen Laporan';
+
+    public $balance;
+    public $years;
+    public $year;
+    public $month;
+    public $session;
+
+
+    public function mount()
+    {
+    }
 }

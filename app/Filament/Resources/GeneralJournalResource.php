@@ -62,7 +62,8 @@ class GeneralJournalResource extends Resource
                     ->required(),
                 Hidden::make('pesantren_id')
                     ->default(Filament::getTenant()->id),
-                Repeater::make('journals')
+                TableRepeater::make('journals')
+                    ->hideLabels()
                     ->grid(2)
                     ->minItems(2)
                     ->schema([

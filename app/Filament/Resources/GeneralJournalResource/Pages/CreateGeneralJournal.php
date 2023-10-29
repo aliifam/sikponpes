@@ -25,6 +25,7 @@ class CreateGeneralJournal extends CreateRecord
     {
         //get filament repeater value
         $transactions = $this->data['journals'];
+        $tahun = $this->data['date'];
 
         //check if the debit and credit is balance
         $debit = 0;
@@ -53,8 +54,19 @@ class CreateGeneralJournal extends CreateRecord
 
         //check if initial balance for account in this year is enough to debit or credit
         foreach ($transactions as $transaction) {
-            $account = \App\Models\Account::find($transaction['account_id']);
-            $initial_balance = $account->initialBalance()->where('year', date('Y'))->first();
+            $initial_balance = \App\Models\InitialBalance::where('account_id', $transaction['account_id'])
+                ->whereYear('date', $tahun)
+                ->first();
+            //if initial balance not exist, halting
+            if (!$initial_balance) {
+                Notification::make()
+                    ->title('Gagal Menambahkan Jurnal')
+                    ->body('Saldo awal tidak ditemukan')
+                    ->danger()
+                    ->send();
+                //halting
+                $this->halt();
+            }
             if ($transaction['position'] == 'debit') {
                 if ($initial_balance->amount < $transaction['amount']) {
                     Notification::make()
@@ -77,6 +89,7 @@ class CreateGeneralJournal extends CreateRecord
                 }
             }
         }
+        //end of checking
 
         //transaksi valid generate journal detail id string pk
 
