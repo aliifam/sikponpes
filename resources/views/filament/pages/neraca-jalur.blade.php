@@ -212,5 +212,12 @@
             var month = document.querySelector('#months').value;
             window.location.href = 'neraca-jalur?year=' + year + '&month=' + month;
         });
+
+        //export pdf function in new tab
+        document.getElementById('export').addEventListener('click', function() {
+            var year = document.querySelector('#years').value;
+            var month = document.querySelector('#months').value;
+            window.open('neraca-jalur/export?year=' + year + '&month=' + month);
+        });
     </script>
 </x-filament-panels::page>
