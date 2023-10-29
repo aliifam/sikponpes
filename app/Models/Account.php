@@ -40,6 +40,6 @@ class Account extends Model
 
     public function journal()
     {
-        return $this->hasMany(GeneralJournal::class);
+        return $this->hasMany(GeneralJournal::class, 'account_id');
     }
 }

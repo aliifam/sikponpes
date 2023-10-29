@@ -51,6 +51,33 @@ class CreateGeneralJournal extends CreateRecord
             $this->halt();
         }
 
+        //check if initial balance for account in this year is enough to debit or credit
+        foreach ($transactions as $transaction) {
+            $account = \App\Models\Account::find($transaction['account_id']);
+            $initial_balance = $account->initialBalance()->where('year', date('Y'))->first();
+            if ($transaction['position'] == 'debit') {
+                if ($initial_balance->amount < $transaction['amount']) {
+                    Notification::make()
+                        ->title('Gagal Menambahkan Jurnal')
+                        ->body('Saldo awal tidak mencukupi untuk melakukan debit')
+                        ->danger()
+                        ->send();
+                    //halting
+                    $this->halt();
+                }
+            } else if ($transaction['position'] == 'credit') {
+                if ($initial_balance->amount < $transaction['amount']) {
+                    Notification::make()
+                        ->title('Gagal Menambahkan Jurnal')
+                        ->body('Saldo awal tidak mencukupi untuk melakukan kredit')
+                        ->danger()
+                        ->send();
+                    //halting
+                    $this->halt();
+                }
+            }
+        }
+
         //transaksi valid generate journal detail id string pk
 
         $journal_detail = new JournalDetail();
