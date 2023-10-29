@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Facades\Filament;
 use Filament\Pages\Page;
 
 class LaporanAktivitas extends Page
@@ -21,5 +22,13 @@ class LaporanAktivitas extends Page
 
     public function mount()
     {
+        if (isset($_GET['year'])) {
+            $year = $_GET['year'];
+            $month = $_GET['month'];
+        } else {
+            $year = date('Y');
+            $month = date('m');
+        }
+        $session = Filament::getTenant()->id;
     }
 }

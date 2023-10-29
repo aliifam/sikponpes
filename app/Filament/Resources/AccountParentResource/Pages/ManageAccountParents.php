@@ -14,11 +14,11 @@ class ManageAccountParents extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->modalHeading('Tambah Akun Parent')
-                ->modalWidth('xl')
-                ->modalAlignment(Alignment::Center)
-                ->createAnother(false),
+            // Actions\CreateAction::make()
+            //     ->modalHeading('Tambah Akun Parent')
+            //     ->modalWidth('xl')
+            //     ->modalAlignment(Alignment::Center)
+            //     ->createAnother(false),
         ];
     }
 }
