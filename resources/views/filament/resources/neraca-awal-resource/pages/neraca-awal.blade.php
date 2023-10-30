@@ -66,7 +66,7 @@
                 @endforeach
 
                 @if ($balanceStatus == 'Unbalance')
-                    <tr class="bg-red-500 text-white border-b">
+                    <tr class="bg-red-500 text-white">
                         <td class="px-6 py-3">Total</td>
                         <td class="px-6 py-3">Rp{{ strrev(implode('.', str_split(strrev(strval($totalDebit)), 3))) }}
                         </td>
@@ -77,7 +77,7 @@
                         </td>
                     </tr>
                 @else
-                    <tr class="bg-green-500 text-white border-b">
+                    <tr class="bg-green-500 text-white">
                         <td class="px-6 py-3">Total</td>
                         <td class="px-6 py-3">Rp{{ strrev(implode('.', str_split(strrev(strval($totalDebit)), 3))) }}
                         </td>

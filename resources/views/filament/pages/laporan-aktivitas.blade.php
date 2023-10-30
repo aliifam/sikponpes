@@ -113,17 +113,16 @@
                 <th></th>
             </thead>
             <tbody>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td style="width:60%" class="p-2">
+                <tr class="bg-green-600 text-white font-bold">
+                    <td style="width:60%" class="p-3">
                         Pendapatan
                     </td>
-                    <td style="width:10%"></td>
+                    <td style="width:10%" class="p-2"></td>
                 </tr>
                 @for ($i = 0; $i < sizeof($incomeData); $i++)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td style="width:60%;padding-left: 1.5rem!important;">
+                        <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
                             <strong>{{ $incomeData[$i]['classification'] }}</strong>
                         </td>
                         <td style="width:10%"></td>
@@ -137,7 +136,7 @@
                                         {{ $incomeData[$i]['code'][$y] }}-
                                         {{ $incomeData[$i]['name'][$y] }}
                                     </td>
-                                    <td class="text-right" style="width:10%">
+                                    <td class="text-right px-3 py-2" style="width:10%">
                                         @if ($incomeData[$i]['ending balance'][$y] < 0)
                                             -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $incomeData[$i]['ending balance'][$y])), 3))) }}
                                         @else
@@ -150,47 +149,46 @@
                     @endif
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td style="width:60%;padding-left: 1.5rem!important;">
+                        <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
                             Total {{ $incomeData[$i]['classification'] }}
                         </td>
-                        <td class="text-right" style="width:10%">
+                        <td class="text-right px-3 py-2" style="width:10%">
                             Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($incomeData[$i]['ending balance']))), 3))) }}
                         </td>
                     </tr>
                 @endfor
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td style="width:60%" class="p-2">
+                    <td style="width:60%" class="px-3 py-2">
                         <strong>Total Pendapatan</strong>
                     </td>
-                    <td class="text-right" style="width:10%">
+                    <td class="text-right px-3 py-2" style="width:10%">
                         Rp{{ strrev(implode('.', str_split(strrev(strval($income)), 3))) }}
                     </td>
                 </tr>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td style="width:60%" class="p-2">Biaya</td>
+                <tr class="bg-green-600 text-white font-bold">
+                    <td style="width:60%" class="p-3">Biaya</td>
                     <td style="width:10%"></td>
                 </tr>
                 @for ($i = 0; $i < sizeof($expenseData); $i++)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td style="width:60%;padding-left: 1.5rem!important;">
+                        <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
                             <strong>{{ $expenseData[$i]['classification'] }}</strong>
                         </td>
                         <td style="width:10%">
                         </td>
                     </tr>
-                    @if (isset($incomeData[$i]['name']))
+                    @if (isset($expenseData[$i]['name']))
                         @for ($j = 0; $j < sizeof($expenseData[$i]['ending balance']); $j++)
                             @if ($expenseData[$i]['ending balance'][$j] != 0)
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td style="width:60%;padding-left: 3rem!important;">
+                                    <td style="width:60%;padding-left: 3rem!important;" class="px-3 py-2">
                                         {{ $expenseData[$i]['code'][$j] }} -
                                         {{ $expenseData[$i]['name'][$j] }}
                                     </td>
-                                    <td class="text-right" style="width:10%">
+                                    <td class="text-right px-3 py-2" style="width:10%">
                                         Rp{{ strrev(implode('.', str_split(strrev(strval($expenseData[$i]['ending balance'][$j])), 3))) }}
                                     </td>
                                 </tr>
@@ -199,19 +197,20 @@
                     @endif
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td style="width:60%;padding-left: 1.5rem!important;">
+                        <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
                             Total {{ $expenseData[$i]['classification'] }}
                         </td>
-                        <td style="width:10%" class="text-right">
+                        <td style="width:10%" class="text-right px-3 py-2">
                             Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($expenseData[$i]['ending balance']))), 3))) }}
                         </td>
                     </tr>
                 @endfor
-                <tr>
-                    <td style="width:60%" class="p-2">
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style="width:60%" class="px-3 py-2">
                         <strong>Total Biaya</strong>
                     </td>
-                    <td class="text-right" style="width:10%">
+                    <td class="text-right px-3 py-2" style="width:10%">
                         @if ($expense < 0)
                             <strong>-Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $expense)), 3))) }}</strong>
                         @else
@@ -219,20 +218,37 @@
                         @endif
                     </td>
                 </tr>
-                <tr>
-                    <td style="width:60%" class="p-2">
-                        <strong>Surplus / Defisit</strong>
-                    </td>
-                    <td class="text-right" style="width:10%" class="p-20">
-                        <strong>
-                            @if ($income - $expense < 0)
-                                -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($income - $expense))), 3))) }}
-                            @else
-                                Rp{{ strrev(implode('.', str_split(strrev(strval($income - $expense)), 3))) }}
-                            @endif
-                        </strong>
-                    </td>
-                </tr>
+                @if ($income >= $expense)
+                    <tr class="bg-green-600 text-white font-bold">
+                        <td style="width:60%" class="px-3 py-4">
+                            <strong>Surplus</strong>
+                        </td>
+                        <td class="text-right px-3 py-2" style="width:10%" class="p-2">
+                            <strong>
+                                @if ($income - $expense < 0)
+                                    -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($income - $expense))), 3))) }}
+                                @else
+                                    Rp{{ strrev(implode('.', str_split(strrev(strval($income - $expense)), 3))) }}
+                                @endif
+                            </strong>
+                        </td>
+                    </tr>
+                @else
+                    <tr class="bg-red-600 text-white font-bold">
+                        <td style="width:60%" class="px-3 py-4">
+                            <strong>Defisit</strong>
+                        </td>
+                        <td class="text-right px-3 py-2" style="width:10%" class="p-2">
+                            <strong>
+                                @if ($income - $expense < 0)
+                                    -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($income - $expense))), 3))) }}
+                                @else
+                                    Rp{{ strrev(implode('.', str_split(strrev(strval($income - $expense)), 3))) }}
+                                @endif
+                            </strong>
+                        </td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>

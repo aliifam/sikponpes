@@ -150,6 +150,6 @@ class NeracaAwal extends Page
             ->success()
             ->send();
 
-        $this->redirect('/dashboard/' . Filament::getTenant()->id . '/neraca-awals');
+        $this->redirect('/dashboard/pesantren/' . Filament::getTenant()->id . '/neraca-awals');
     }
 }
