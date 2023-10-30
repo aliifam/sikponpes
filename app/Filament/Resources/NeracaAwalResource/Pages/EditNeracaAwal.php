@@ -53,4 +53,9 @@ class EditNeracaAwal extends EditRecord
             $this->data['amount'] = $currentAmount;
         }
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

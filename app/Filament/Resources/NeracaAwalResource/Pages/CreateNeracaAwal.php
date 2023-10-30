@@ -49,6 +49,15 @@ class CreateNeracaAwal extends CreateRecord
             $this->data['account_id'] = $currentAccount;
             $this->data['date'] = $currentDate;
             $this->data['amount'] = $currentAmount;
+
+            //redirect to the index page
+            // $this->redirect(NeracaAwalResource::getUrl('index'));
         }
+    }
+
+    //redirect to the index page after create
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }
