@@ -8,6 +8,8 @@
             $month = date('m');
         }
 
+        // dd($incomeData, $expenseData);
+
         setlocale(LC_ALL, 'id_ID');
 
         $jumlah_debit = 0;
@@ -111,14 +113,16 @@
                 <th></th>
             </thead>
             <tbody>
-                <tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%" class="p-2">
                         Pendapatan
                     </td>
                     <td style="width:10%"></td>
                 </tr>
                 @for ($i = 0; $i < sizeof($incomeData); $i++)
-                    <tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style="width:60%;padding-left: 1.5rem!important;">
                             <strong>{{ $incomeData[$i]['classification'] }}</strong>
                         </td>
@@ -127,7 +131,8 @@
                     @if (isset($incomeData[$i]['name']))
                         @for ($y = 0; $y < sizeof($incomeData[$i]['name']); $y++)
                             @if ($incomeData[$i]['ending balance'][$y] != '0')
-                                <tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td style="width:60%;padding-left: 3rem!important;">
                                         {{ $incomeData[$i]['code'][$y] }}-
                                         {{ $incomeData[$i]['name'][$y] }}
@@ -143,14 +148,18 @@
                             @endif
                         @endfor
                     @endif
-                    <tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style="width:60%;padding-left: 1.5rem!important;">
                             Total {{ $incomeData[$i]['classification'] }}
                         </td>
-                        <td class="text-right" style="width:10%"></td>
+                        <td class="text-right" style="width:10%">
+                            Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($incomeData[$i]['ending balance']))), 3))) }}
+                        </td>
                     </tr>
                 @endfor
-                <tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%" class="p-2">
                         <strong>Total Pendapatan</strong>
                     </td>
@@ -158,21 +167,25 @@
                         Rp{{ strrev(implode('.', str_split(strrev(strval($income)), 3))) }}
                     </td>
                 </tr>
-                <tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%" class="p-2">Biaya</td>
                     <td style="width:10%"></td>
                 </tr>
                 @for ($i = 0; $i < sizeof($expenseData); $i++)
-                    <tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style="width:60%;padding-left: 1.5rem!important;">
                             <strong>{{ $expenseData[$i]['classification'] }}</strong>
                         </td>
-                        <td style="width:10%"></td>
+                        <td style="width:10%">
+                        </td>
                     </tr>
                     @if (isset($incomeData[$i]['name']))
                         @for ($j = 0; $j < sizeof($expenseData[$i]['ending balance']); $j++)
                             @if ($expenseData[$i]['ending balance'][$j] != 0)
-                                <tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td style="width:60%;padding-left: 3rem!important;">
                                         {{ $expenseData[$i]['code'][$j] }} -
                                         {{ $expenseData[$i]['name'][$j] }}
@@ -184,11 +197,14 @@
                             @endif
                         @endfor
                     @endif
-                    <tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style="width:60%;padding-left: 1.5rem!important;">
                             Total {{ $expenseData[$i]['classification'] }}
                         </td>
-                        <td style="width:10%" class="text-right"></td>
+                        <td style="width:10%" class="text-right">
+                            Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($expenseData[$i]['ending balance']))), 3))) }}
+                        </td>
                     </tr>
                 @endfor
                 <tr>
@@ -221,5 +237,16 @@
         </table>
     </div>
     {{-- end table --}}
+
+    <script>
+        document.getElementById('search').addEventListener('click', function() {
+            var year = document.querySelector('#years').value;
+            var month = document.querySelector('#months').value;
+            window.location.href = 'laporan-aktivitas?year=' + year + '&month=' + month;
+        });
+
+        //export pdf function in new tab
+        //export excel function in new tab
+    </script>
 
 </x-filament-panels::page>

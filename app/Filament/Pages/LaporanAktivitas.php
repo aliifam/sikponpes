@@ -65,6 +65,9 @@ class LaporanAktivitas extends Page
                             $q->whereMonth('date', '<=', $month);
                         })->get();
                         foreach ($jurnals as $jurnal) {
+                            if ($jurnal->position == "credit") {
+                                $jurnal->position = "kredit";
+                            }
                             if ($jurnal->position == $position) {
                                 $endingBalance += $jurnal->amount;
                             } else {
