@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Closure;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Get;
 use stdClass;
 
 class NeracaAwalResource extends Resource
@@ -56,6 +57,10 @@ class NeracaAwalResource extends Resource
                                 }
                             )
                     )
+                    //if the account already exist in the same year, disable the option, if value is already exist in the same year, disable the option
+                    // ->disableOptionWhen(function ($value, Get $get) {
+                    //     return InitialBalance::where('pesantren_id', Filament::getTenant()->id)
+                    // })
                     ->required(),
                 TextInput::make('amount')
                     ->label('Jumlah')

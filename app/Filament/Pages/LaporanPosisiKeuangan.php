@@ -110,12 +110,13 @@ class LaporanPosisiKeuangan extends Page
                         $liabilityData[$i]['code'][] = $a->account_code;
                         $liabilityData[$i]['ending balance'][] = $endingBalance;
                         if ($position == "kredit") {
-                            $liability += $endingBalance;
+                            $sum += $endingBalance;
                             $pasiva += $endingBalance;
                         } else {
-                            $liability -= $endingBalance;
+                            $sum -= $endingBalance;
                             $pasiva -= $endingBalance;
                         }
+                        $liabilityData[$i]['sum'] = $sum;
                     } else if ($p->parent_name == "Ekuitas") {
                         $equityData[$i]['classification'] = $c->classification_name;
                         $equityData[$i]['classification_code'] = $c->classification_code;
@@ -123,10 +124,10 @@ class LaporanPosisiKeuangan extends Page
                         $equityData[$i]['code'][] = $a->account_code;
                         $equityData[$i]['ending balance'][] = $endingBalance;
                         if ($position == "kredit") {
-                            $equity += $endingBalance;
+                            $sum += $endingBalance;
                             $pasiva += $endingBalance;
                         } else {
-                            $equity -= $endingBalance;
+                            $sum += $endingBalance;
                             $pasiva -= $endingBalance;
                         }
                     }
@@ -153,6 +154,7 @@ class LaporanPosisiKeuangan extends Page
         }
 
         // dd($assetData);
+        // dd($liabilityData);
 
         $this->years = $years;
         $this->year = $year;

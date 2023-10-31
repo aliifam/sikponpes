@@ -181,10 +181,15 @@
                         <strong>Total Aktiva</strong>
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        @if ($sum < 0)
+                        {{-- @if ($sum < 0)
                             - Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $sum)), 3))) }}
                         @else
                             Rp{{ strrev(implode('.', str_split(strrev(strval($sum)), 3))) }}
+                        @endif --}}
+                        @if ($aktiva < 0)
+                            - Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $aktiva)), 3))) }}
+                        @else
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($aktiva)), 3))) }}
                         @endif
                     </td>
                 </tr>
@@ -233,6 +238,65 @@
                         </td>
                     </tr>
                 @endfor
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 font-bold">
+                    <td style="width:60%" class="p-3">Ekuitas</td>
+                    <td style="width:10%"></td>
+                </tr>
+                @for ($i = 0; $i < sizeof($equityData); $i++)
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
+                            <strong>{{ $equityData[$i]['classification_code'] }} -
+                                {{ $equityData[$i]['classification'] }}</strong>
+                        </td>
+                        <td style="width:10%">
+                        </td>
+                    </tr>
+                    @if (isset($equityData[$i]['name']))
+                        @for ($j = 0; $j < sizeof($equityData[$i]['ending balance']); $j++)
+                            @if ($equityData[$i]['ending balance'][$j] != 0)
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <td style="width:60%;padding-left: 3rem!important;" class="px-3 py-2">
+                                        {{ $equityData[$i]['code'][$j] }} -
+                                        {{ $equityData[$i]['name'][$j] }}
+                                    </td>
+                                    <td class="text-right px-3 py-2" style="width:10%">
+                                        Rp{{ strrev(implode('.', str_split(strrev(strval($equityData[$i]['ending balance'][$j])), 3))) }}
+                                    </td>
+                                </tr>
+                            @endif
+                        @endfor
+                    @endif
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
+                            Total {{ $equityData[$i]['classification'] }}
+                        </td>
+                        <td style="width:10%" class="text-right px-3 py-2">
+                            Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($equityData[$i]['ending balance']))), 3))) }}
+                        </td>
+                    </tr>
+                @endfor
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style="width:60%" class="px-3 py-2">
+                        <strong>Total Pasiva</strong>
+                    </td>
+                    <td class="text-right px-3 py-2" style="width:10%">
+                        {{-- @if ($sum < 0)
+                            - Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $sum)), 3))) }}
+                        @else
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($sum)), 3))) }}
+                        @endif --}}
+                        @if ($pasiva < 0)
+                            - Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $pasiva)), 3))) }}
+                        @else
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($pasiva)), 3))) }}
+                        @endif
+                    </td>
+                </tr>
                 {{-- <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%" class="px-3 py-2">
@@ -280,5 +344,28 @@
             </tbody>
         </table>
     </div>
+
+    @if ($aktiva != $pasiva)
+        <div class="flex items-center justify-center mt-4">
+            <div class="flex items-center justify-center bg-red-600 text-white font-bold rounded-lg px-4 py-2">
+                <p class="text-sm">Aktiva & Pasiva Belum Balance</p>
+            </div>
+        </div>
+    @else
+        <div class="flex items-center justify-center mt-4">
+            <div class="flex items-center justify-center bg-green-600 text-white font-bold rounded-lg px-4 py-2">
+                <p class="text-sm">Aktiva & Pasiva sudah Balance</p>
+            </div>
+        </div>
+    @endif
     {{-- end table --}}
+
+    <script>
+        // filter by year and month
+        document.getElementById('search').addEventListener('click', function() {
+            var year = document.getElementById('years').value;
+            var month = document.getElementById('months').value;
+            window.location.href = 'laporan-posisi-keuangan?year=' + year + '&month=' + month;
+        });
+    </script>
 </x-filament-panels::page>
