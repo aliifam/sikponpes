@@ -88,4 +88,9 @@ class EmployeeResource extends Resource
             'index' => Pages\ManageEmployees::route('/'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
 }
