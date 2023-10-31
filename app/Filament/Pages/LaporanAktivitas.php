@@ -84,6 +84,7 @@ class LaporanAktivitas extends Page
 
                     if ($p->parent_name == "Pendapatan") {
                         $incomeData[$i]['classification'] = $c->classification_name;
+                        $incomeData[$i]['classification_code'] = $c->classification_code;
                         $incomeData[$i]['name'][] = $a->account_name;
                         $incomeData[$i]['code'][] = $a->account_code;
                         $incomeData[$i]['ending balance'][] = $endingBalance;
@@ -94,6 +95,7 @@ class LaporanAktivitas extends Page
                         }
                     } else if ($p->parent_name == "Biaya") {
                         $expenseData[$i]['classification'] = $c->classification_name;
+                        $expenseData[$i]['classification_code'] = $c->classification_code;
                         $expenseData[$i]['name'][] = $a->account_name;
                         $expenseData[$i]['code'][] = $a->account_code;
                         $expenseData[$i]['ending balance'][] = $endingBalance;

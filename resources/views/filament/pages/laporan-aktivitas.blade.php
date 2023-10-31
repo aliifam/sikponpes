@@ -12,8 +12,8 @@
 
         setlocale(LC_ALL, 'id_ID');
 
-        $jumlah_debit = 0;
-        $jumlah_kredit = 0;
+        // $jumlah_debit = 0;
+        // $jumlah_kredit = 0;
 
         //switch month to indonesian name
         switch ($month) {
@@ -123,7 +123,8 @@
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
-                            <strong>{{ $incomeData[$i]['classification'] }}</strong>
+                            <strong>{{ $incomeData[$i]['classification_code'] }} -
+                                {{ $incomeData[$i]['classification'] }}</strong>
                         </td>
                         <td style="width:10%"></td>
                     </tr>
@@ -174,7 +175,8 @@
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
-                            <strong>{{ $expenseData[$i]['classification'] }}</strong>
+                            <strong>{{ $expenseData[$i]['classification_code'] }} -
+                                {{ $expenseData[$i]['classification'] }}</strong>
                         </td>
                         <td style="width:10%">
                         </td>
@@ -218,7 +220,7 @@
                         @endif
                     </td>
                 </tr>
-                @if ($income >= $expense)
+                @if ($income > $expense)
                     <tr class="bg-green-600 text-white font-bold">
                         <td style="width:60%" class="px-3 py-4">
                             <strong>Surplus</strong>
@@ -233,7 +235,7 @@
                             </strong>
                         </td>
                     </tr>
-                @else
+                @elseif ($income < $expense)
                     <tr class="bg-red-600 text-white font-bold">
                         <td style="width:60%" class="px-3 py-4">
                             <strong>Defisit</strong>
@@ -259,6 +261,13 @@
             var year = document.querySelector('#years').value;
             var month = document.querySelector('#months').value;
             window.location.href = 'laporan-aktivitas?year=' + year + '&month=' + month;
+        });
+
+        document.getElementById('export').addEventListener('click', function() {
+            var year = document.querySelector('#years').value;
+            var month = document.querySelector('#months').value;
+            var id = "{{ $session }}"
+            window.open('laporan-aktivitas/export?year=' + year + '&month=' + month);
         });
 
         //export pdf function in new tab

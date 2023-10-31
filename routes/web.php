@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanAktifitasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NeracaSaldoController;
 /*
@@ -18,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('export/neraca_lajur', [NeracaSaldoController::class, 'export'])->name('export.neraca_lajur');
+
+Route::get('export/laporan_aktivitas', [LaporanAktifitasController::class, 'exportpdf'])->name('export.laporan_aktivitas');

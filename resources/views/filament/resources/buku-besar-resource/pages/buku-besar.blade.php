@@ -90,7 +90,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="font-semibold dark:bg-slate-700 dark:text-white">
+                <tr class="font-semibold dark:bg-slate-700 bg-slate-200 dark:text-white">
                     <td class="px-6 py-3">{{ $year }}</td>
                     <td class="px-6 py-3">Saldo Awal</td>
                     <td class="px-6 py-3 text-center"></td>
@@ -101,7 +101,8 @@
                 </tr>
 
                 @foreach ($data as $d)
-                    <tr class="dark:bg-slate-700 dark:text-white">
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-3">{{ strftime('%d %B %G', strtotime($d->detail->date)) }}</td>
                         <td class="px-6 py-3">{{ $d->detail->description }}</td>
                         <td class="px-6 py-3 text-center">

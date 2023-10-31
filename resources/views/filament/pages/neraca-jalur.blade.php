@@ -125,7 +125,7 @@
                         @for ($j = 0; $j < sizeof($balance[$i]['classification']); $j++)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td style="padding-left: 1.5rem!important;" class="px-1 py-1">
+                                <td style="padding-left: 1.5rem!important;" class="px-6 py-2">
                                     {{ $balance[$i]['classification'][$j]['classification_name'] }}
                                 </td>
                                 <td></td>
@@ -137,7 +137,7 @@
                                     @if ($balance[$i]['classification'][$j]['account'][$k]['saldo_akhir'] != '0')
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <td style="padding-left: 3rem!important;">
+                                            <td style="padding-left: 3rem!important;" class="px-6 py-2">
                                                 {{ $balance[$i]['classification'][$j]['account'][$k]['account_code'] }}
                                                 -
                                                 {{ $balance[$i]['classification'][$j]['account'][$k]['account_name'] }}
