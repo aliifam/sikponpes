@@ -227,7 +227,7 @@
                 <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                     <div
                         class="mb-9 bg-white rounded-xl py-8 px-7 shadow-md transition-all hover:shadow-lg sm:p-9 lg:px-6 xl:px-9">
-                        <div class="mx-auto mb-7 inline-block">
+                        <div class="mx-auto mb-3 inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="green" class="w-16 h-16">
                                 <path stroke-linecap="round" stroke-linejoin="round"
