@@ -14,3 +14,11 @@ Sistem informasi keuangan pondok pesantren
 8. jalankan `npm install`
 9. jalankan `npm run dev`
 10. Jalankan `php artisan serve`
+
+## Tech Stack
+
+-   Laravel 10
+-   Tailwind CSS
+-   Alpine JS
+-   Livewire
+-   Filament

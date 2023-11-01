@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\Account;
 use App\Models\GeneralJournal;
+use App\Models\JournalDetail;
 use Filament\Facades\Filament;
 use Filament\Pages\Page;
 
@@ -59,6 +60,19 @@ class LaporanArusKas extends Page
         //if kas position is credit and account classification is aset lancar
         $arusKasOperasiKeluar = $arusKasOperasi->where('position', 'credit')->where('account.classification.classification_name', 'Aset Lancar');
 
-        dd($arusKasOperasiMasuk->toArray(), $arusKasOperasiKeluar->toArray());
+        $arusKasOperasi = [
+            'masuk' => $arusKasOperasiMasuk->toArray(),
+            'keluar' => $arusKasOperasiKeluar->toArray(),
+            'amount' => $arusKasOperasiMasuk->sum('amount') - $arusKasOperasiKeluar->sum('amount')
+        ];
+        // dd($arusKasOperasi);
+
+        $cobadata = JournalDetail::with('general_journal.account.classification.parent')
+            ->whereHas('general_journal.account.classification.parent', function ($q) use ($session) {
+                $q->where('pesantren_id', $session);
+            })->whereHas('general_journal', function ($q) use ($year) {
+                $q->whereYear('date', $year);
+            })->get();
+        dd($cobadata->toArray());
     }
 }
