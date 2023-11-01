@@ -7,6 +7,7 @@ use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\Tenancy\EditPesantrenProfile;
 use App\Filament\Pages\Tenancy\RegisterPesantren;
+use App\Filament\Widgets\LatestTransactions;
 use App\Models\Pesantren;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -53,7 +54,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                // Widgets\AccountWidget::class,
+                Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')

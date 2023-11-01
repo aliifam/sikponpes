@@ -46,10 +46,12 @@ class AccountOverview extends BaseWidget
         return [
             //using Account Model wheren pesantren_id = now pesantren
             Stat::make('Total Akun', Account::where('pesantren_id', Filament::getTenant()->id)->count())
-                ->descriptionIcon('heroicon-o-users'),
+                ->descriptionIcon('heroicon-o-users')
+                ->chart([7, 2, 10, 3, 15, 4, 17])
+                ->color('success'),
             Stat::make('Saldo Kas', $saldo_kas)
                 ->descriptionIcon('heroicon-o-currency-dollar'),
-            Stat::make('Transaksi', $transactions)
+            Stat::make('Jumlah Transaksi', $transactions)
                 ->descriptionIcon('heroicon-o-cash'),
             // Stat::make('Laba Rugi', 'Rp. 20.000.000')
             //     ->descriptionIcon('heroicon-o-cash'),
