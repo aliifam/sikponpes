@@ -297,6 +297,17 @@
                         @endif
                     </td>
                 </tr>
+                <tr>
+                    @if ($aktiva != $pasiva)
+                        <td class="bg-red-600 text-center text-white text-base py-2" colspan="2">
+                            Aktiva dan Pasiva Belum Balance
+                        </td>
+                    @else
+                        <td class="bg-green-600 text-center text-white text-base py-2" colspan="2">
+                            Aktiva dan Pasiva Sudah Balance
+                        </td>
+                    @endif
+                </tr>
                 {{-- <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%" class="px-3 py-2">
@@ -345,7 +356,7 @@
         </table>
     </div>
 
-    @if ($aktiva != $pasiva)
+    {{-- @if ($aktiva != $pasiva)
         <div class="flex items-center justify-center mt-4">
             <div class="flex items-center justify-center bg-red-600 text-white font-bold rounded-lg px-4 py-2">
                 <p class="text-sm">Aktiva & Pasiva Belum Balance</p>
@@ -357,7 +368,7 @@
                 <p class="text-sm">Aktiva & Pasiva sudah Balance</p>
             </div>
         </div>
-    @endif
+    @endif --}}
     {{-- end table --}}
 
     <script>
