@@ -23,7 +23,13 @@ class AccountOverview extends BaseWidget
         //count saldo kas
         $kas_id = Account::where('pesantren_id', $session)->where('account_name', 'Kas')->first()->id;
         $saldo_kas = InitialBalance::where('pesantren_id', $session)->where('account_id', $kas_id)->whereYear('date', $year)->first();
-        $saldo_kas = $saldo_kas->amount;
+        // $saldo_kas = $saldo_kas->amount;
+        if ($saldo_kas) {
+            $saldo_kas = $saldo_kas->amount;
+        } else {
+            $saldo_kas = 0;
+        }
+
         $jurnal_yg_ada_kasnya = GeneralJournal::where('pesantren_id', $session)->where('account_id', $kas_id)->whereYear('created_at', $year)->get();
 
         // dd($jurnal_yg_ada_kasnya->toArray());
