@@ -16,6 +16,8 @@ class ArusKas extends ApexChartWidget
      */
     protected static string $chartId = 'aruskaschart';
 
+    public ?string $filter = '2023';
+
     /**
      * Widget Title
      *
@@ -31,7 +33,7 @@ class ArusKas extends ApexChartWidget
      */
     protected function getOptions(): array
     {
-        $year = date('Y');
+        $year = $this->filter;
         $session = Filament::getTenant()->id;
         $account = Account::whereHas('classification.parent', function ($q) use ($session) {
             $q->where('pesantren_id', $session);
@@ -114,6 +116,17 @@ class ArusKas extends ApexChartWidget
                 ],
             ],
             'colors' => ['#4ADE80', '#f43f5e'],
+        ];
+    }
+
+    protected function getFilters(): ?array
+    {
+
+        return [
+            '2023' => '2023',
+            '2022' => '2022',
+            '2021' => '2021',
+            '2020' => '2020',
         ];
     }
 }
