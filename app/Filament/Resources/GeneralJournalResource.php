@@ -154,7 +154,11 @@ class GeneralJournalResource extends Resource
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            //order by date desc
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('date', 'desc');
+            });
     }
 
     public static function getRelations(): array

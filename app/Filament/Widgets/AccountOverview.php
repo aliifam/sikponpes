@@ -127,8 +127,17 @@ class AccountOverview extends BaseWidget
 
         $ekuitas = $income - $expense;
 
-        $ekuitas = "Rp. " . strrev(implode('.', str_split(strrev(strval($ekuitas)), 3)));
-        $saldo_kas = "Rp. " . strrev(implode('.', str_split(strrev(strval($saldo_kas)), 3)));
+        if ($ekuitas < 0) {
+            $ekuitas = "-Rp. " . strrev(implode('.', str_split(strrev(strval($ekuitas)), 3)));
+        } else {
+            $ekuitas = "Rp. " . strrev(implode('.', str_split(strrev(strval($ekuitas)), 3)));
+        }
+
+        if ($saldo_kas < 0) {
+            $saldo_kas = "-Rp. " . strrev(implode('.', str_split(strrev(strval($saldo_kas)), 3)));
+        } else {
+            $saldo_kas = "Rp. " . strrev(implode('.', str_split(strrev(strval($saldo_kas)), 3)));
+        }
 
         return [
             //using Account Model wheren pesantren_id = now pesantren

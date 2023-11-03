@@ -24,7 +24,7 @@ class ArusKas extends ApexChartWidget
      *
      * @var string|null
      */
-    protected static ?string $heading = 'Arus Akun Kas';
+    protected static ?string $heading = 'Arus Kas';
 
     /**
      * Chart options (series, labels, types, size, animations...)
@@ -86,7 +86,7 @@ class ArusKas extends ApexChartWidget
         return [
             'chart' => [
                 'type' => 'bar',
-                'height' => 500,
+                'height' => 545,
                 'stacked' => true,
             ],
             'series' => [
