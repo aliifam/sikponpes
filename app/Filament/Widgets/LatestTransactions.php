@@ -44,6 +44,7 @@ class LatestTransactions extends BaseWidget
             ->actions([
                 Action::make('Detail')
                     ->icon('heroicon-o-eye')
+                    ->iconButton()
                     ->url(fn (JournalDetail $record): string => GeneralJournalResource::getUrl('edit', ['record' => $record])),
             ]);
     }

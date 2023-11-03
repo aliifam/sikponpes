@@ -86,7 +86,7 @@ class ArusKas extends ApexChartWidget
         return [
             'chart' => [
                 'type' => 'bar',
-                'height' => 490,
+                'height' => 500,
                 'stacked' => true,
             ],
             'series' => [
