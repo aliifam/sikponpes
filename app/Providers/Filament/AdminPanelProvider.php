@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\PasswordReset\ResetPassword;
 use App\Filament\Pages\Auth\Register;
@@ -39,7 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->tenantProfile(EditPesantrenProfile::class)
             ->login(Login::class)
             ->registration(Register::class)
-            ->profile()
+            ->profile(EditProfile::class)
             ->passwordReset(RequestPasswordReset::class, ResetPassword::class)
             ->authPasswordBroker('users')
             ->authGuard('web')
