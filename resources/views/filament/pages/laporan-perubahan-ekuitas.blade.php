@@ -122,7 +122,7 @@
                 </tr>
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td style="width:60%;padding-left: 3rem!important;">
+                    <td style="width:60%;padding-left: 1.5rem!important;">
                         anjay
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
