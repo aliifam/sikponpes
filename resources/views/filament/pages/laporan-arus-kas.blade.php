@@ -262,7 +262,7 @@
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
-                        Jumlah kas neto diterima dari aktivitas operasi
+                        Jumlah kas neto diterima dari aktivitas investasi
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
                         @if ($arusKasOperasi['amount'] < 0)
@@ -284,19 +284,136 @@
                 </tr>
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td style="width:60%;padding-left: 3rem!important;">
-
+                    <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2 font-semibold">
+                        Arus Kas Masuk
                     </td>
-                    <td class="text-right px-3 py-2" style="width:10%">
-                        anhay
+                    <td style="width:10%">
                     </td>
                 </tr>
+                @if (isset($arusKasPendanaan['masuk']))
+                    @foreach ($arusKasPendanaan['masuk'] as $item)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td style="width:60%;padding-left: 3rem!important;" class="px-3 py-2">
+                                {{ $item['description'] }}
+                            </td>
+                            <td class="text-right px-3 py-2" style="width:10%">
+                                @php
+                                    $amount = 0;
+                                    foreach ($item['general_journal'] as $journal) {
+                                        if ($journal['account_id'] === $kasId) {
+                                            $amount += $journal['amount'];
+                                        }
+                                    }
+                                @endphp
+                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2 font-semibold">
+                        Arus Kas Keluar
+                    </td>
+                    <td class="text-right px-3 py-2" style="width:10%">
+                    </td>
+                </tr>
+                @if (isset($arusKasPendanaan['keluar']))
+                    @foreach ($arusKasPendanaan['keluar'] as $item)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td style="width:60%;padding-left: 3rem!important;" class="px-3 py-2">
+                                {{ $item['description'] }}
+                            </td>
+                            <td class="text-right px-3 py-2" style="width:10%">
+                                @php
+                                    $amount = 0;
+                                    foreach ($item['general_journal'] as $journal) {
+                                        if ($journal['account_id'] === $kasId) {
+                                            $amount += $journal['amount'];
+                                        }
+                                    }
+                                @endphp
+                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
+                        Jumlah kas neto diterima dari aktivitas investasi
+                    </td>
+                    <td class="text-right px-3 py-2" style="width:10%">
+                        @if ($arusKasOperasi['amount'] < 0)
+                            - Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasPendanaan['amount'])), 3))) }}
+                        @else
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasPendanaan['amount'])), 3))) }}
+                        @endif
+                    </td>
+                </tr>
+                {{-- end arus kas pendanaan render --}}
+
+                {{-- render rangkuman --}}
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 font-semibold">
+                    <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
+                        Kenaikan / Penurunan
+                    </td>
+                    <td class="text-right px-3 py-2" style="width:10%">
+                        @if ($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] - $saldoAwal < 0)
+                            -
+                            Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] - $saldoAwal))), 3))) }}
+                        @else
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] - $saldoAwal)), 3))) }}
+                        @endif
+                    </td>
+                </tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 font-semibold">
+                    <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
+                        Saldo Awal
+                    </td>
+                    <td class="text-right px-3 py-2" style="width:10%">
+                        @if ($saldoAwal < 0)
+                            - Rp{{ strrev(implode('.', str_split(strrev(strval($saldoAwal)), 3))) }}
+                        @else
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($saldoAwal)), 3))) }}
+                        @endif
+                    </td>
+                </tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 font-semibold">
+                    <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
+                        Saldo Akhir
+                    </td>
+                    <td class="text-right px-3 py-2" style="width:10%">
+                        @if ($saldoAwal - $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] < 0)
+                            -
+                            Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($saldoAwal - $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount']))), 3))) }}
+                        @else
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($saldoAwal - $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'])), 3))) }}
+                        @endif
+                    </td>
+                </tr>
+                {{-- end render rangkuman --}}
             </tbody>
         </table>
     </div>
     {{-- end table --}}
 
     {{-- start script js --}}
+    <script>
+        // filter data by year and month in url query
+        document.getElementById('search').addEventListener('click', function() {
+            let year = document.getElementById('years').value;
+            let month = document.getElementById('months').value;
+            window.location.href = 'laporan-arus-kas?year=' + year + '&month=' + month;
+        });
 
+        // export pdf to new tab
+        // export and download excel
+    </script>
     {{-- end script js --}}
 </x-filament-panels::page>

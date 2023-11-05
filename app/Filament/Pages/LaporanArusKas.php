@@ -51,6 +51,11 @@ class LaporanArusKas extends Page
                 $q->where('pesantren_id', $session);
             })->where('account_name', 'Kas')->first()->id;
 
+        $id_bank = Account::with('classification.parent')
+            ->whereHas('classification.parent', function ($q) use ($session) {
+                $q->where('pesantren_id', $session);
+            })->where('account_name', 'Bank')->first()->id;
+
         //list all journal
         $journal = JournalDetail::with('general_journal.account.classification.parent')
             ->whereHas('general_journal.account.classification.parent', function ($q) use ($session) {
@@ -304,6 +309,22 @@ class LaporanArusKas extends Page
 
         // dd($arusKasPendanaan);
 
+        //saldo awal is initial balance of kas account and bank account
+        if (InitialBalance::where('account_id', $id_kas)->whereYear('date', '=', $year)->first() == null) {
+            $initial_kas = 0;
+        } else {
+            $initial_kas = InitialBalance::where('account_id', $id_kas)->whereYear('date', '=', $year)->first()->amount;
+        }
+
+        if (InitialBalance::where('account_id', $id_bank)->whereYear('date', '=', $year)->first() == null) {
+            $initial_bank = 0;
+        } else {
+            $initial_bank = InitialBalance::where('account_id', $id_bank)->whereYear('date', '=', $year)->first()->amount;
+        }
+
+        $saldoAwal = $initial_kas + $initial_bank;
+
+
         $this->arusKasOperasi = $arusKasOperasi;
         $this->arusKasInvestasi = $arusKasInvestasi;
         $this->arusKasPendanaan = $arusKasPendanaan;
@@ -315,6 +336,7 @@ class LaporanArusKas extends Page
         $this->year = $year;
         $this->month = $month;
         $this->kasId = $id_kas;
+        $this->saldoAwal = $saldoAwal;
 
 
 
