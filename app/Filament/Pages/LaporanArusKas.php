@@ -38,107 +38,122 @@ class LaporanArusKas extends Page
     {
         $session = Filament::getTenant()->id;
 
-        if (isset($_GET['year'], $_GET['akun'])) {
+        if (isset($_GET['year'], $_GET['month'])) {
             $year = $_GET['year'];
-            $akun = $_GET['month'];
+            $month = $_GET['month'];
         } else {
             $year = date('Y');
-            $akun = date('m');
+            $month = date('m');
         }
         $id_kas = Account::with('classification.parent')
             ->whereHas('classification.parent', function ($q) use ($session) {
                 $q->where('pesantren_id', $session);
             })->where('account_name', 'Kas')->first()->id;
 
+        //list all journal
+        $journal = JournalDetail::with('general_journal.account.classification.parent')
+            ->whereHas('general_journal.account.classification.parent', function ($q) use ($session) {
+                $q->where('pesantren_id', $session);
+            })->whereHas('general_journal', function ($q) use ($year, $month) {
+                $q->whereYear('date', $year);
+                $q->whereMonth('date', '>=', '01');
+                $q->whereMonth('date', '<=', $month);
+            })->get();
+        // dd($journal->toArray());
+
+        // filter journal that includes account kas in general journals
+        $journal = $journal->filter(function ($item) use ($id_kas) {
+            return collect($item['general_journal'])->contains('account_id', $id_kas);
+        });
+        dd($journal->toArray());
+
+        // arus kas operasi masuk
+
+        // arus kas operasi keluar
+
 
         //arus kas operasi
-        $arusKasOperasi = GeneralJournal::with('account.classification.parent', 'detail')
-            ->whereHas('account.classification.parent', function ($q) use ($session) {
-                $q->where('pesantren_id', $session);
-            })->whereHas('detail', function ($q) use ($year) {
-                $q->whereYear('date', $year);
-            })->where('account_id', $id_kas)
-            ->get();
-        // dd($arusKasOperasi->toArray());
+        // $arusKasOperasi = GeneralJournal::with('account.classification.parent', 'detail')
+        //     ->whereHas('account.classification.parent', function ($q) use ($session) {
+        //         $q->where('pesantren_id', $session);
+        //     })->whereHas('detail', function ($q) use ($year) {
+        //         $q->whereYear('date', $year);
+        //     })->where('account_id', $id_kas)
+        //     ->get();
+        // // dd($arusKasOperasi->toArray());
 
-        //if kas position is debit and account classification is aset lancar or utang jangka pendek
-        $arusKasOperasiMasuk = $arusKasOperasi->where(function ($item) {
-            return ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Aset Lancar')
-                || ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Pendek');
-        });
-        //if kas position is credit and account classification is aset lancar
-        $arusKasOperasiKeluar = $arusKasOperasi->where(function ($item) {
-            return ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Aset Lancar')
-                || ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Pendek');
-        });
+        // //if kas position is debit and account classification is aset lancar or utang jangka pendek
+        // $arusKasOperasiMasuk = $arusKasOperasi->where(function ($item) {
+        //     return ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Aset Lancar')
+        //         || ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Pendek');
+        // });
+        // //if kas position is credit and account classification is aset lancar
+        // $arusKasOperasiKeluar = $arusKasOperasi->where(function ($item) {
+        //     return ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Aset Lancar')
+        //         || ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Pendek');
+        // });
 
-        $arusKasOperasi = [
-            'masuk' => $arusKasOperasiMasuk->toArray(),
-            'keluar' => $arusKasOperasiKeluar->toArray(),
-            'amount' => $arusKasOperasiMasuk->sum('amount') - $arusKasOperasiKeluar->sum('amount')
-        ];
-        dd($arusKasOperasi);
+        // $arusKasOperasi = [
+        //     'masuk' => $arusKasOperasiMasuk->toArray(),
+        //     'keluar' => $arusKasOperasiKeluar->toArray(),
+        //     'amount' => $arusKasOperasiMasuk->sum('amount') - $arusKasOperasiKeluar->sum('amount')
+        // ];
+        // // dd($arusKasOperasi);
 
-        //arus kas investasi
-        $arusKasInvestasi = GeneralJournal::with('account.classification.parent', 'detail')
-            ->whereHas('account.classification.parent', function ($q) use ($session) {
-                $q->where('pesantren_id', $session);
-            })->whereHas('detail', function ($q) use ($year) {
-                $q->whereYear('date', $year);
-            })->where('account_id', $id_kas)
-            ->get();
+        // //arus kas investasi
+        // $arusKasInvestasi = GeneralJournal::with('account.classification.parent', 'detail')
+        //     ->whereHas('account.classification.parent', function ($q) use ($session) {
+        //         $q->where('pesantren_id', $session);
+        //     })->whereHas('detail', function ($q) use ($year) {
+        //         $q->whereYear('date', $year);
+        //     })->where('account_id', $id_kas)
+        //     ->get();
 
-        //if kas position is debit and account classification is aset tetap
-        $arusKasInvestasiMasuk = $arusKasInvestasi->where('position', 'debit')->where('account.classification.classification_name', 'Aset Tetap');
-        //if kas position is credit and account classification is aset tetap
-        $arusKasInvestasiKeluar = $arusKasInvestasi->where('position', 'credit')->where('account.classification.classification_name', 'Aset Tetap');
+        // //if kas position is debit and account classification is aset tetap
+        // $arusKasInvestasiMasuk = $arusKasInvestasi->where('position', 'debit')->where('account.classification.classification_name', 'Aset Tetap');
+        // //if kas position is credit and account classification is aset tetap
+        // $arusKasInvestasiKeluar = $arusKasInvestasi->where('position', 'credit')->where('account.classification.classification_name', 'Aset Tetap');
 
-        $arusKasInvestasi = [
-            'masuk' => $arusKasInvestasiMasuk->toArray(),
-            'keluar' => $arusKasInvestasiKeluar->toArray(),
-            'amount' => $arusKasInvestasiMasuk->sum('amount') - $arusKasInvestasiKeluar->sum('amount')
-        ];
+        // $arusKasInvestasi = [
+        //     'masuk' => $arusKasInvestasiMasuk->toArray(),
+        //     'keluar' => $arusKasInvestasiKeluar->toArray(),
+        //     'amount' => $arusKasInvestasiMasuk->sum('amount') - $arusKasInvestasiKeluar->sum('amount')
+        // ];
 
-        // dd($arusKasInvestasi);
+        // // dd($arusKasInvestasi);
 
-        //arus kas pendanaan
-        $arusKasPendanaan = GeneralJournal::with('account.classification.parent', 'detail')
-            ->whereHas('account.classification.parent', function ($q) use ($session) {
-                $q->where('pesantren_id', $session);
-            })->whereHas('detail', function ($q) use ($year) {
-                $q->whereYear('date', $year);
-            })->where('account_id', $id_kas)
-            ->get();
+        // //arus kas pendanaan
+        // $arusKasPendanaan = GeneralJournal::with('account.classification.parent', 'detail')
+        //     ->whereHas('account.classification.parent', function ($q) use ($session) {
+        //         $q->where('pesantren_id', $session);
+        //     })->whereHas('detail', function ($q) use ($year) {
+        //         $q->whereYear('date', $year);
+        //     })->where('account_id', $id_kas)
+        //     ->get();
 
-        //if kas position is debit and account classification is ekuitas or utang jangka panjang
-        $arusKasPendanaanMasuk = $arusKasPendanaan->where(function ($item) {
-            return ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Ekuitas')
-                || ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Panjang');
-        });
+        // //if kas position is debit and account classification is ekuitas or utang jangka panjang
+        // $arusKasPendanaanMasuk = $arusKasPendanaan->where(function ($item) {
+        //     return ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Ekuitas')
+        //         || ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Panjang');
+        // });
 
-        //if kas position is credit and account classification is ekuitas or utang jangka panjang
-        $arusKasPendanaanKeluar = $arusKasPendanaan->where(function ($item) {
-            return ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Ekuitas')
-                || ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Panjang');
-        });
+        // //if kas position is credit and account classification is ekuitas or utang jangka panjang
+        // $arusKasPendanaanKeluar = $arusKasPendanaan->where(function ($item) {
+        //     return ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Ekuitas')
+        //         || ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Panjang');
+        // });
 
-        $arusKasPendanaan = [
-            'masuk' => $arusKasPendanaanMasuk->toArray(),
-            'keluar' => $arusKasPendanaanKeluar->toArray(),
-            'amount' => $arusKasPendanaanMasuk->sum('amount') - $arusKasPendanaanKeluar->sum('amount')
-        ];
+        // $arusKasPendanaan = [
+        //     'masuk' => $arusKasPendanaanMasuk->toArray(),
+        //     'keluar' => $arusKasPendanaanKeluar->toArray(),
+        //     'amount' => $arusKasPendanaanMasuk->sum('amount') - $arusKasPendanaanKeluar->sum('amount')
+        // ];
 
         // dd($arusKasPendanaan);
 
         //saldo awal adalah
         // $saldoAwal = InitialBalance::where
 
-        // $cobadata = JournalDetail::with('general_journal.account.classification.parent')
-        //     ->whereHas('general_journal.account.classification.parent', function ($q) use ($session) {
-        //         $q->where('pesantren_id', $session);
-        //     })->whereHas('general_journal', function ($q) use ($year) {
-        //         $q->whereYear('date', $year);
-        //     })->get();
-        // dd($cobadata->toArray());
+
     }
 }

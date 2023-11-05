@@ -60,7 +60,7 @@ class EditGeneralJournal extends EditRecord
             //if initial balance not exist, halting
             if (!$initial_balance) {
                 Notification::make()
-                    ->title('Gagal Menambahkan Jurnal')
+                    ->title('Gagal Mengedit Jurnal')
                     ->body('Saldo awal tidak ditemukan')
                     ->danger()
                     ->send();
@@ -70,7 +70,7 @@ class EditGeneralJournal extends EditRecord
             if ($transaction['position'] == 'debit') {
                 if ($initial_balance->amount < $transaction['amount']) {
                     Notification::make()
-                        ->title('Gagal Menambahkan Jurnal')
+                        ->title('Gagal Mengedit Jurnal')
                         ->body('Saldo awal tidak mencukupi untuk melakukan debit')
                         ->danger()
                         ->send();
@@ -80,7 +80,7 @@ class EditGeneralJournal extends EditRecord
             } else if ($transaction['position'] == 'credit') {
                 if ($initial_balance->amount < $transaction['amount']) {
                     Notification::make()
-                        ->title('Gagal Menambahkan Jurnal')
+                        ->title('Gagal Mengedit Jurnal')
                         ->body('Saldo awal tidak mencukupi untuk melakukan kredit')
                         ->danger()
                         ->send();

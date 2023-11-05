@@ -74,7 +74,7 @@ class BukuBesar extends Page
             })->where('account_id', $akun)
             ->get();
 
-        $data = $data->sortBy('detail.date');
+        $data = $data->sortBy('detail.date', SORT_REGULAR, true);
 
         // select distinct all available years in journal details table and initial balances table
         $years = JournalDetail::selectRaw('YEAR(date) as year')

@@ -157,7 +157,7 @@ class GeneralJournalResource extends Resource
             ])
             //order by date desc
             ->modifyQueryUsing(function (Builder $query) {
-                $query->orderBy('date', 'desc');
+                $query->orderBy('created_at', 'desc');
             });
     }
 
