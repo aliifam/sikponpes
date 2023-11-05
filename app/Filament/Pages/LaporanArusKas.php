@@ -65,9 +65,255 @@ class LaporanArusKas extends Page
         $journal = $journal->filter(function ($item) use ($id_kas) {
             return collect($item['general_journal'])->contains('account_id', $id_kas);
         });
-        dd($journal->toArray());
 
-        // arus kas operasi masuk
+        // arus kas operasi masuk where account classification is aset lancar or utang jangka pendek and kas account position is debit
+        function filterOperasiMasuk($item, $id_kas)
+        {
+            $kasAccountFound = false;
+            $otherAccountStatus = false;
+            foreach ($item['general_journal'] as $journal) {
+                // Check if the "account_code" is "1.1.1" (Kas) and the "position" is "debit"
+
+                if ($journal['account']['id'] == $id_kas && $journal['position'] === 'debit') {
+                    $kasAccountFound = true;
+                    continue;
+                }
+                // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
+                if (
+                    $journal['account']['classification']['classification_name'] === 'Aset Lancar' ||
+                    $journal['account']['classification']['classification_name'] === 'Utang Jangka Pendek' ||
+                    $journal['account']['account_name'] === 'Prive'
+                ) {
+                    // dd("masuk");
+                    $otherAccountStatus = true;
+                }
+            }
+
+            if ($kasAccountFound && $otherAccountStatus) {
+                return true; // Include the item in the result
+            } else {
+                return false; // Exclude the item from the result
+            }
+        }
+
+        // arus kas operasi keluar where account classification is aset lancar or utang jangka pendek and kas position is credit
+        function filterOperasiKeluar($item, $id_kas)
+        {
+            $kasAccountFound = false;
+            $otherAccountStatus = false;
+            foreach ($item['general_journal'] as $journal) {
+                // Check if the "account_code" is "1.1.1" (Kas) and the "position" is "debit"
+
+                if ($journal['account']['id'] == $id_kas && $journal['position'] === 'credit') {
+                    $kasAccountFound = true;
+                    //goto next loop
+                    continue;
+                }
+                // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
+                if (
+                    $journal['account']['classification']['classification_name'] === 'Aset Lancar' ||
+                    $journal['account']['classification']['classification_name'] === 'Utang Jangka Pendek' ||
+                    $journal['account']['account_name'] === 'Prive'
+                ) {
+                    // dd("masuk");
+                    $otherAccountStatus = true;
+                }
+            }
+
+            if ($kasAccountFound && $otherAccountStatus) {
+                return true; // Include the item in the result
+            } else {
+                return false; // Exclude the item from the result
+            }
+        }
+
+        $arusKasOperasiMasuk = $journal->filter(function ($item) use ($id_kas) {
+            return filterOperasiMasuk($item, $id_kas);
+        });
+
+        $arusKasOperasiKeluar = $journal->filter(function ($item) use ($id_kas) {
+            return filterOperasiKeluar($item, $id_kas);
+        });
+
+        $arusKasOperasi = [
+            'masuk' => $arusKasOperasiMasuk->toArray(),
+            'keluar' => $arusKasOperasiKeluar->toArray(),
+            //amount is operasi masuk amount of kas account - operasi keluar amount of kas account
+            'amount' => $arusKasOperasiMasuk->sum(function ($item) use ($id_kas) {
+                return $item['general_journal']->where('account_id', $id_kas)->where('position', 'debit')->sum('amount');
+            }) - $arusKasOperasiKeluar->sum(function ($item) use ($id_kas) {
+                return $item['general_journal']->where('account_id', $id_kas)->where('position', 'credit')->sum('amount');
+            })
+        ];
+
+        // dd($arusKasOperasi);
+
+        function filterInvestasiMasuk($item, $id_kas)
+        {
+            $kasAccountFound = false;
+            $otherAccountStatus = false;
+            foreach ($item['general_journal'] as $journal) {
+                // Check if the "account_code" is "1.1.1" (Kas) and the "position" is "debit"
+
+                if ($journal['account']['id'] == $id_kas && $journal['position'] === 'debit') {
+                    $kasAccountFound = true;
+                    continue;
+                }
+                // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
+                if (
+                    $journal['account']['classification']['classification_name'] === 'Aset Tetap'
+                ) {
+                    // dd("masuk");
+                    $otherAccountStatus = true;
+                }
+            }
+
+            if ($kasAccountFound && $otherAccountStatus) {
+                return true; // Include the item in the result
+            } else {
+                return false; // Exclude the item from the result
+            }
+        }
+
+        function filterInvestasiKeluar($item, $id_kas)
+        {
+            $kasAccountFound = false;
+            $otherAccountStatus = false;
+            foreach ($item['general_journal'] as $journal) {
+                // Check if the "account_code" is "1.1.1" (Kas) and the "position" is "debit"
+
+                if ($journal['account']['id'] == $id_kas && $journal['position'] === 'credit') {
+                    $kasAccountFound = true;
+                    continue;
+                }
+                // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
+                if (
+                    $journal['account']['classification']['classification_name'] === 'Aset Tetap'
+                ) {
+                    // dd("masuk");
+                    $otherAccountStatus = true;
+                }
+            }
+
+            if ($kasAccountFound && $otherAccountStatus) {
+                return true; // Include the item in the result
+            } else {
+                return false; // Exclude the item from the result
+            }
+        }
+
+        $arusKasInvestasiMasuk = $journal->filter(function ($item) use ($id_kas) {
+            return filterInvestasiMasuk($item, $id_kas);
+        });
+
+        $arusKasInvestasiKeluar = $journal->filter(function ($item) use ($id_kas) {
+            return filterInvestasiKeluar($item, $id_kas);
+        });
+
+        $arusKasInvestasi = [
+            'masuk' => $arusKasInvestasiMasuk->toArray(),
+            'keluar' => $arusKasInvestasiKeluar->toArray(),
+            //amount is investasi masuk amount of kas account - investasi keluar amount of kas account
+            'amount' => $arusKasInvestasiMasuk->sum(function ($item) use ($id_kas) {
+                return $item['general_journal']->where('account_id', $id_kas)->where('position', 'debit')->sum('amount');
+            }) - $arusKasInvestasiKeluar->sum(function ($item) use ($id_kas) {
+                return $item['general_journal']->where('account_id', $id_kas)->where('position', 'credit')->sum('amount');
+            })
+        ];
+
+        // dd($arusKasInvestasi);
+
+        //arus kas pendanaan
+        function filterPendanaanMasuk($item, $id_kas)
+        {
+            $kasAccountFound = false;
+            $otherAccountStatus = false;
+            foreach ($item['general_journal'] as $journal) {
+                // Check if the "account_code" is "1.1.1" (Kas) and the "position" is "debit"
+
+                if ($journal['account']['id'] == $id_kas && $journal['position'] === 'debit') {
+                    $kasAccountFound = true;
+                    continue;
+                }
+                // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
+                if (
+                    $journal['account']['classification']['classification_name'] === 'Ekuitas' ||
+                    $journal['account']['classification']['classification_name'] === 'Utang Jangka Panjang'
+                ) {
+                    // dd("masuk");
+                    $otherAccountStatus = true;
+                }
+            }
+
+            if ($kasAccountFound && $otherAccountStatus) {
+                return true; // Include the item in the result
+            } else {
+                return false; // Exclude the item from the result
+            }
+        }
+
+        function filterPendanaanKeluar($item, $id_kas)
+        {
+            $kasAccountFound = false;
+            $otherAccountStatus = false;
+            foreach ($item['general_journal'] as $journal) {
+                // Check if the "account_code" is "1.1.1" (Kas) and the "position" is "debit"
+
+                if ($journal['account']['id'] == $id_kas && $journal['position'] === 'credit') {
+                    $kasAccountFound = true;
+                    continue;
+                }
+                // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
+                if (
+                    $journal['account']['classification']['classification_name'] === 'Ekuitas' ||
+                    $journal['account']['classification']['classification_name'] === 'Utang Jangka Panjang'
+                ) {
+                    // dd("masuk");
+                    $otherAccountStatus = true;
+                }
+            }
+
+            if ($kasAccountFound && $otherAccountStatus) {
+                return true; // Include the item in the result
+            } else {
+                return false; // Exclude the item from the result
+            }
+        }
+
+        $arusKasPendanaanMasuk = $journal->filter(function ($item) use ($id_kas) {
+            return filterPendanaanMasuk($item, $id_kas);
+        });
+
+        $arusKasPendanaanKeluar = $journal->filter(function ($item) use ($id_kas) {
+            return filterPendanaanKeluar($item, $id_kas);
+        });
+
+        $arusKasPendanaan = [
+            'masuk' => $arusKasPendanaanMasuk->toArray(),
+            'keluar' => $arusKasPendanaanKeluar->toArray(),
+            //amount is pendanaan masuk amount of kas account - pendanaan keluar amount of kas account
+            'amount' => $arusKasPendanaanMasuk->sum(function ($item) use ($id_kas) {
+                return $item['general_journal']->where('account_id', $id_kas)->where('position', 'debit')->sum('amount');
+            }) - $arusKasPendanaanKeluar->sum(function ($item) use ($id_kas) {
+                return $item['general_journal']->where('account_id', $id_kas)->where('position', 'credit')->sum('amount');
+            })
+        ];
+
+        // dd($arusKasPendanaan);
+
+        $this->arusKasOperasi = $arusKasOperasi;
+        $this->arusKasInvestasi = $arusKasInvestasi;
+        $this->arusKasPendanaan = $arusKasPendanaan;
+        $this->session = $session;
+        $this->years = JournalDetail::selectRaw('YEAR(date) as year')
+            ->whereHas('general_journal.account.classification.parent', function ($q) use ($session) {
+                $q->where('pesantren_id', $session);
+            })->groupBy('year')->orderBy('year', 'desc')->get();
+        $this->year = $year;
+        $this->month = $month;
+
+
+
 
         // arus kas operasi keluar
 
