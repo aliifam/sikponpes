@@ -33,6 +33,7 @@ class LaporanArusKas extends Page
     public $year;
     public $month;
     public $saldoAwal;
+    public $kasId;
 
     public function mount()
     {
@@ -161,7 +162,8 @@ class LaporanArusKas extends Page
                 }
                 // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
                 if (
-                    $journal['account']['classification']['classification_name'] === 'Aset Tetap'
+                    $journal['account']['classification']['classification_name'] === 'Aset Tetap' ||
+                    $journal['account']['classification']['classification_name'] === 'Investasi'
                 ) {
                     // dd("masuk");
                     $otherAccountStatus = true;
@@ -188,7 +190,8 @@ class LaporanArusKas extends Page
                 }
                 // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
                 if (
-                    $journal['account']['classification']['classification_name'] === 'Aset Tetap'
+                    $journal['account']['classification']['classification_name'] === 'Aset Tetap' ||
+                    $journal['account']['classification']['classification_name'] === 'Investasi'
                 ) {
                     // dd("masuk");
                     $otherAccountStatus = true;
@@ -311,6 +314,7 @@ class LaporanArusKas extends Page
             })->groupBy('year')->orderBy('year', 'desc')->get();
         $this->year = $year;
         $this->month = $month;
+        $this->kasId = $id_kas;
 
 
 
