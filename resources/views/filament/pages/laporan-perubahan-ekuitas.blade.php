@@ -126,12 +126,16 @@
                         Ekuitas
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        {{ $modal_awal }}
+                        @if ($modal_awal >= 0)
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($modal_awal)), 3))) }}
+                        @else
+                            -Rp.{{ strrev(implode('.', str_split(strrev(strval($modal_awal * -1)), 3))) }}
+                        @endif
                     </td>
                 </tr>
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="width:60%" class="p-3">
-                        Penambahan Investasi periode berjalan:
+                        Penambahan Investasi periode berjalan
                     </td>
                     <td style="width:10%" class="p-2"></td>
                 </tr>
@@ -141,16 +145,24 @@
                         Setoran Modal
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        {{ $setoran_modal }}
+                        @if ($setoran_modal >= 0)
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($setoran_modal)), 3))) }}
+                        @else
+                            -Rp.{{ strrev(implode('.', str_split(strrev(strval($setoran_modal * -1)), 3))) }}
+                        @endif
                     </td>
                 </tr>
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 font-semibold">
                     <td style="width:60%;padding-left: 1.5rem!important;">
-                        Surplus/Desifisit
+                        Surplus/Defisit
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        {{ $surpdef }}
+                        @if ($surpdef >= 0)
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($surpdef)), 3))) }}
+                        @else
+                            -Rp.{{ strrev(implode('.', str_split(strrev(strval($surpdef * -1)), 3))) }}
+                        @endif
                     </td>
                 </tr>
                 <tr class="bg-green-600 text-white font-bold">
@@ -164,7 +176,11 @@
                         Prive
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        {{ $prive }}
+                        @if ($prive >= 0)
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($prive)), 3))) }}
+                        @else
+                            -Rp.{{ strrev(implode('.', str_split(strrev(strval($prive * -1)), 3))) }}
+                        @endif
                     </td>
                 </tr>
                 <tr class="bg-green-600 text-white font-bold">
@@ -172,7 +188,11 @@
                         Ekuitas Akhir
                     </td>
                     <td style="width:10%" class="px-3 py-2 text-right">
-                        {{ $modal_awal + $setoran_modal + $surpdef - $prive }}
+                        @if ($modal_awal + $setoran_modal + $surpdef - $prive >= 0)
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($modal_awal + $setoran_modal + $surpdef - $prive)), 3))) }}
+                        @else
+                            -Rp.{{ strrev(implode('.', str_split(strrev(strval(($modal_awal + $setoran_modal + $surpdef - $prive) * -1)), 3))) }}
+                        @endif
                     </td>
                 </tr>
             </tbody>
