@@ -2,7 +2,9 @@
 
 namespace App\Filament\Pages;
 
+use App\Models\Account;
 use App\Models\AccountParent;
+use App\Models\GeneralJournal;
 use App\Models\InitialBalance;
 use App\Models\JournalDetail;
 use Filament\Facades\Filament;
@@ -16,12 +18,20 @@ class LaporanPerubahanEkuitas extends Page
 
     protected static ?string $navigationGroup = 'Manajemen Laporan';
 
+    //laporan perubahan ekuitas
+    // modalawal = initial balance akun ekuitas
+    // setoran modal = ambil jurnal yang akunnya ekuitas bila posisi debit maka kurangi, bila posisi kredit maka tambah
+    // saldo berjalan = saldo akun pendapatan - saldo akun biaya
+
+
     public $session;
     public $years;
     public $year;
     public $month;
     public $saldo_berjalan;
-    public $equityData;
+    public $setoran_modal;
+    public $modal_awal;
+    public $prive;
 
     public function mount()
     {
@@ -34,6 +44,61 @@ class LaporanPerubahanEkuitas extends Page
             $year = date('Y');
             $month = date('m');
         }
+
+        $modal_awal = Account::where('pesantren_id', $session)->where('account_name', 'Ekuitas')->first();
+
+        if ($modal_awal) {
+            $modal_awal = $modal_awal->initialBalance()->whereYear('date', $year)->first();
+            $modal_awal = $modal_awal ? $modal_awal->amount : 0;
+        } else {
+            $modal_awal = 0;
+        }
+
+        // dd($modal_awal);
+
+        $ekuitas_id = Account::where('pesantren_id', $session)->where('account_name', 'Ekuitas')->first()->id;
+        $prive_id = Account::where('pesantren_id', $session)->where('account_name', 'Prive')->first()->id;
+
+        // dd($ekuitas_id, $prive_id);
+
+        $setoran_modal = 0;
+
+        // journal detail has many general journal and general journal belongs to journal detail,  I want to get list of general journal in $year but the date is in journal detail table
+        $jurnal_yg_ada_ekuitasnya = GeneralJournal::whereHas('detail', function ($q) use ($year) {
+            $q->whereYear('date', $year);
+        })->where('pesantren_id', $session)->where('account_id', $ekuitas_id)->get();
+
+        // dd($jurnal_yg_ada_ekuitasnya->toArray());
+
+        foreach ($jurnal_yg_ada_ekuitasnya as $jurnal) {
+            if ($jurnal->position == 'debit') {
+                $setoran_modal -= $jurnal->amount;
+            } else if ($jurnal->position == 'credit') {
+                $setoran_modal += $jurnal->amount;
+            }
+        }
+
+        $prive_awal = Account::where('pesantren_id', $session)->where('account_name', 'Prive')->first();
+
+        if ($prive_awal) {
+            $prive_awal = $prive_awal->initialBalance()->whereYear('date', $year)->first();
+            $prive_awal = $prive_awal ? $prive_awal->amount : 0;
+        } else {
+            $prive_awal = 0;
+        }
+
+        $jurnal_yg_ada_privenya = GeneralJournal::whereHas('detail', function ($q) use ($year) {
+            $q->whereYear('date', $year);
+        })->where('pesantren_id', $session)->where('account_id', $prive_id)->get();
+
+        foreach ($jurnal_yg_ada_privenya as $jurnal) {
+            if ($jurnal->position == 'debit') {
+                $prive_awal -= $jurnal->amount;
+            } else if ($jurnal->position == 'credit') {
+                $prive_awal += $jurnal->amount;
+            }
+        }
+
 
         $parent = AccountParent::with('classification.account')->where('pesantren_id', $session)->get();
         $saldo_berjalan = 0;
@@ -100,6 +165,7 @@ class LaporanPerubahanEkuitas extends Page
         // dd($equityArray, $saldo_berjalan);
         // dd($saldo_berjalan);
 
+
         $years = JournalDetail::selectRaw('YEAR(date) as year')
             ->whereHas('general_journal.account.classification.parent', function ($q) use ($session) {
                 $q->where('pesantren_id', $session);
@@ -121,6 +187,9 @@ class LaporanPerubahanEkuitas extends Page
         $this->years = $years;
         $this->year = $year;
         $this->month = $month;
+        $this->modal_awal = $modal_awal;
+        $this->setoran_modal = $setoran_modal;
+        $this->prive = $prive_awal;
         $this->saldo_berjalan = $saldo_berjalan;
         $this->equityData = $equityArray;
     }

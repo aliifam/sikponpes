@@ -116,14 +116,14 @@
             <tbody>
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="width:60%" class="p-3">
-                        Penyertaan Modal
+                        Modal
                     </td>
                     <td style="width:10%" class="p-2"></td>
                 </tr>
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%;padding-left: 1.5rem!important;">
-                        anjay
+                        Ekuitas
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
                         anhay

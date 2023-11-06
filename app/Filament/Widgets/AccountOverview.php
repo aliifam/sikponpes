@@ -32,7 +32,9 @@ class AccountOverview extends BaseWidget
             $saldo_kas = 0;
         }
 
-        $jurnal_yg_ada_kasnya = GeneralJournal::where('pesantren_id', $session)->where('account_id', $kas_id)->whereYear('created_at', $year)->get();
+        $jurnal_yg_ada_kasnya = GeneralJournal::whereHas('detail', function ($q) use ($year) {
+            $q->whereYear('date', $year);
+        })->where('pesantren_id', $session)->where('account_id', $kas_id)->get();
 
         // dd($jurnal_yg_ada_kasnya->toArray());
         // dd($saldo_kas->toArray());
