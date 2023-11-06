@@ -32,6 +32,7 @@ class LaporanPerubahanEkuitas extends Page
     public $setoran_modal;
     public $modal_awal;
     public $prive;
+    public $surpdef;
 
     public function mount()
     {
@@ -100,13 +101,20 @@ class LaporanPerubahanEkuitas extends Page
         }
 
 
+        $surpdef = 0;
         $parent = AccountParent::with('classification.account')->where('pesantren_id', $session)->get();
-        $saldo_berjalan = 0;
+
+        $incomeData = [];
+        $expenseData = [];
+        $income = 0;
+        $expense = 0;
 
         foreach ($parent as $p) {
-            foreach ($p->classification as $c) {
-                $i = 0;
-                foreach ($c->account as $a) {
+            $i = 0;
+            $classification = $p->classification()->get();
+            foreach ($classification as $c) {
+                $account = $c->account()->get();
+                foreach ($account as $a) {
                     $position = $a->position;
                     if (!$a->initialBalance()->whereYear('date', $year)->first()) {
                         $beginningBalance = 0;
@@ -137,28 +145,36 @@ class LaporanPerubahanEkuitas extends Page
                             $endingBalance = 0;
                         }
                     }
-                    $i++;
-                    if ($p->parent_name == "Ekuitas") {
-                        $equityArray[$i]['name'] = $a->account_name;
-                        $equityArray[$i]['code'] = $a->account_code;
-                        $equityArray[$i]['ending balance'] = $endingBalance;
-                    }
+
                     if ($p->parent_name == "Pendapatan") {
+                        $incomeData[$i]['classification'] = $c->classification_name;
+                        $incomeData[$i]['classification_code'] = $c->classification_code;
+                        $incomeData[$i]['name'][] = $a->account_name;
+                        $incomeData[$i]['code'][] = $a->account_code;
+                        $incomeData[$i]['ending balance'][] = $endingBalance;
                         if ($position == "kredit") {
-                            $saldo_berjalan += $endingBalance;
+                            $income += $endingBalance;
                         } else {
-                            $saldo_berjalan -= $endingBalance;
+                            $income -= $endingBalance;
                         }
                     } else if ($p->parent_name == "Biaya") {
+                        $expenseData[$i]['classification'] = $c->classification_name;
+                        $expenseData[$i]['classification_code'] = $c->classification_code;
+                        $expenseData[$i]['name'][] = $a->account_name;
+                        $expenseData[$i]['code'][] = $a->account_code;
+                        $expenseData[$i]['ending balance'][] = $endingBalance;
                         if ($position == "debit") {
-                            $saldo_berjalan -= $endingBalance;
+                            $expense += $endingBalance;
                         } else {
-                            $saldo_berjalan += $endingBalance;
+                            $expense -= $endingBalance;
                         }
                     }
                 }
+                $i++;
             }
         }
+
+        $surpdef = $income - $expense;
 
         //
 
@@ -190,7 +206,6 @@ class LaporanPerubahanEkuitas extends Page
         $this->modal_awal = $modal_awal;
         $this->setoran_modal = $setoran_modal;
         $this->prive = $prive_awal;
-        $this->saldo_berjalan = $saldo_berjalan;
-        $this->equityData = $equityArray;
+        $this->surpdef = $surpdef;
     }
 }

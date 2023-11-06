@@ -116,7 +116,7 @@
             <tbody>
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="width:60%" class="p-3">
-                        Modal
+                        Penyertaan Modal
                     </td>
                     <td style="width:10%" class="p-2"></td>
                 </tr>
@@ -126,41 +126,82 @@
                         Ekuitas
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        anhay
+                        {{ $modal_awal }}
                     </td>
                 </tr>
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="width:60%" class="p-3">
-                        Penambahan Investasi periode berjalan
+                        Penambahan Investasi periode berjalan:
                     </td>
                     <td style="width:10%" class="p-2"></td>
                 </tr>
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td style="width:60%;padding-left: 3rem!important;">
-                        anjay
+                    <td style="width:60%;padding-left: 1.5rem!important;">
+                        Setoran Modal
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        anhay
+                        {{ $setoran_modal }}
+                    </td>
+                </tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 font-semibold">
+                    <td style="width:60%;padding-left: 1.5rem!important;">
+                        Surplus/Desifisit
+                    </td>
+                    <td class="text-right px-3 py-2" style="width:10%">
+                        {{ $surpdef }}
                     </td>
                 </tr>
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="width:60%" class="p-3">
-                        Penambahan Investasi periode berjalan
+                        Bagi Hasil Penyertaan
                     </td>
                     <td style="width:10%" class="p-2"></td>
                 </tr>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td style="width:60%;padding-left: 3rem!important;">
-
+                <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style="width:60%;padding-left: 1.5rem!important;">
+                        Prive
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        anhay
+                        {{ $prive }}
+                    </td>
+                </tr>
+                <tr class="bg-green-600 text-white font-bold">
+                    <td style="width:60%" class="p-3">
+                        Ekuitas Akhir
+                    </td>
+                    <td style="width:10%" class="px-3 py-2 text-right">
+                        {{ $modal_awal + $setoran_modal + $surpdef - $prive }}
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
     {{-- end table --}}
+
+    {{-- start script --}}
+    <script>
+        // dyamic filter by month and year
+        document.getElementById('search').addEventListener('click', function() {
+            var year = document.getElementById('years').value;
+            var month = document.getElementById('months').value;
+            window.location.href = 'laporan-perubahan-ekuitas?year=' + year + '&month=' + month;
+        });
+
+        // dynamic export pdf on new tab
+        document.getElementById('export').addEventListener('click', function() {
+            var year = document.getElementById('years').value;
+            var month = document.getElementById('months').value;
+            window.open('laporan-perubahan-ekuitas/export?year=' + year + '&month=' + month);
+        });
+
+        // dynamic export excel on new tab
+        document.getElementById('export-excel').addEventListener('click', function() {
+            var year = document.getElementById('years').value;
+            var month = document.getElementById('months').value;
+            window.open('laporan-perubahan-ekuitas/export-excel?year=' + year + '&month=' + month);
+        });
+    </script>
+    {{-- end script --}}
 </x-filament-panels::page>
