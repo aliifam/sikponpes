@@ -211,9 +211,12 @@
 
         // dynamic export pdf on new tab
         document.getElementById('export').addEventListener('click', function() {
-            var year = document.getElementById('years').value;
-            var month = document.getElementById('months').value;
-            window.open('laporan-perubahan-ekuitas/export?year=' + year + '&month=' + month);
+            // var year = document.getElementById('years').value;
+            // var month = document.getElementById('months').value;
+            //encrypt url parameter using laravel encrypter
+            var document = @json($endpoint);
+            console.log(document);
+            window.open('/export/laporan_perubahan_ekuitas?document=' + document);
         });
 
         // dynamic export excel on new tab

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class LPKController extends Controller
+class LPEController extends Controller
 {
     public function exportpdf(Request $request)
     {
