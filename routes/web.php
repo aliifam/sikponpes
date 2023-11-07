@@ -25,8 +25,8 @@ Route::get('/', function () {
 Route::get('export/neraca_lajur', [NeracaSaldoController::class, 'export'])->name('export.neraca_lajur')->middleware('auth');
 
 // laporan aktivitas pdf & excel
-Route::get('export/laporan_aktivitas', [LAController::class, 'exportpdf'])->name('export.laporan_aktivitas');
-Route::get('export/laporan_aktivitas_excel', [LAController::class, 'exportexcel'])->name('export.laporan_aktivitas_excel');
+Route::get('export/laporan_aktivitas', [LAController::class, 'exportpdf'])->name('export.laporan_aktivitas')->middleware('auth');
+Route::get('export/laporan_aktivitas_excel', [LAController::class, 'exportexcel'])->name('export.laporan_aktivitas_excel')->middleware('auth');
 
 // laporan arus kas pdf & excel
 Route::get('export/laporan_arus_kas', [LAKController::class, 'exportpdf'])->name('export.laporan_arus_kas');
