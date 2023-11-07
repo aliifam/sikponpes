@@ -215,7 +215,7 @@
             // var month = document.getElementById('months').value;
             //encrypt url parameter using laravel encrypter
             var document = @json($endpoint);
-            console.log(document);
+            // console.log(document);
             window.open('/export/laporan_perubahan_ekuitas?document=' + document);
         });
 

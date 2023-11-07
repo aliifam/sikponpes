@@ -215,11 +215,12 @@
 
         //export pdf function in new tab
         document.getElementById('export').addEventListener('click', function() {
-            var year = document.querySelector('#years').value;
-            var month = document.querySelector('#months').value;
-            var id = "{{ $session }}"
+            // var year = document.querySelector('#years').value;
+            // var month = document.querySelector('#months').value;
+            // var id = "{{ $session }}"
+            var document = @json($endpoint);
             //url parameter id, year, month
-            window.open('/export/neraca_lajur?id=' + id + '&year=' + year + '&month=' + month, '_blank');
+            window.open('/export/neraca_lajur?document=' + document);
         });
     </script>
 </x-filament-panels::page>

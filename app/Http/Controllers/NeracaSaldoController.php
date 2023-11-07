@@ -6,14 +6,17 @@ use App\Models\AccountParent;
 use App\Models\Pesantren;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class NeracaSaldoController extends Controller
 {
     public function export(Request $request)
     {
-        $pesantren = $request->id;
-        $year = $request->year;
-        $month = $request->month;
+        $encrypted = Crypt::decrypt($request->document);
+        // dd($encrypted);
+        $year = $encrypted['year'];
+        $month = $encrypted['month'];
+        $pesantren = $encrypted['id'];
 
         $session = $pesantren;
 

@@ -8,6 +8,7 @@ use App\Models\JournalDetail;
 use Filament\Facades\Filament;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Crypt;
 
 class NeracaJalur extends Page
 {
@@ -31,6 +32,7 @@ class NeracaJalur extends Page
     public $year;
     public $month;
     public $session;
+    public $endpoint;
 
 
     public function mount()
@@ -149,5 +151,6 @@ class NeracaJalur extends Page
         $this->year = $year;
         $this->month = $month;
         $this->session = $session;
+        $this->endpoint = Crypt::encrypt(['year' => $year, 'month' => $month, 'id' => $session]);
     }
 }

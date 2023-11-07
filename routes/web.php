@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 // neraca lajur pdf
-Route::get('export/neraca_lajur', [NeracaSaldoController::class, 'export'])->name('export.neraca_lajur');
+Route::get('export/neraca_lajur', [NeracaSaldoController::class, 'export'])->name('export.neraca_lajur')->middleware('auth');
 
 // laporan aktivitas pdf & excel
 Route::get('export/laporan_aktivitas', [LAController::class, 'exportpdf'])->name('export.laporan_aktivitas');

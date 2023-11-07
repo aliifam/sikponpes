@@ -53,8 +53,8 @@
 
 <body>
     @php
-        $dt = $_GET['year'];
-        $month = $_GET['month'];
+        // $dt = $_GET['year'];
+        // $month = $_GET['month'];
 
         setlocale(LC_ALL, 'id_ID');
 
@@ -110,7 +110,7 @@
                 $monthName = $dateObj->format('F'); // March
             @endphp --}}
             <p class="text-center" style="margin:5px; margin-bottom:10px"><strong>Periode</strong>
-                {{ $monthName }} {{ $dt }} </p>
+                {{ $monthName }} {{ $year }} </p>
         </div>
         <div>
             <table cellspacing="0" width="100%" style="width:100%">

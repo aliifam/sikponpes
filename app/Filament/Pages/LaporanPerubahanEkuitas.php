@@ -201,7 +201,7 @@ class LaporanPerubahanEkuitas extends Page
             ]);
         }
 
-        $this->endpoint = Crypt::encrypt(['year' => $year, 'month' => $month]);
+        $this->endpoint = Crypt::encrypt(['year' => $year, 'month' => $month, 'id' => $session]);
         $this->session = $session;
         $this->years = $years;
         $this->year = $year;
