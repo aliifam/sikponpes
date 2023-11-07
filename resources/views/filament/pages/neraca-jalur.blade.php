@@ -216,7 +216,7 @@
         //export pdf function in new tab
         document.getElementById('export').addEventListener('click', function() {
             var document = @json($endpoint);
-            var url = "{{ route('export.neraca_lajur') }}?document=" + document;
+            var url = "{{ route('export.neraca-lajur') }}?document=" + document;
             window.open(url);
         });
     </script>

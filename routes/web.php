@@ -22,15 +22,15 @@ Route::get('/', function () {
 });
 
 // neraca lajur pdf
-Route::get('export/neraca_lajur', [NeracaSaldoController::class, 'export'])->name('export.neraca_lajur')->middleware('auth');
+Route::get('export/neraca-lajur', [NeracaSaldoController::class, 'export'])->name('export.neraca-lajur')->middleware('auth');
 
 // laporan aktivitas pdf & excel
-Route::get('export/laporan_aktivitas', [LAController::class, 'exportpdf'])->name('export.laporan_aktivitas')->middleware('auth');
-Route::get('export/laporan_aktivitas_excel', [LAController::class, 'exportexcel'])->name('export.laporan_aktivitas_excel')->middleware('auth');
+Route::get('export/laporan-aktivitas', [LAController::class, 'exportpdf'])->name('export.laporan-aktivitas')->middleware('auth');
+Route::get('export/laporan-aktivitas_excel', [LAController::class, 'exportexcel'])->name('export.laporan-aktivitas_excel')->middleware('auth');
 
 // laporan arus kas pdf & excel
-Route::get('export/laporan_arus_kas', [LAKController::class, 'exportpdf'])->name('export.laporan_arus_kas');
-Route::get('export/laporan_arus_kas_excel', [LAKController::class, 'exportexcel'])->name('export.laporan_arus_kas_excel');
+Route::get('export/laporan-arus-kas', [LAKController::class, 'exportpdf'])->name('export.laporan-arus-kas');
+Route::get('export/laporan-arus-kas-excel', [LAKController::class, 'exportexcel'])->name('export.laporan-arus-kas-excel');
 
 // laporan perubahan ekuitas pdf & excel
 Route::get('export/laporan_perubahan_ekuitas', [LPEController::class, 'exportpdf'])->name('export.laporan_perubahan_ekuitas');
