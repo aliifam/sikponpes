@@ -95,7 +95,7 @@ class NeracaSaldoController extends Controller
             $i++;
         }
 
-        $pdf = Pdf::loadview('export.neracajalur', compact('balance', 'pesantrendata', 'year', 'month'));
+        $pdf = Pdf::loadview('export.pdf.neracajalur', compact('balance', 'pesantrendata', 'year', 'month'));
         return $pdf->stream();
 
         // dd($balance);
