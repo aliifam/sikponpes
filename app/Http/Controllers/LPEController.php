@@ -17,8 +17,6 @@ class LPEController extends Controller
         $session = $encrypted['id'];
 
         // dd($year, $month, $session);
-
-
     }
 
     public function exportexcel(Request $request)

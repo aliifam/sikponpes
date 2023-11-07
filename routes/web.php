@@ -33,9 +33,9 @@ Route::get('export/laporan-arus-kas', [LAKController::class, 'exportpdf'])->name
 Route::get('export/laporan-arus-kas-excel', [LAKController::class, 'exportexcel'])->name('export.laporan-arus-kas-excel');
 
 // laporan perubahan ekuitas pdf & excel
-Route::get('export/laporan_perubahan_ekuitas', [LPEController::class, 'exportpdf'])->name('export.laporan_perubahan_ekuitas');
-Route::get('export/laporan_perubahan_ekuitas_excel', [LPEController::class, 'exportexcel'])->name('export.laporan_perubahan_ekuitas_excel');
+Route::get('export/laporan-perubahan-ekuitas', [LPEController::class, 'exportpdf'])->name('export.laporan-perubahan-ekuitas');
+Route::get('export/laporan-perubahan-ekuitas-excel', [LPEController::class, 'exportexcel'])->name('export.laporan-perubahan-ekuitas-excel');
 
 // laporan posisi keuangan pdf & excel
-Route::get('export/laporan_posisi_keuangan', [LPKController::class, 'exportpdf'])->name('export.laporan_posisi_keuangan');
-Route::get('export/laporan_posisi_keuangan_excel', [LPKController::class, 'exportexcel'])->name('export.laporan_posisi_keuangan_excel');
+Route::get('export/laporan-posisi-keuangan', [LPKController::class, 'exportpdf'])->name('export.laporan-posisi-keuangan');
+Route::get('export/laporan-posisi-keuangan-excel', [LPKController::class, 'exportexcel'])->name('export.laporan-posisi-keuangan-excel');
