@@ -2,6 +2,19 @@
 
 Sistem informasi keuangan pondok pesantren
 
+## Fitur
+
+-   Multi Pesantren
+-   Manajemen Akun
+-   Buku Besar
+-   Jurnal Umum
+-   Neraca Lajur
+-   Neraca Awal
+-   Laporan Aktivitas
+-   Laporan Arus Kas
+-   Laporan Posisi Keuangan
+-   Laporan Perubahan Ekuitas
+
 ## Instalasi
 
 1. Clone repository ini
