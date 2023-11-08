@@ -188,8 +188,8 @@ class LPEController extends Controller
 
         // dd($year, $month, $session);
 
-        $pesantrendata = Pesantren::where('id', $session)->first();
+        $pesantren = Pesantren::where('id', $session)->first();
 
-        return Excel::download(new LaporanPerubahanEkuitas($pesantrendata, $year, $month), 'Laporan Perubahan Ekuitas ' . $pesantrendata->name . ' ' . $year . '-' . $month . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new LaporanPerubahanEkuitas($pesantren, $year, $month), 'Laporan Perubahan Ekuitas ' . $pesantren->name . ' ' . $year . '-' . $month . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

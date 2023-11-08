@@ -108,10 +108,23 @@ class LAController extends Controller
 
     public function exportexcel(Request $request)
     {
-        $pesantren = $request->id;
-        $year = $request->year;
-        $month = $request->month;
+        try {
+            $encrypted = Crypt::decrypt($request->document);
+            // Your code to work with the decrypted data
+        } catch (DecryptException $e) {
+            // Handle the exception by returning JavaScript to close the tab or window
+            return response('Unauthorized', 403);
+        }
 
-        return Excel::download(new LaporanAktivitas($pesantren, $year, $month), 'laporan-aktivitas-' . $year . '-' . $month . '.xlsx');
+        // dd($encrypted);
+        $year = $encrypted['year'];
+        $month = $encrypted['month'];
+        $session = $encrypted['id'];
+
+        // dd($year, $month, $session);
+
+        $pesantrendata = Pesantren::where('id', $session)->first();
+
+        return Excel::download(new LaporanAktivitas($pesantrendata, $year, $month), 'Laporan Aktivitas ' . $pesantrendata->name . ' ' . $year . '-' . $month . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

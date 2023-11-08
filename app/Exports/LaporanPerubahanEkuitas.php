@@ -211,42 +211,20 @@ class LaporanPerubahanEkuitas implements FromView, WithStyles, WithEvents
 
     public function registerEvents(): array
     {
-        $styleArray1 = [
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
-                ],
-                'outline' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK
-                ],
-            ],
-        ];
-
-        $styleArray2 = [
+        $styleArray = [
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
                 ],
             ],
         ];
-
-        $styleArray3 = [
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK
-                ]
-            ],
-        ];
-
 
         return [
             AfterSheet::class => function (AfterSheet $event) use (
-                $styleArray1,
-                $styleArray2,
-                $styleArray3
+                $styleArray
             ) {
 
-                $event->sheet->getStyle('A4:b11')->ApplyFromArray($styleArray1);
+                $event->sheet->getStyle('A4:b11')->ApplyFromArray($styleArray);
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(70);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(30);
             },

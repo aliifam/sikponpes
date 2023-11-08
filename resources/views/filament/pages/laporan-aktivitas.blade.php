@@ -263,14 +263,19 @@
             window.location.href = 'laporan-aktivitas?year=' + year + '&month=' + month;
         });
 
+        //export pdf function in new tab
         document.getElementById('export').addEventListener('click', function() {
             var document = @json($endpoint);
             var url = "{{ route('export.laporan-aktivitas') }}?document=" + document;
             window.open(url);
         });
 
-        //export pdf function in new tab
         //export excel function in new tab
+        document.getElementById('export-excel').addEventListener('click', function() {
+            var document = @json($endpoint);
+            var url = "{{ route('export.laporan-aktivitas_excel') }}?document=" + document;
+            window.open(url);
+        });
     </script>
 
 </x-filament-panels::page>
