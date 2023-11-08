@@ -413,6 +413,11 @@
         });
 
         // export pdf to new tab
+        document.getElementById('export').addEventListener('click', function() {
+            var document = @json($endpoint);
+            var url = "{{ route('export.laporan-arus-kas') }}?document=" + document;
+            window.open(url);
+        });
         // export and download excel
     </script>
     {{-- end script js --}}

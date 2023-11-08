@@ -8,6 +8,7 @@ use App\Models\InitialBalance;
 use App\Models\JournalDetail;
 use Filament\Facades\Filament;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Crypt;
 
 class LaporanArusKas extends Page
 {
@@ -34,6 +35,7 @@ class LaporanArusKas extends Page
     public $month;
     public $saldoAwal;
     public $kasId;
+    public $endpoint;
 
     public function mount()
     {
@@ -337,95 +339,6 @@ class LaporanArusKas extends Page
         $this->month = $month;
         $this->kasId = $id_kas;
         $this->saldoAwal = $saldoAwal;
-
-
-
-
-        // arus kas operasi keluar
-
-
-        //arus kas operasi
-        // $arusKasOperasi = GeneralJournal::with('account.classification.parent', 'detail')
-        //     ->whereHas('account.classification.parent', function ($q) use ($session) {
-        //         $q->where('pesantren_id', $session);
-        //     })->whereHas('detail', function ($q) use ($year) {
-        //         $q->whereYear('date', $year);
-        //     })->where('account_id', $id_kas)
-        //     ->get();
-        // // dd($arusKasOperasi->toArray());
-
-        // //if kas position is debit and account classification is aset lancar or utang jangka pendek
-        // $arusKasOperasiMasuk = $arusKasOperasi->where(function ($item) {
-        //     return ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Aset Lancar')
-        //         || ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Pendek');
-        // });
-        // //if kas position is credit and account classification is aset lancar
-        // $arusKasOperasiKeluar = $arusKasOperasi->where(function ($item) {
-        //     return ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Aset Lancar')
-        //         || ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Pendek');
-        // });
-
-        // $arusKasOperasi = [
-        //     'masuk' => $arusKasOperasiMasuk->toArray(),
-        //     'keluar' => $arusKasOperasiKeluar->toArray(),
-        //     'amount' => $arusKasOperasiMasuk->sum('amount') - $arusKasOperasiKeluar->sum('amount')
-        // ];
-        // // dd($arusKasOperasi);
-
-        // //arus kas investasi
-        // $arusKasInvestasi = GeneralJournal::with('account.classification.parent', 'detail')
-        //     ->whereHas('account.classification.parent', function ($q) use ($session) {
-        //         $q->where('pesantren_id', $session);
-        //     })->whereHas('detail', function ($q) use ($year) {
-        //         $q->whereYear('date', $year);
-        //     })->where('account_id', $id_kas)
-        //     ->get();
-
-        // //if kas position is debit and account classification is aset tetap
-        // $arusKasInvestasiMasuk = $arusKasInvestasi->where('position', 'debit')->where('account.classification.classification_name', 'Aset Tetap');
-        // //if kas position is credit and account classification is aset tetap
-        // $arusKasInvestasiKeluar = $arusKasInvestasi->where('position', 'credit')->where('account.classification.classification_name', 'Aset Tetap');
-
-        // $arusKasInvestasi = [
-        //     'masuk' => $arusKasInvestasiMasuk->toArray(),
-        //     'keluar' => $arusKasInvestasiKeluar->toArray(),
-        //     'amount' => $arusKasInvestasiMasuk->sum('amount') - $arusKasInvestasiKeluar->sum('amount')
-        // ];
-
-        // // dd($arusKasInvestasi);
-
-        // //arus kas pendanaan
-        // $arusKasPendanaan = GeneralJournal::with('account.classification.parent', 'detail')
-        //     ->whereHas('account.classification.parent', function ($q) use ($session) {
-        //         $q->where('pesantren_id', $session);
-        //     })->whereHas('detail', function ($q) use ($year) {
-        //         $q->whereYear('date', $year);
-        //     })->where('account_id', $id_kas)
-        //     ->get();
-
-        // //if kas position is debit and account classification is ekuitas or utang jangka panjang
-        // $arusKasPendanaanMasuk = $arusKasPendanaan->where(function ($item) {
-        //     return ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Ekuitas')
-        //         || ($item['position'] === 'debit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Panjang');
-        // });
-
-        // //if kas position is credit and account classification is ekuitas or utang jangka panjang
-        // $arusKasPendanaanKeluar = $arusKasPendanaan->where(function ($item) {
-        //     return ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Ekuitas')
-        //         || ($item['position'] === 'credit' && $item['account']['classification']['classification_name'] === 'Utang Jangka Panjang');
-        // });
-
-        // $arusKasPendanaan = [
-        //     'masuk' => $arusKasPendanaanMasuk->toArray(),
-        //     'keluar' => $arusKasPendanaanKeluar->toArray(),
-        //     'amount' => $arusKasPendanaanMasuk->sum('amount') - $arusKasPendanaanKeluar->sum('amount')
-        // ];
-
-        // dd($arusKasPendanaan);
-
-        //saldo awal adalah
-        // $saldoAwal = InitialBalance::where
-
-
+        $this->endpoint = Crypt::encrypt(['year' => $year, 'month' => $month, 'id' => $session]);
     }
 }
