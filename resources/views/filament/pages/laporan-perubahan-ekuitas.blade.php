@@ -218,9 +218,9 @@
 
         // dynamic export excel on new tab
         document.getElementById('export-excel').addEventListener('click', function() {
-            var year = document.getElementById('years').value;
-            var month = document.getElementById('months').value;
-            window.open('laporan-perubahan-ekuitas/export-excel?year=' + year + '&month=' + month);
+            var document = @json($endpoint);
+            var url = "{{ route('export.laporan-perubahan-ekuitas-excel') }}?document=" + document;
+            window.open(url);
         });
     </script>
     {{-- end script --}}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanPerubahanEkuitas;
 use App\Models\Account;
 use App\Models\AccountParent;
 use App\Models\GeneralJournal;
@@ -9,6 +10,7 @@ use App\Models\Pesantren;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LPEController extends Controller
 {
@@ -162,5 +164,16 @@ class LPEController extends Controller
 
     public function exportexcel(Request $request)
     {
+        $encrypted = Crypt::decrypt($request->document);
+        // dd($encrypted);
+        $year = $encrypted['year'];
+        $month = $encrypted['month'];
+        $session = $encrypted['id'];
+
+        // dd($year, $month, $session);
+
+        $pesantrendata = Pesantren::where('id', $session)->first();
+
+        return Excel::download(new LaporanPerubahanEkuitas($pesantrendata, $year, $month), 'Laporan Perubahan Ekuitas ' . $pesantrendata->name . ' ' . $year . '-' . $month . '.xlsx');
     }
 }
