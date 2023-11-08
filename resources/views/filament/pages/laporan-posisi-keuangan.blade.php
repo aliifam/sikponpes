@@ -378,5 +378,12 @@
             var month = document.getElementById('months').value;
             window.location.href = 'laporan-posisi-keuangan?year=' + year + '&month=' + month;
         });
+
+        // export pdf
+        document.getElementById('export').addEventListener('click', function() {
+            var document = @json($endpoint);
+            var url = "{{ route('export.laporan-posisi-keuangan') }}?document=" + document;
+            window.open(url);
+        });
     </script>
 </x-filament-panels::page>

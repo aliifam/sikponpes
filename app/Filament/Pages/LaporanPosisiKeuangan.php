@@ -7,6 +7,7 @@ use App\Models\InitialBalance;
 use App\Models\JournalDetail;
 use Filament\Facades\Filament;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Crypt;
 
 class LaporanPosisiKeuangan extends Page
 {
@@ -27,6 +28,7 @@ class LaporanPosisiKeuangan extends Page
     public $equity;
     public $aktiva;
     public $pasiva;
+    public $endpoint;
 
     public function mount()
     {
@@ -155,7 +157,6 @@ class LaporanPosisiKeuangan extends Page
 
         // dd($assetData);
         // dd($liabilityData);
-
         $this->years = $years;
         $this->year = $year;
         $this->month = $month;
@@ -168,5 +169,6 @@ class LaporanPosisiKeuangan extends Page
         $this->equity = $equity;
         $this->aktiva = $aktiva;
         $this->pasiva = $pasiva;
+        $this->endpoint = Crypt::encrypt(['year' => $year, 'month' => $month, 'id' => $session]);
     }
 }
