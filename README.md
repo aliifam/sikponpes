@@ -27,6 +27,7 @@ Sistem informasi keuangan pondok pesantren
 8. jalankan `npm install`
 9. jalankan `npm run dev`
 10. Jalankan `php artisan serve`
+11. Isi konfigurasi smtp email di file `.env`
 
 ## Tech Stack
 
