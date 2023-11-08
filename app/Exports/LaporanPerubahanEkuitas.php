@@ -15,7 +15,6 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class LaporanPerubahanEkuitas implements FromView, WithStyles, WithEvents
 {
-
     private $pesantren;
     private $year;
     private $month;
@@ -241,21 +240,15 @@ class LaporanPerubahanEkuitas implements FromView, WithStyles, WithEvents
 
 
         return [
-            AfterSheet::class    => function (AfterSheet $event) use (
+            AfterSheet::class => function (AfterSheet $event) use (
                 $styleArray1,
                 $styleArray2,
                 $styleArray3
             ) {
 
-                $event->sheet->getStyle('A4:c4')->ApplyFromArray($styleArray3);
-
-                $event->sheet->getStyle('A5:C7')->ApplyFromArray($styleArray1);
-
-                $event->sheet->getStyle('A5:A7')->ApplyFromArray($styleArray1);
-
-                $event->sheet->getStyle('B5:B7')->ApplyFromArray($styleArray1);
-
-                $event->sheet->getStyle('A8:C9')->ApplyFromArray($styleArray3);
+                $event->sheet->getStyle('A4:b11')->ApplyFromArray($styleArray1);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(70);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(30);
             },
         ];
     }

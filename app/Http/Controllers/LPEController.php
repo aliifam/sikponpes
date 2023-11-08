@@ -190,6 +190,6 @@ class LPEController extends Controller
 
         $pesantrendata = Pesantren::where('id', $session)->first();
 
-        return Excel::download(new LaporanPerubahanEkuitas($pesantrendata, $year, $month), 'Laporan Perubahan Ekuitas ' . $pesantrendata->name . ' ' . $year . '-' . $month . '.xlsx');
+        return Excel::download(new LaporanPerubahanEkuitas($pesantrendata, $year, $month), 'Laporan Perubahan Ekuitas ' . $pesantrendata->name . ' ' . $year . '-' . $month . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }
