@@ -264,10 +264,9 @@
         });
 
         document.getElementById('export').addEventListener('click', function() {
-            var year = document.querySelector('#years').value;
-            var month = document.querySelector('#months').value;
-            var id = "{{ $session }}"
-            window.open('laporan-aktivitas/export?year=' + year + '&month=' + month);
+            var document = @json($endpoint);
+            var url = "{{ route('export.laporan-aktivitas') }}?document=" + document;
+            window.open(url);
         });
 
         //export pdf function in new tab

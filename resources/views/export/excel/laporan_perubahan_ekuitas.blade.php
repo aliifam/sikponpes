@@ -107,7 +107,8 @@
         <br>
         <br>
         <div>
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%" style="width:100%">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%" style="width:100%"
+                cellspacing="0">
                 <tbody>
                     <tr class="bg-green-600 text-white font-bold">
                         <th style="width:60%" class="p-3" colspan="2">
