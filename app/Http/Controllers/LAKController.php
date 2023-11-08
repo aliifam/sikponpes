@@ -312,7 +312,7 @@ class LAKController extends Controller
         $kasId = $id_kas;
 
         $pdf = Pdf::loadView('export.pdf.laporan_arus_kas', compact('pesantrendata', 'arusKasOperasi', 'arusKasInvestasi', 'arusKasPendanaan', 'saldoAwal', 'year', 'month', 'kasId'));
-        return $pdf->stream();
+        return $pdf->stream('Laporan Arus Kas' . '-' . $pesantrendata->name . '-' . $year . '-' . $month . '.pdf');
     }
 
     public function exportexcel(Request $request)

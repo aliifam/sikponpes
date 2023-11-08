@@ -167,7 +167,7 @@ class LPEController extends Controller
         $prive = $prive_awal;
 
         $pdf = Pdf::loadview('export.pdf.laporan_perubahan_ekuitas', compact('pesantrendata', 'year', 'month', 'modal_awal', 'setoran_modal', 'prive', 'surpdef'));
-        return $pdf->stream();
+        return $pdf->stream('Laporan Perubahan Ekuitas' . '-' . $pesantrendata->name . '-' . $year . '-' . $month . '.pdf');
     }
 
     public function exportexcel(Request $request)

@@ -103,7 +103,7 @@ class LAController extends Controller
         }
 
         $pdf = Pdf::loadView('export.pdf.laporan_aktifitas', compact('pesantrendata', 'incomeData', 'expenseData', 'income', 'expense', 'year', 'month'));
-        return $pdf->stream();
+        return $pdf->stream('Laporan Aktivitas' . '-' . $pesantrendata->name . '-' . $year . '-' . $month . '.pdf');
     }
 
     public function exportexcel(Request $request)
