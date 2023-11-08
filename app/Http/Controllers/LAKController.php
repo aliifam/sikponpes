@@ -7,6 +7,7 @@ use App\Models\InitialBalance;
 use App\Models\JournalDetail;
 use App\Models\Pesantren;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -14,7 +15,15 @@ class LAKController extends Controller
 {
     public function exportpdf(Request $request)
     {
-        $encrypted = Crypt::decrypt($request->document);
+        // $encrypted = Crypt::decrypt($request->document);
+
+        try {
+            $encrypted = Crypt::decrypt($request->document);
+            // Your code to work with the decrypted data
+        } catch (DecryptException $e) {
+            // Handle the exception by returning JavaScript to close the tab or window
+            return response('Unauthorized', 403);
+        }
 
         $year = $encrypted['year'];
         $month = $encrypted['month'];

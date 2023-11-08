@@ -29,13 +29,13 @@ Route::get('export/laporan-aktivitas', [LAController::class, 'exportpdf'])->name
 Route::get('export/laporan-aktivitas_excel', [LAController::class, 'exportexcel'])->name('export.laporan-aktivitas_excel')->middleware('auth');
 
 // laporan arus kas pdf & excel
-Route::get('export/laporan-arus-kas', [LAKController::class, 'exportpdf'])->name('export.laporan-arus-kas');
-Route::get('export/laporan-arus-kas-excel', [LAKController::class, 'exportexcel'])->name('export.laporan-arus-kas-excel');
+Route::get('export/laporan-arus-kas', [LAKController::class, 'exportpdf'])->name('export.laporan-arus-kas')->middleware('auth');
+Route::get('export/laporan-arus-kas-excel', [LAKController::class, 'exportexcel'])->name('export.laporan-arus-kas-excel')->middleware('auth');
 
 // laporan perubahan ekuitas pdf & excel
-Route::get('export/laporan-perubahan-ekuitas', [LPEController::class, 'exportpdf'])->name('export.laporan-perubahan-ekuitas');
-Route::get('export/laporan-perubahan-ekuitas-excel', [LPEController::class, 'exportexcel'])->name('export.laporan-perubahan-ekuitas-excel');
+Route::get('export/laporan-perubahan-ekuitas', [LPEController::class, 'exportpdf'])->name('export.laporan-perubahan-ekuitas')->middleware('auth');
+Route::get('export/laporan-perubahan-ekuitas-excel', [LPEController::class, 'exportexcel'])->name('export.laporan-perubahan-ekuitas-excel')->middleware('auth');
 
 // laporan posisi keuangan pdf & excel
-Route::get('export/laporan-posisi-keuangan', [LPKController::class, 'exportpdf'])->name('export.laporan-posisi-keuangan');
-Route::get('export/laporan-posisi-keuangan-excel', [LPKController::class, 'exportexcel'])->name('export.laporan-posisi-keuangan-excel');
+Route::get('export/laporan-posisi-keuangan', [LPKController::class, 'exportpdf'])->name('export.laporan-posisi-keuangan')->middleware('auth');
+Route::get('export/laporan-posisi-keuangan-excel', [LPKController::class, 'exportexcel'])->name('export.laporan-posisi-keuangan-excel')->middleware('auth');
