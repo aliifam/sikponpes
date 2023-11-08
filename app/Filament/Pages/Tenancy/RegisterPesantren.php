@@ -276,18 +276,18 @@ class RegisterPesantren extends RegisterTenant
                         "code" => "3.1",
                         "account" => array(
                             "3.1.1" => array(
-                                "name" => "Ekuitas Awal",
+                                "name" => "Ekuitas",
                                 "code" => "3.1.1",
                                 "position" => "kredit"
                             ),
+                            // "3.1.2" => array(
+                            //     "name" => "Ekuitas Akhir",
+                            //     "code" => "3.1.2",
+                            //     "position" => "kredit"
+                            // ),
                             "3.1.2" => array(
-                                "name" => "Ekuitas Akhir",
-                                "code" => "3.1.2",
-                                "position" => "kredit"
-                            ),
-                            "3.1.3" => array(
                                 "name" => "Prive",
-                                "code" => "3.1.3",
+                                "code" => "3.1.2",
                                 "position" => "kredit"
                             ),
                         )
