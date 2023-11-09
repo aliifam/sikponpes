@@ -227,17 +227,17 @@ class RegisterPesantren extends RegisterTenant
                                 "code" => "2.1.2",
                                 "position" => "kredit"
                             ),
+                            // "2.1.3" => array(
+                            //     "name" => "Utang Bank",
+                            //     "code" => "2.1.3",
+                            //     "position" => "kredit"
+                            // ),
                             "2.1.3" => array(
-                                "name" => "Utang Bank",
-                                "code" => "2.1.3",
-                                "position" => "kredit"
-                            ),
-                            "2.1.4" => array(
                                 "name" => "Utang Pajak",
                                 "code" => "2.1.4",
                                 "position" => "kredit"
                             ),
-                            "2.1.5" => array(
+                            "2.1.4" => array(
                                 "name" => "Utang Lainnya",
                                 "code" => "2.1.5",
                                 "position" => "kredit"

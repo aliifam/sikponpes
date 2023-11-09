@@ -53,42 +53,42 @@ class CreateGeneralJournal extends CreateRecord
         }
 
         //check if initial balance for account in this year is enough to debit or credit
-        foreach ($transactions as $transaction) {
-            $initial_balance = \App\Models\InitialBalance::where('account_id', $transaction['account_id'])
-                ->whereYear('date', $tahun)
-                ->first();
-            //if initial balance not exist, halting
-            if (!$initial_balance) {
-                Notification::make()
-                    ->title('Gagal Menambahkan Jurnal')
-                    ->body('Saldo awal tidak ditemukan')
-                    ->danger()
-                    ->send();
-                //halting
-                $this->halt();
-            }
-            if ($transaction['position'] == 'debit') {
-                if ($initial_balance->amount < $transaction['amount']) {
-                    Notification::make()
-                        ->title('Gagal Menambahkan Jurnal')
-                        ->body('Saldo awal tidak mencukupi untuk melakukan debit')
-                        ->danger()
-                        ->send();
-                    //halting
-                    $this->halt();
-                }
-            } else if ($transaction['position'] == 'credit') {
-                if ($initial_balance->amount < $transaction['amount']) {
-                    Notification::make()
-                        ->title('Gagal Menambahkan Jurnal')
-                        ->body('Saldo awal tidak mencukupi untuk melakukan kredit')
-                        ->danger()
-                        ->send();
-                    //halting
-                    $this->halt();
-                }
-            }
-        }
+        // foreach ($transactions as $transaction) {
+        //     $initial_balance = \App\Models\InitialBalance::where('account_id', $transaction['account_id'])
+        //         ->whereYear('date', $tahun)
+        //         ->first();
+        //     //if initial balance not exist, halting
+        //     if (!$initial_balance) {
+        //         Notification::make()
+        //             ->title('Gagal Menambahkan Jurnal')
+        //             ->body('Saldo awal tidak ditemukan')
+        //             ->danger()
+        //             ->send();
+        //         //halting
+        //         $this->halt();
+        //     }
+        //     if ($transaction['position'] == 'debit') {
+        //         if ($initial_balance->amount < $transaction['amount']) {
+        //             Notification::make()
+        //                 ->title('Gagal Menambahkan Jurnal')
+        //                 ->body('Saldo awal tidak mencukupi untuk melakukan debit')
+        //                 ->danger()
+        //                 ->send();
+        //             //halting
+        //             $this->halt();
+        //         }
+        //     } else if ($transaction['position'] == 'credit') {
+        //         if ($initial_balance->amount < $transaction['amount']) {
+        //             Notification::make()
+        //                 ->title('Gagal Menambahkan Jurnal')
+        //                 ->body('Saldo awal tidak mencukupi untuk melakukan kredit')
+        //                 ->danger()
+        //                 ->send();
+        //             //halting
+        //             $this->halt();
+        //         }
+        //     }
+        // }
         //end of checking
 
         //transaksi valid generate journal detail id string pk

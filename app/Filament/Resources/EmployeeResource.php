@@ -16,6 +16,7 @@ use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Phpsa\FilamentPasswordReveal\Password;
 
 class EmployeeResource extends Resource
 {
@@ -43,7 +44,7 @@ class EmployeeResource extends Resource
                     ->autofocus()
                     ->placeholder('Masukkan Email Karyawan')
                     ->required(),
-                TextInput::make('password')
+                Password::make('password')
                     ->label('Password Karyawan')
                     ->autofocus()
                     ->placeholder('Masukkan Password Karyawan')
