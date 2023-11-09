@@ -385,5 +385,12 @@
             var url = "{{ route('export.laporan-posisi-keuangan') }}?document=" + document;
             window.open(url);
         });
+
+        //export and download excel
+        document.getElementById('export-excel').addEventListener('click', function() {
+            var document = @json($endpoint);
+            var url = "{{ route('export.laporan-posisi-keuangan-excel') }}?document=" + document;
+            window.open(url);
+        });
     </script>
 </x-filament-panels::page>
