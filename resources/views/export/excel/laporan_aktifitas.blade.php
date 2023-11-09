@@ -112,6 +112,8 @@
             <p class="text-center" style="margin:5px; margin-bottom:10px"><strong>Periode </strong>
                 {{ $monthName }} {{ $year }} </p>
         </div>
+        <br>
+        <br>
         <div>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%" style="width:100%">
                 <tbody>

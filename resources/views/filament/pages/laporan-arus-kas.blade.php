@@ -95,10 +95,10 @@
             Submit
         </button>
         <div class="flex-grow"></div>
-        <button type="button" id="export-excel"
+        {{-- <button type="button" id="export-excel"
             class="self-end focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-2  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
             Export Excel
-        </button>
+        </button> --}}
         <button type="button" id="export"
             class="self-end focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-2  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
             Export PDF
@@ -418,7 +418,13 @@
             var url = "{{ route('export.laporan-arus-kas') }}?document=" + document;
             window.open(url);
         });
+
         // export and download excel
+        document.getElementById('export-excel').addEventListener('click', function() {
+            var document = @json($endpoint);
+            var url = "{{ route('export.laporan-arus-kas-excel') }}?document=" + document;
+            window.open(url);
+        });
     </script>
     {{-- end script js --}}
 </x-filament-panels::page>

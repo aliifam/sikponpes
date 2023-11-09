@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanArusKas;
 use App\Models\Account;
 use App\Models\InitialBalance;
 use App\Models\JournalDetail;
@@ -10,6 +11,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LAKController extends Controller
 {
@@ -317,5 +319,20 @@ class LAKController extends Controller
 
     public function exportexcel(Request $request)
     {
+        try {
+            $encrypted = Crypt::decrypt($request->document);
+            // Your code to work with the decrypted data
+        } catch (DecryptException $e) {
+            // Handle the exception by returning JavaScript to close the tab or window
+            return response('Unauthorized', 403);
+        }
+
+        $year = $encrypted['year'];
+        $month = $encrypted['month'];
+        $session = $encrypted['id'];
+
+        $pesantrendata = Pesantren::where('id', $session)->first();
+
+        return Excel::download(new LaporanArusKas($pesantrendata, $year, $month), 'Laporan Arus Kas ' . $pesantrendata->name . ' ' . $year . '-' . $month . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

@@ -156,7 +156,7 @@ class LaporanAktivitas implements FromView, WithStyles, WithEvents
                 $styleArray
             ) {
 
-                $event->sheet->getStyle('A4:b11')->ApplyFromArray($styleArray);
+                // $event->sheet->getStyle('A4:b11')->ApplyFromArray($styleArray);
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(70);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(30);
             },
