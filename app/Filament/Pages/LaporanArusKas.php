@@ -326,15 +326,29 @@ class LaporanArusKas extends Page
 
         $saldoAwal = $initial_kas + $initial_bank;
 
+        $years = JournalDetail::selectRaw('YEAR(date) as year')
+            ->whereHas('general_journal.account.classification.parent', function ($q) use ($session) {
+                $q->where('pesantren_id', $session);
+            })->union(InitialBalance::selectRaw('YEAR(date) as year')
+                ->whereHas('account.classification.parent', function ($q) use ($session) {
+                    $q->where('pesantren_id', $session);
+                }))->orderBy('year', 'DESC')->get();
+
+        if ($years->isEmpty()) {
+            //same data structure as $years
+            $years = collect([
+                (object) [
+                    'year' => date('Y')
+                ]
+            ]);
+        }
+
 
         $this->arusKasOperasi = $arusKasOperasi;
         $this->arusKasInvestasi = $arusKasInvestasi;
         $this->arusKasPendanaan = $arusKasPendanaan;
         $this->session = $session;
-        $this->years = JournalDetail::selectRaw('YEAR(date) as year')
-            ->whereHas('general_journal.account.classification.parent', function ($q) use ($session) {
-                $q->where('pesantren_id', $session);
-            })->groupBy('year')->orderBy('year', 'desc')->get();
+        $this->years = $years;
         $this->year = $year;
         $this->month = $month;
         $this->kasId = $id_kas;
