@@ -141,9 +141,8 @@
                                     $amount = 0;
                                     foreach ($item['general_journal'] as $journal) {
                                         if ($journal['account_id'] === $kasId) {
-                                            $amount += $journal['amount'];
+                                            $amount = $journal['amount'];
                                         }
-                                        dd($journal);
                                     }
                                 @endphp
                                 {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
@@ -171,7 +170,7 @@
                                     $amount = 0;
                                     foreach ($item['general_journal'] as $journal) {
                                         if ($journal['account_id'] === $kasId) {
-                                            $amount += $journal['amount'];
+                                            $amount = $journal['amount'];
                                         }
                                     }
                                 @endphp
@@ -222,7 +221,7 @@
                                     $amount = 0;
                                     foreach ($item['general_journal'] as $journal) {
                                         if ($journal['account_id'] === $kasId) {
-                                            $amount += $journal['amount'];
+                                            $amount = $journal['amount'];
                                         }
                                     }
                                 @endphp
@@ -251,7 +250,7 @@
                                     $amount = 0;
                                     foreach ($item['general_journal'] as $journal) {
                                         if ($journal['account_id'] === $kasId) {
-                                            $amount += $journal['amount'];
+                                            $amount = $journal['amount'];
                                         }
                                     }
                                 @endphp
@@ -303,7 +302,7 @@
                                     $amount = 0;
                                     foreach ($item['general_journal'] as $journal) {
                                         if ($journal['account_id'] === $kasId) {
-                                            $amount += $journal['amount'];
+                                            $amount = $journal['amount'];
                                         }
                                     }
                                 @endphp
@@ -332,7 +331,7 @@
                                     $amount = 0;
                                     foreach ($item['general_journal'] as $journal) {
                                         if ($journal['account_id'] === $kasId) {
-                                            $amount += $journal['amount'];
+                                            $amount = $journal['amount'];
                                         }
                                     }
                                 @endphp
