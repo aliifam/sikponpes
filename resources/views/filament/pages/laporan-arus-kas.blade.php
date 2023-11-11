@@ -140,12 +140,12 @@
                                 @php
                                     $amount = 0;
                                     foreach ($item['general_journal'] as $journal) {
-                                        dd('masuk');
+                                        dd($journal['account_id'], $kasId);
                                         if ($journal['account_id'] === $kasId) {
                                             $amount = $journal['amount'];
                                             dd($amount, $journal['amount'], $journal);
                                         }
-                                        dd($kasId, $journal['account_id']);
+                                        dd('mental');
                                     }
                                 @endphp
                                 {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
