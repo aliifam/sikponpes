@@ -142,6 +142,7 @@
                                     foreach ($item['general_journal'] as $journal) {
                                         if ($journal['account_id'] === $kasId) {
                                             $amount = $journal['amount'];
+                                            dd($amount, $journal['amount'], $journal);
                                         }
                                     }
                                 @endphp
