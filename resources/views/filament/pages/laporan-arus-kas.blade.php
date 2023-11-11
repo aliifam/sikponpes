@@ -144,6 +144,7 @@
                                             $amount = $journal['amount'];
                                             dd($amount, $journal['amount'], $journal);
                                         }
+                                        dd($kasId, $journal['account_id']);
                                     }
                                 @endphp
                                 {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
