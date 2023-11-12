@@ -90,6 +90,7 @@ class LaporanArusKas extends Page
                 if (
                     $journal['account']['classification']['classification_name'] === 'Aset Lancar' ||
                     $journal['account']['classification']['classification_name'] === 'Utang Jangka Pendek' ||
+                    $journal['account']['classification']['classification_name'] === 'Pendapatan' ||
                     $journal['account']['account_name'] === 'Prive'
                 ) {
                     // dd("masuk");
@@ -121,6 +122,9 @@ class LaporanArusKas extends Page
                 if (
                     $journal['account']['classification']['classification_name'] === 'Aset Lancar' ||
                     $journal['account']['classification']['classification_name'] === 'Utang Jangka Pendek' ||
+                    $journal['account']['classification']['classification_name'] === 'Biaya Operasional' ||
+                    $journal['account']['account_name'] === 'Kerugian Piutang' ||
+                    $journal['account']['account_name'] === 'Donasi dan Bantuan' ||
                     $journal['account']['account_name'] === 'Prive'
                 ) {
                     // dd("masuk");
@@ -198,6 +202,8 @@ class LaporanArusKas extends Page
                 // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
                 if (
                     $journal['account']['classification']['classification_name'] === 'Aset Tetap' ||
+                    $journal['account']['account_name'] === 'Penyusutan Aset Tetap' ||
+                    $journal['account']['account_name'] === 'Kerugian Investasi' ||
                     $journal['account']['classification']['classification_name'] === 'Investasi'
                 ) {
                     // dd("masuk");
@@ -276,6 +282,7 @@ class LaporanArusKas extends Page
                 // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
                 if (
                     $journal['account']['classification']['classification_name'] === 'Ekuitas' ||
+                    $journal['account']['classification']['classification_name'] === 'Biaya Keuangan' ||
                     $journal['account']['classification']['classification_name'] === 'Utang Jangka Panjang'
                 ) {
                     // dd("masuk");
