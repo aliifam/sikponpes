@@ -145,7 +145,7 @@
                                         }
                                     }
                                 @endphp
-                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
+                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount * -1)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
                             </td>
                         </tr>
                     @endforeach
@@ -174,7 +174,7 @@
                                         }
                                     }
                                 @endphp
-                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
+                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount * -1)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
                             </td>
                         </tr>
                     @endforeach
@@ -186,7 +186,8 @@
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
                         @if ($arusKasOperasi['amount'] < 0)
-                            - Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasOperasi['amount'])), 3))) }}
+                            -
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasOperasi['amount'] * -1)), 3))) }}
                         @else
                             Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasOperasi['amount'])), 3))) }}
                         @endif
@@ -225,7 +226,7 @@
                                         }
                                     }
                                 @endphp
-                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
+                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount * -1)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
                             </td>
                         </tr>
                     @endforeach
@@ -254,7 +255,7 @@
                                         }
                                     }
                                 @endphp
-                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
+                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount * -1)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
                             </td>
                         </tr>
                     @endforeach
@@ -265,8 +266,9 @@
                         Jumlah kas neto diterima dari aktivitas investasi
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        @if ($arusKasOperasi['amount'] < 0)
-                            - Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasInvestasi['amount'])), 3))) }}
+                        @if ($arusKasInvestasi['amount'] < 0)
+                            -
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasInvestasi['amount'] * -1)), 3))) }}
                         @else
                             Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasInvestasi['amount'])), 3))) }}
                         @endif
@@ -306,7 +308,7 @@
                                         }
                                     }
                                 @endphp
-                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
+                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount * -1)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
                             </td>
                         </tr>
                     @endforeach
@@ -335,7 +337,7 @@
                                         }
                                     }
                                 @endphp
-                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
+                                {{ $amount < 0 ? '- Rp' . strrev(implode('.', str_split(strrev(strval($amount * -1)), 3))) : 'Rp' . strrev(implode('.', str_split(strrev(strval($amount)), 3))) }}
                             </td>
                         </tr>
                     @endforeach
@@ -343,11 +345,12 @@
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
-                        Jumlah kas neto diterima dari aktivitas investasi
+                        Jumlah kas neto diterima dari aktivitas Pendanaan
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        @if ($arusKasOperasi['amount'] < 0)
-                            - Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasPendanaan['amount'])), 3))) }}
+                        @if ($arusKasPendanaan['amount'] < 0)
+                            -
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasPendanaan['amount'] * -1)), 3))) }}
                         @else
                             Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasPendanaan['amount'])), 3))) }}
                         @endif
@@ -377,7 +380,7 @@
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
                         @if ($saldoAwal < 0)
-                            - Rp{{ strrev(implode('.', str_split(strrev(strval($saldoAwal)), 3))) }}
+                            - Rp{{ strrev(implode('.', str_split(strrev(strval($saldoAwal * -1)), 3))) }}
                         @else
                             Rp{{ strrev(implode('.', str_split(strrev(strval($saldoAwal)), 3))) }}
                         @endif

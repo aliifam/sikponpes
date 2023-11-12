@@ -349,6 +349,7 @@ class LaporanArusKas extends Page
             ]);
         }
 
+        // dd($arusKasOperasi, $arusKasInvestasi, $arusKasPendanaan, $session, $years, $year, $month, $id_kas, $saldoAwal);
 
         $this->arusKasOperasi = $arusKasOperasi;
         $this->arusKasInvestasi = $arusKasInvestasi;
