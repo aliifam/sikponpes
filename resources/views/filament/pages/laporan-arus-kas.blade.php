@@ -362,11 +362,11 @@
                         Kenaikan / Penurunan
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        @if ($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] - $saldoAwal < 0)
+                        @if ($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] < 0)
                             -
-                            Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] - $saldoAwal))), 3))) }}
+                            Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount']))), 3))) }}
                         @else
-                            Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] - $saldoAwal)), 3))) }}
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'])), 3))) }}
                         @endif
                     </td>
                 </tr>
@@ -389,11 +389,11 @@
                         Saldo Akhir
                     </td>
                     <td class="text-right px-3 py-2" style="width:10%">
-                        @if ($saldoAwal - $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] < 0)
+                        @if ($saldoAwal + $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'] < 0)
                             -
-                            Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($saldoAwal - $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount']))), 3))) }}
+                            Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($saldoAwal + $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount']))), 3))) }}
                         @else
-                            Rp{{ strrev(implode('.', str_split(strrev(strval($saldoAwal - $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'])), 3))) }}
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($saldoAwal + $arusKasOperasi['amount'] + $arusKasInvestasi['amount'] + $arusKasPendanaan['amount'])), 3))) }}
                         @endif
                     </td>
                 </tr>
