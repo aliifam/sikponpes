@@ -90,8 +90,7 @@ class LaporanArusKas extends Page
                 if (
                     $journal['account']['classification']['classification_name'] === 'Aset Lancar' ||
                     $journal['account']['classification']['classification_name'] === 'Utang Jangka Pendek' ||
-                    $journal['account']['classification']['classification_name'] === 'Pendapatan' ||
-                    $journal['account']['account_name'] === 'Prive'
+                    $journal['account']['classification']['classification_name'] === 'Pendapatan'
                 ) {
                     // dd("masuk");
                     $otherAccountStatus = true;
@@ -124,8 +123,7 @@ class LaporanArusKas extends Page
                     $journal['account']['classification']['classification_name'] === 'Utang Jangka Pendek' ||
                     $journal['account']['classification']['classification_name'] === 'Biaya Operasional' ||
                     $journal['account']['account_name'] === 'Kerugian Piutang' ||
-                    $journal['account']['account_name'] === 'Donasi dan Bantuan' ||
-                    $journal['account']['account_name'] === 'Prive'
+                    $journal['account']['account_name'] === 'Donasi dan Bantuan'
                 ) {
                     // dd("masuk");
                     $otherAccountStatus = true;
@@ -283,7 +281,8 @@ class LaporanArusKas extends Page
                 if (
                     $journal['account']['classification']['classification_name'] === 'Ekuitas' ||
                     $journal['account']['classification']['classification_name'] === 'Biaya Keuangan' ||
-                    $journal['account']['classification']['classification_name'] === 'Utang Jangka Panjang'
+                    $journal['account']['classification']['classification_name'] === 'Utang Jangka Panjang' ||
+                    $journal['account']['account_name'] === 'Prive'
                 ) {
                     // dd("masuk");
                     $otherAccountStatus = true;
