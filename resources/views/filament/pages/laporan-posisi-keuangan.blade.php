@@ -281,6 +281,19 @@
                 @endfor
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style="width:60%;padding-left: 1.5rem!important;" class="px-3 py-2">
+                        <strong>Surplus/Desifisit</strong>
+                    </td>
+                    <td class="text-right px-3 py-2" style="width:10%">
+                        @if ($surpdef < 0)
+                            - Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $surpdef)), 3))) }}
+                        @else
+                            Rp{{ strrev(implode('.', str_split(strrev(strval($surpdef)), 3))) }}
+                        @endif
+                    </td>
+                </tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td style="width:60%" class="px-3 py-2">
                         <strong>Total Pasiva</strong>
                     </td>
