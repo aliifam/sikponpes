@@ -220,7 +220,11 @@
                                             {{ $liabilityData[$i]['name'][$j] }}
                                         </td>
                                         <td class="text-right px-3 py-2" style="width:10%">
-                                            Rp{{ strrev(implode('.', str_split(strrev(strval($liabilityData[$i]['ending balance'][$j])), 3))) }}
+                                            @if ($liabilityData[$i]['ending balance'][$j] < 0)
+                                                -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $liabilityData[$i]['ending balance'][$j])), 3))) }}
+                                            @else
+                                                Rp{{ strrev(implode('.', str_split(strrev(strval($liabilityData[$i]['ending balance'][$j])), 3))) }}
+                                            @endif
                                         </td>
                                     </tr>
                                 @endif
@@ -232,7 +236,11 @@
                                 Total {{ $liabilityData[$i]['classification'] }}
                             </td>
                             <td style="width:10%" class="text-right px-3 py-2">
-                                Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($liabilityData[$i]['ending balance']))), 3))) }}
+                                @if (array_sum($liabilityData[$i]['ending balance']) < 0)
+                                    -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * array_sum($liabilityData[$i]['ending balance']))), 3))) }}
+                                @else
+                                    Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($liabilityData[$i]['ending balance']))), 3))) }}
+                                @endif
                             </td>
                         </tr>
                     @endfor
@@ -258,7 +266,11 @@
                                             {{ $equityData[$i]['name'][$j] }}
                                         </td>
                                         <td class="text-right px-3 py-2" style="width:10%">
-                                            Rp{{ strrev(implode('.', str_split(strrev(strval($equityData[$i]['ending balance'][$j])), 3))) }}
+                                            @if ($equityData[$i]['ending balance'][$j] < 0)
+                                                -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $equityData[$i]['ending balance'][$j])), 3))) }}
+                                            @else
+                                                Rp{{ strrev(implode('.', str_split(strrev(strval($equityData[$i]['ending balance'][$j])), 3))) }}
+                                            @endif
                                         </td>
                                     </tr>
                                 @endif
@@ -270,7 +282,11 @@
                                 Total {{ $equityData[$i]['classification'] }}
                             </td>
                             <td style="width:10%" class="text-right px-3 py-2">
-                                Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($equityData[$i]['ending balance']))), 3))) }}
+                                @if (array_sum($equityData[$i]['ending balance']) < 0)
+                                    -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * array_sum($equityData[$i]['ending balance']))), 3))) }}
+                                @else
+                                    Rp{{ strrev(implode('.', str_split(strrev(strval(array_sum($equityData[$i]['ending balance']))), 3))) }}
+                                @endif
                             </td>
                         </tr>
                     @endfor
