@@ -75,7 +75,7 @@ class LAKController extends Controller
                 if (
                     $journal['account']['classification']['classification_name'] === 'Aset Lancar' ||
                     $journal['account']['classification']['classification_name'] === 'Utang Jangka Pendek' ||
-                    $journal['account']['account_name'] === 'Prive'
+                    $journal['account']['classification']['classification_name'] === 'Pendapatan'
                 ) {
                     // dd("masuk");
                     $otherAccountStatus = true;
@@ -106,7 +106,9 @@ class LAKController extends Controller
                 if (
                     $journal['account']['classification']['classification_name'] === 'Aset Lancar' ||
                     $journal['account']['classification']['classification_name'] === 'Utang Jangka Pendek' ||
-                    $journal['account']['account_name'] === 'Prive'
+                    $journal['account']['classification']['classification_name'] === 'Biaya Operasional' ||
+                    $journal['account']['account_name'] === 'Kerugian Piutang' ||
+                    $journal['account']['account_name'] === 'Donasi dan Bantuan'
                 ) {
                     // dd("masuk");
                     $otherAccountStatus = true;
@@ -183,6 +185,8 @@ class LAKController extends Controller
                 // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
                 if (
                     $journal['account']['classification']['classification_name'] === 'Aset Tetap' ||
+                    $journal['account']['account_name'] === 'Penyusutan Aset Tetap' ||
+                    $journal['account']['account_name'] === 'Kerugian Investasi' ||
                     $journal['account']['classification']['classification_name'] === 'Investasi'
                 ) {
                     // dd("masuk");
@@ -261,7 +265,9 @@ class LAKController extends Controller
                 // Check if the "position" is "debit" and the "classification_name" is "Aset Lancar" or "Utang Jangka Pendek"
                 if (
                     $journal['account']['classification']['classification_name'] === 'Ekuitas' ||
-                    $journal['account']['classification']['classification_name'] === 'Utang Jangka Panjang'
+                    $journal['account']['classification']['classification_name'] === 'Biaya Keuangan' ||
+                    $journal['account']['classification']['classification_name'] === 'Utang Jangka Panjang' ||
+                    $journal['account']['account_name'] === 'Prive'
                 ) {
                     // dd("masuk");
                     $otherAccountStatus = true;
