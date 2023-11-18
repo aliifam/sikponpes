@@ -16,4 +16,9 @@ class Perusahaan extends Model
         'email',
         'pesantren_id',
     ];
+
+    public function pesantren()
+    {
+        return $this->belongsTo(Pesantren::class);
+    }
 }

@@ -18,4 +18,9 @@ class Santri extends Model
         'jenis_kelamin',
         'pesantren_id',
     ];
+
+    public function pesantren()
+    {
+        return $this->belongsTo(Pesantren::class);
+    }
 }

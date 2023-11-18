@@ -64,4 +64,14 @@ class Pesantren extends Model
     {
         return $this->belongsTo(Pesantren::class, 'id');
     }
+
+    public function santris(): HasMany
+    {
+        return $this->hasMany(Santri::class);
+    }
+
+    public function perusahaans(): HasMany
+    {
+        return $this->hasMany(Perusahaan::class);
+    }
 }
