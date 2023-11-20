@@ -7,6 +7,8 @@ use App\Filament\Resources\GeneralJournalResource\RelationManagers;
 use App\Models\Account;
 use App\Models\GeneralJournal;
 use App\Models\JournalDetail;
+use App\Models\Perusahaan;
+use App\Models\Santri;
 use Awcodes\FilamentTableRepeater\Components\TableRepeater;
 use Dompdf\FrameDecorator\Text;
 use Filament\Facades\Filament;
@@ -62,8 +64,8 @@ class GeneralJournalResource extends Resource
                     ->required(),
                 Hidden::make('pesantren_id')
                     ->default(Filament::getTenant()->id),
-                TableRepeater::make('journals')
-                    ->hideLabels()
+                Repeater::make('journals')
+                    // ->hideLabels()
                     ->grid(2)
                     ->minItems(2)
                     ->schema([
@@ -84,6 +86,7 @@ class GeneralJournalResource extends Resource
                             ->disableOptionWhen(function ($value, $state, Get $get) {
                                 return collect($get('../*.account_id'))->contains($value);
                             })
+                            ->live()
                             ->required(),
                         Select::make('position')
                             ->label('Posisi')
@@ -99,6 +102,36 @@ class GeneralJournalResource extends Resource
                             ->prefix('Rp. ')
                             ->placeholder('Masukkan Jumlah ')
                             ->required(),
+                        Select::make('perusahaan_id')
+                            ->label('Perusahaan')
+                            ->placeholder('Pilih Perusahaan')
+                            ->options(Perusahaan::all()->pluck('nama', 'id'))
+                            ->searchable()
+                            ->hidden(function (Get $get) {
+                                $array_of_utang_perusahaan = Account::where('pesantren_id', Filament::getTenant()->id)
+                                    ->where(function ($query) {
+                                        $query->where('account_name', 'like', 'Utang%')
+                                            ->orWhere('account_name', 'like', 'Utang Gaji')
+                                            ->orWhere('account_name', 'like', 'Utang Bank');
+                                    })
+                                    ->pluck('id')
+                                    ->toArray();
+                                return !in_array($get('account_id'), $array_of_utang_perusahaan);
+                            }),
+                        Select::make('santri_id')
+                            ->label('Santri')
+                            ->placeholder('Pilih Santri')
+                            ->options(Santri::all()->pluck('nama', 'id'))
+                            ->searchable()
+                            ->hidden(function (Get $get) {
+                                $array_of_utang_perusahaan = Account::where('pesantren_id', Filament::getTenant()->id)
+                                    ->where(function ($query) {
+                                        $query->where('account_name', 'like', 'Piutang%');
+                                    })
+                                    ->pluck('id')
+                                    ->toArray();
+                                return !in_array($get('account_id'), $array_of_utang_perusahaan);
+                            }),
                     ])
             ])->columns(1);
     }
