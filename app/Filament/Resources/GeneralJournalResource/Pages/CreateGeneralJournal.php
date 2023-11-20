@@ -118,6 +118,8 @@ class CreateGeneralJournal extends CreateRecord
             $general_journal->journal_detail_id = $journal_detail_id;
             $general_journal->account_id = $transaction['account_id'];
             $general_journal->position = $transaction['position'];
+            $general_journal->perusahaan_id = $transaction['perusahaan_id'];
+            $general_journal->santri_id = $transaction['santri_id'];
             $general_journal->amount = $transaction['amount'];
             $general_journal->pesantren_id = $this->data['pesantren_id'];
             $general_journal->save();
