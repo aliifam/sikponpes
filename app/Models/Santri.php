@@ -23,4 +23,9 @@ class Santri extends Model
     {
         return $this->belongsTo(Pesantren::class);
     }
+
+    public function generalJournal()
+    {
+        return $this->hasMany(GeneralJournal::class);
+    }
 }

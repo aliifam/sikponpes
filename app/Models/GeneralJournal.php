@@ -34,4 +34,14 @@ class GeneralJournal extends Model
     {
         return $this->belongsTo(JournalDetail::class, 'journal_detail_id');
     }
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class);
+    }
+
+    public function santri()
+    {
+        return $this->belongsTo(Santri::class);
+    }
 }

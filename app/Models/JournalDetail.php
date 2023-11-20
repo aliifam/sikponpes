@@ -34,6 +34,7 @@ class JournalDetail extends Model
     //journals is json type containing account_id, position, and amount. structure from general journals table
     protected $casts = [
         'journals' => 'array',
+        'date' => 'datetime'
     ];
 
     public function general_journal()
