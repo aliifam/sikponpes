@@ -13,6 +13,8 @@ class BukuBesar extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
+    protected static ?string $navigationGroup = 'Manajemen Buku';
+
     protected static string $view = 'filament.resources.buku-besar-resource.pages.buku-besar';
 
     public $data;
