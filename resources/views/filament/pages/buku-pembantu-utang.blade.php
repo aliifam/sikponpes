@@ -10,7 +10,7 @@
         $debit = 0;
         $kredit = 0;
     @endphp
-    <h2 class="text-lg font-semibold mt-0">{{ $perusahaanName }}, Periode {{ $year }}</h2>
+    <h2 class="text-lg font-semibold mt-0">{{ $perusahaanName }} Periode {{ $year }}</h2>
 
     {{-- start dropdown and submit --}}
     <div class="flex items-center">
@@ -92,6 +92,7 @@
                 @endforeach
                 @if ($data->count() == 0)
                     {{-- single row displayed empty --}}
+                    <td class="px-6 py-3 text-center" colspan="4">Data Kosong</td>
                 @endif
             </tbody>
         </table>

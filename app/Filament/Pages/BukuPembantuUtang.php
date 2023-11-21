@@ -36,7 +36,11 @@ class BukuPembantuUtang extends Page
             $perusahaan = $_GET['perusahaan'];
         } else {
             $year = date('Y');
-            $perusahaan = $perusahaans->first()->id;
+            if (!$perusahaans->isEmpty()) {
+                $perusahaan = $perusahaans->first()->id;
+            } else {
+                $perusahaan = null;
+            }
         }
 
         //take the data where pesantren_id = session, peruahaan_id = perusahaan, and year = tahun, date is from detail
@@ -65,7 +69,12 @@ class BukuPembantuUtang extends Page
             ]);
         }
 
-        $perusahaanName = Perusahaan::where('id', $perusahaan)->first()->nama;
+        if ($perusahaan != null) {
+            //get perusahaan name (for title)
+            $perusahaanName = Perusahaan::where('id', $perusahaan)->first()->nama;
+        } else {
+            $perusahaanName = null;
+        }
 
         // dd($years->toArray());
         // dd($data->toArray());
