@@ -145,6 +145,11 @@
                         </td>
                     </tr>
                 @endforeach
+                @if (empty($listTanah))
+                    {{-- single row displayed empty --}}
+                    <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                @endif
+
 
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="" class="p-3 text-center">
@@ -189,6 +194,10 @@
                         </td>
                     </tr>
                 @endforeach
+                @if (empty($listKendaraan))
+                    {{-- single row displayed empty --}}
+                    <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                @endif
 
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="" class="p-3 text-center">
@@ -233,6 +242,11 @@
                         </td>
                     </tr>
                 @endforeach
+                @if (empty($listPeralatan))
+                    {{-- single row displayed empty --}}
+                    <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                @endif
+
 
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="" class="p-3 text-center">
@@ -277,6 +291,10 @@
                         </td>
                     </tr>
                 @endforeach
+                @if (empty($listGedung))
+                    {{-- single row displayed empty --}}
+                    <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                @endif
             </tbody>
         </table>
     </div>

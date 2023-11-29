@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Models\GeneralJournal;
 use App\Models\InitialBalance;
 use App\Models\JournalDetail;
 use Filament\Facades\Filament;
@@ -45,20 +46,13 @@ class BukuPembantuAktivaTetap extends Page
         $idperalatan = \App\Models\Account::where('account_name', 'LIKE', 'Peralatan dan Mesin')->where('pesantren_id', $session)->first()->id;
         $idgedung = \App\Models\Account::where('account_name', 'LIKE', 'Gedung dan Bangunan')->where('pesantren_id', $session)->first()->id;
 
-        //general journal incude asset tetap id and where position is debit and where date before or equal to selected date
-        $data = \App\Models\GeneralJournal::with('detail', 'account')
-            ->whereHas('detail', function ($q) use ($idtanah, $idkendaraan, $idperalatan, $idgedung, $year, $month) {
-                $q->where(function ($q) use ($year, $month) {
-                    $q->whereYear('date', '>', $year)
-                        ->orWhere(function ($q) use ($year, $month) {
-                            $q->whereYear('date', '<=', $year)
-                                ->whereMonth('date', '<', $month);
-                        });
-                })
-                    ->whereIn('account_id', [$idtanah, $idkendaraan, $idperalatan, $idgedung]);
-            })
-            ->where('position', 'debit')
-            ->get();
+        //general journal incude asset tetap id and where position is debit
+        $data = GeneralJournal::whereHas('account', function ($q) use ($idtanah, $idkendaraan, $idperalatan, $idgedung) {
+            $q->where('id', $idtanah)
+                ->orWhere('id', $idkendaraan)
+                ->orWhere('id', $idperalatan)
+                ->orWhere('id', $idgedung);
+        })->where('position', 'debit')->with('account', 'detail')->get();
 
 
         // dd($data->toArray());
@@ -70,6 +64,12 @@ class BukuPembantuAktivaTetap extends Page
 
 
         foreach ($data as $d) {
+            //filter tanggal misal $year = 2021 dan $month = 1 maka $d->detail->date yang akan diambil hanya yang sebulan sebelumnya atau lebih jadi harusnya detail date 2020-12-31 masuk atau lebih lama dari itu
+            $tanggal_beli = $d->detail->date;
+            $selisih_bulan = (date('Y', strtotime($year . '-' . $month . '-01')) - date('Y', strtotime($tanggal_beli))) * 12 + (date('m', strtotime($year . '-' . $month . '-01')) - date('m', strtotime($tanggal_beli)));
+            if ($selisih_bulan < 1) {
+                continue;
+            }
             if ($d->account_id == $idtanah) {
                 $listTanah[] = $d;
             } elseif ($d->account_id == $idkendaraan) {
