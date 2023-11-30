@@ -178,7 +178,7 @@ class RegisterPesantren extends RegisterTenant
                             "1.3.5" => array(
                                 "name" => "Konstruksi dalam Pengerjaan",
                                 "code" => "1.3.5",
-                                "position" => "kredit"
+                                "position" => "debit"
                             ),
                             "1.3.6" => array(
                                 "name" => "Akumulasi Penyusutan Aset",
@@ -188,17 +188,17 @@ class RegisterPesantren extends RegisterTenant
                             "1.3.7" => array(
                                 "name" => "Aset Tetap Lainnya",
                                 "code" => "1.3.7",
-                                "position" => "kredit"
+                                "position" => "debit"
                             ),
                             "1.3.8" => array(
                                 "name" => "Aset Tidak Berwujud",
                                 "code" => "1.3.8",
-                                "position" => "kredit"
+                                "position" => "debit"
                             ),
                             "1.3.9" => array(
                                 "name" => "Aset Lain-lain",
                                 "code" => "1.3.9",
-                                "position" => "kredit"
+                                "position" => "debit"
                             ),
                             "1.3.10" => array(
                                 "name" => "Akumulasi Penyusutan Aset Lain-lain",
