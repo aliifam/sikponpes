@@ -168,7 +168,7 @@ class RegisterPesantren extends RegisterTenant
                             "1.3.3" => array(
                                 "name" => "Peralatan dan Mesin",
                                 "code" => "1.3.3",
-                                "position" => "kredit"
+                                "position" => "debit"
                             ),
                             "1.3.4" => array(
                                 "name" => "Gedung dan Bangunan",
