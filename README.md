@@ -1,12 +1,15 @@
 # SIK Ponpes
 
-Sistem informasi keuangan pondok pesantren
+Sistem informasi keuangan pondok pesantren, aplikasi akunting simpel untuk pondok pesantren.
 
 ## Fitur
 
 -   Multi Pesantren
 -   Manajemen Akun
 -   Buku Besar
+-   Buku Pembantu Aktiva Tetap
+-   Buku Pembantu Piutang
+-   Buku Pembantu Utang
 -   Jurnal Umum
 -   Neraca Lajur
 -   Neraca Awal
@@ -14,6 +17,7 @@ Sistem informasi keuangan pondok pesantren
 -   Laporan Arus Kas
 -   Laporan Posisi Keuangan
 -   Laporan Perubahan Ekuitas
+-   Export ke Excel dan PDF
 
 ## Instalasi
 
@@ -35,4 +39,4 @@ Sistem informasi keuangan pondok pesantren
 -   Tailwind CSS
 -   Alpine JS
 -   Livewire
--   Filament
+-   FilamentPHP
