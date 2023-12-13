@@ -90,6 +90,40 @@
                         </td>
                     </tr>
                 @endforeach
+                {{-- accumulation and total --}}
+                @if ($data->count() > 0)
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-left" colspan="2">Total</td>
+                        <td class="px-6 py-3 text-center">
+                            @if ($debit < 0)
+                                -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $debit)), 3))) }}
+                            @else
+                                Rp{{ strrev(implode('.', str_split(strrev(strval($debit)), 3))) }}
+                            @endif
+                        </td>
+                        <td class="px-6 py-3 text-center">
+                            @if ($kredit < 0)
+                                -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * $kredit)), 3))) }}
+                            @else
+                                Rp{{ strrev(implode('.', str_split(strrev(strval($kredit)), 3))) }}
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 text-left" colspan="2">Saldo</td>
+                        {{-- saldo utang adalah kredit - debit --}}
+                        <td class="px-6 py-3 text-center">
+                            @if ($kredit - $debit < 0)
+                                -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($kredit - $debit))), 3))) }}
+                            @else
+                                Rp{{ strrev(implode('.', str_split(strrev(strval($kredit - $debit)), 3))) }}
+                            @endif
+                        </td>
+                    </tr>
+                @endif
+                {{-- end accumulation and total --}}
+                {{-- single row displayed empty --}}
                 @if ($data->count() == 0)
                     {{-- single row displayed empty --}}
                     <td class="px-6 py-3 text-center" colspan="4">Data Kosong</td>
