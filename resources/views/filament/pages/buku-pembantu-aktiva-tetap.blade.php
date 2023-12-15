@@ -49,6 +49,8 @@
                 $monthName = 'Desember';
                 break;
         }
+
+        $total;
     @endphp
 
     <h2 class="text-lg font-semibold mt-0">Periode {{ $monthName }} {{ $dt }}</h2>

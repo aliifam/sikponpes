@@ -110,10 +110,11 @@
                             @endif
                         </td>
                     </tr>
-                    <tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-3 text-left" colspan="2">Saldo</td>
                         {{-- saldo utang adalah kredit - debit --}}
-                        <td class="px-6 py-3 text-center">
+                        <td class="px-6 py-3 text-center" colspan="2">
                             @if ($kredit - $debit < 0)
                                 -Rp{{ strrev(implode('.', str_split(strrev(strval(-1 * ($kredit - $debit))), 3))) }}
                             @else
