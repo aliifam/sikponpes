@@ -51,6 +51,26 @@
         }
 
         $total;
+
+        $totalAmountTanah = 0;
+        $totalDepresiasiBulananTanah = 0;
+        $totalDepresiasiTanah = 0;
+        $totalNilaiBukuTanah = 0;
+
+        $totalAmountKendaraan = 0;
+        $totalDepresiasiBulananKendaraan = 0;
+        $totalDepresiasiKendaraan = 0;
+        $totalNilaiBukuKendaraan = 0;
+
+        $totalAmountPeralatan = 0;
+        $totalDepresiasiBulananPeralatan = 0;
+        $totalDepresiasiPeralatan = 0;
+        $totalNilaiBukuPeralatan = 0;
+
+        $totalAmountGedung = 0;
+        $totalDepresiasiBulananGedung = 0;
+        $totalDepresiasiGedung = 0;
+        $totalNilaiBukuGedung = 0;
     @endphp
 
     <h2 class="text-lg font-semibold mt-0">Periode {{ $monthName }} {{ $dt }}</h2>
@@ -124,7 +144,49 @@
                         Nilai Buku
                     </td>
                 </tr>
+                {{-- saldo awal tanah --}}
+                @if ($initialTanah != null)
+                    @php
+                        $totalAmountTanah += $initialTanah->amount;
+                        $totalDepresiasiBulananTanah += $initialTanah->depresiasi_bulanan;
+                        $totalDepresiasiTanah += $initialTanah->depresiasi;
+                        $totalNilaiBukuTanah += $initialTanah->amount - $initialTanah->depresiasi;
+                    @endphp
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td style=";padding-left: 1.5rem!important;" class="text-center">
+                            Saldo Awal
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            {{ strftime('%G', strtotime($initialTanah->date)) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialTanah->amount)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialTanah->depresiasi_bulanan)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialTanah->depresiasi)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialTanah->amount - $initialTanah->depresiasi)), 3))) }}
+                        </td>
+                    </tr>
+                @else
+                    {{-- single row displayed empty --}}
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="6">Saldo awal Tanah kosong</td>
+                    </tr>
+                @endif
                 @foreach ($listTanah as $tanah)
+                    @php
+                        $totalAmountTanah += $tanah->amount;
+                        $totalDepresiasiBulananTanah += $tanah->depresiasi_bulanan;
+                        $totalDepresiasiTanah += $tanah->depresiasi;
+                        $totalNilaiBukuTanah += $tanah->amount - $tanah->depresiasi;
+                    @endphp
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style=";padding-left: 1.5rem!important;" class="text-center">
@@ -149,8 +211,32 @@
                 @endforeach
                 @if (empty($listTanah))
                     {{-- single row displayed empty --}}
-                    <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                    </tr>
                 @endif
+                {{-- counting total of amount, depresiasi bulanan, depresiasi, nilai buku of tanah --}}
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style=";padding-left: 1.5rem!important;" class="text-center">
+                        Total
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalAmountTanah)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalDepresiasiBulananTanah)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalDepresiasiTanah)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalNilaiBukuTanah)), 3))) }}
+                    </td>
+                </tr>
 
 
                 <tr class="bg-green-600 text-white font-bold">
@@ -173,7 +259,49 @@
                         Nilai Buku
                     </td>
                 </tr>
+                {{-- saldo awal kendaraan --}}
+                @if ($initialKendaraan != null)
+                    @php
+                        $totalAmountKendaraan += $initialKendaraan->amount;
+                        $totalDepresiasiBulananKendaraan += $initialKendaraan->depresiasi_bulanan;
+                        $totalDepresiasiKendaraan += $initialKendaraan->depresiasi;
+                        $totalNilaiBukuKendaraan += $initialKendaraan->amount - $initialKendaraan->depresiasi;
+                    @endphp
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td style=";padding-left: 1.5rem!important;" class="text-center">
+                            Saldo Awal
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            {{ strftime('%G', strtotime($initialKendaraan->date)) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialKendaraan->amount)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialKendaraan->depresiasi_bulanan)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialKendaraan->depresiasi)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialKendaraan->amount - $initialKendaraan->depresiasi)), 3))) }}
+                        </td>
+                    </tr>
+                @else
+                    {{-- single row displayed empty --}}
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="6">Saldo awal kendaraan kosong</td>
+                    </tr>
+                @endif
                 @foreach ($listKendaraan as $kendaraan)
+                    @php
+                        $totalAmountKendaraan += $kendaraan->amount;
+                        $totalDepresiasiBulananKendaraan += $kendaraan->depresiasi_bulanan;
+                        $totalDepresiasiKendaraan += $kendaraan->depresiasi;
+                        $totalNilaiBukuKendaraan += $kendaraan->amount - $kendaraan->depresiasi;
+                    @endphp
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style=";padding-left: 1.5rem!important;" class="text-center">
@@ -198,8 +326,32 @@
                 @endforeach
                 @if (empty($listKendaraan))
                     {{-- single row displayed empty --}}
-                    <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                    </tr>
                 @endif
+                {{-- counting total of amount, depresiasi bulanan, depresiasi, nilai buku of kendaraan --}}
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style=";padding-left: 1.5rem!important;" class="text-center">
+                        Total
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalAmountKendaraan)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalDepresiasiBulananKendaraan)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalDepresiasiKendaraan)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalNilaiBukuKendaraan)), 3))) }}
+                    </td>
+                </tr>
 
                 <tr class="bg-green-600 text-white font-bold">
                     <td style="" class="p-3 text-center">
@@ -221,7 +373,49 @@
                         Nilai Buku
                     </td>
                 </tr>
+                {{-- saldo awal kendaraan --}}
+                @if ($initialPeralatan != null)
+                    @php
+                        $totalAmountPeralatan += $initialPeralatan->amount;
+                        $totalDepresiasiBulananPeralatan += $initialPeralatan->depresiasi_bulanan;
+                        $totalDepresiasiPeralatan += $initialPeralatan->depresiasi;
+                        $totalNilaiBukuPeralatan += $initialPeralatan->amount - $initialPeralatan->depresiasi;
+                    @endphp
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td style=";padding-left: 1.5rem!important;" class="text-center">
+                            Saldo Awal
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            {{ strftime('%G', strtotime($initialPeralatan->date)) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialPeralatan->amount)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialPeralatan->depresiasi_bulanan)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialPeralatan->depresiasi)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialPeralatan->amount - $initialPeralatan->depresiasi)), 3))) }}
+                        </td>
+                    </tr>
+                @else
+                    {{-- single row displayed empty --}}
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="6">Saldo awal Peralatan dan Mesin kosong</td>
+                    </tr>
+                @endif
                 @foreach ($listPeralatan as $peralatan)
+                    @php
+                        $totalAmountPeralatan += $peralatan->amount;
+                        $totalDepresiasiBulananPeralatan += $peralatan->depresiasi_bulanan;
+                        $totalDepresiasiPeralatan += $peralatan->depresiasi;
+                        $totalNilaiBukuPeralatan += $peralatan->amount - $peralatan->depresiasi;
+                    @endphp
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style=";padding-left: 1.5rem!important;" class="text-center">
@@ -246,8 +440,32 @@
                 @endforeach
                 @if (empty($listPeralatan))
                     {{-- single row displayed empty --}}
-                    <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                    </tr>
                 @endif
+                {{-- counting total of amount, depresiasi bulanan, depresiasi, nilai buku of peralatan --}}
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style=";padding-left: 1.5rem!important;" class="text-center">
+                        Total
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalAmountPeralatan)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalDepresiasiBulananPeralatan)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalDepresiasiPeralatan)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalNilaiBukuPeralatan)), 3))) }}
+                    </td>
+                </tr>
 
 
                 <tr class="bg-green-600 text-white font-bold">
@@ -270,7 +488,49 @@
                         Nilai Buku
                     </td>
                 </tr>
+                {{-- saldo awal kendaraan --}}
+                @if ($initialGedung != null)
+                    @php
+                        $totalAmountGedung += $initialGedung->amount;
+                        $totalDepresiasiBulananGedung += $initialGedung->depresiasi_bulanan;
+                        $totalDepresiasiGedung += $initialGedung->depresiasi;
+                        $totalNilaiBukuGedung += $initialGedung->amount - $initialGedung->depresiasi;
+                    @endphp
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td style=";padding-left: 1.5rem!important;" class="text-center">
+                            Saldo Awal
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            {{ strftime('%G', strtotime($initialGedung->date)) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialGedung->amount)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialGedung->depresiasi_bulanan)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialGedung->depresiasi)), 3))) }}
+                        </td>
+                        <td class="px-3 py-2 text-center" style="">
+                            Rp.{{ strrev(implode('.', str_split(strrev(strval($initialGedung->amount - $initialGedung->depresiasi)), 3))) }}
+                        </td>
+                    </tr>
+                @else
+                    {{-- single row displayed empty --}}
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="6">Saldo awal Gedung dan Bangunan kosong</td>
+                    </tr>
+                @endif
                 @foreach ($listGedung as $gedung)
+                    @php
+                        $totalAmountGedung += $gedung->amount;
+                        $totalDepresiasiBulananGedung += $gedung->depresiasi_bulanan;
+                        $totalDepresiasiGedung += $gedung->depresiasi;
+                        $totalNilaiBukuGedung += $gedung->amount - $gedung->depresiasi;
+                    @endphp
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style=";padding-left: 1.5rem!important;" class="text-center">
@@ -295,8 +555,32 @@
                 @endforeach
                 @if (empty($listGedung))
                     {{-- single row displayed empty --}}
-                    <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="6">Data Kosong</td>
+                    </tr>
                 @endif
+                {{-- counting total of amount, depresiasi bulanan, depresiasi, nilai buku of gedung --}}
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td style=";padding-left: 1.5rem!important;" class="text-center">
+                        Total
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalAmountGedung)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalDepresiasiBulananGedung)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalDepresiasiGedung)), 3))) }}
+                    </td>
+                    <td class="px-3 py-2 text-center" style="">
+                        Rp.{{ strrev(implode('.', str_split(strrev(strval($totalNilaiBukuGedung)), 3))) }}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

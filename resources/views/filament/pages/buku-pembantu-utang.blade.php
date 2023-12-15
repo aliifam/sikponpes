@@ -127,7 +127,10 @@
                 {{-- single row displayed empty --}}
                 @if ($data->count() == 0)
                     {{-- single row displayed empty --}}
-                    <td class="px-6 py-3 text-center" colspan="4">Data Kosong</td>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-3 text-center" colspan="4">Data Kosong</td>
+                    </tr>
                 @endif
             </tbody>
         </table>

@@ -68,26 +68,26 @@ class BukuPembantuAktivaTetap extends Page
 
         //calculate depresiasi of initial balance
         if ($initialGedung != null) {
-            $initialGedung->depresiasi_bulanan = floor($initialGedung->amount / 12);
+            $initialGedung->depresiasi_bulanan = floor($initialGedung->amount / $dgedung);
             $initialGedung->depresiasi = $initialGedung->depresiasi_bulanan * $month;
         }
 
         if ($initialPeralatan != null) {
-            $initialPeralatan->depresiasi_bulanan = floor($initialPeralatan->amount / 12);
+            $initialPeralatan->depresiasi_bulanan = floor($initialPeralatan->amount / $dperalatan);
             $initialPeralatan->depresiasi = $initialPeralatan->depresiasi_bulanan * $month;
         }
 
         if ($initialKendaraan != null) {
-            $initialKendaraan->depresiasi_bulanan = floor($initialKendaraan->amount / 12);
+            $initialKendaraan->depresiasi_bulanan = floor($initialKendaraan->amount / $dkendaraan);
             $initialKendaraan->depresiasi = $initialKendaraan->depresiasi_bulanan * $month;
         }
 
         if ($initialTanah != null) {
-            $initialTanah->depresiasi_bulanan = 0;
+            $initialTanah->depresiasi_bulanan = $dtanah;
             $initialTanah->depresiasi = $initialTanah->depresiasi_bulanan * $month;
         }
 
-        dd($initialGedung, $initialPeralatan, $initialKendaraan, $initialTanah);
+        // dd($initialGedung, $initialPeralatan, $initialKendaraan, $initialTanah);
 
         // dd($data->toArray());
 
