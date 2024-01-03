@@ -16,7 +16,7 @@ class ArusKas extends ApexChartWidget
      */
     protected static string $chartId = 'aruskaschart';
 
-    public ?string $filter = '2023';
+    public ?string $filter = '2024';
     protected static ?string $loadingIndicator = 'Loading...';
 
     /**
@@ -124,6 +124,7 @@ class ArusKas extends ApexChartWidget
     {
 
         return [
+            '2024' => '2024',
             '2023' => '2023',
             '2022' => '2022',
             '2021' => '2021',

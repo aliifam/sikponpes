@@ -384,6 +384,21 @@ class RegisterPesantren extends RegisterTenant
                                 "code" => "5.1.9",
                                 "position" => "debit"
                             ),
+                            "5.1.10" => array(
+                                "name" => "Depresiasi Kendaraan",
+                                "code" => "5.1.10",
+                                "position" => "debit"
+                            ),
+                            "5.1.11" => array(
+                                "name" => "Depresiasi Gedung dan Bangunan",
+                                "code" => "5.1.11",
+                                "position" => "debit"
+                            ),
+                            "5.1.12" => array(
+                                "name" => "Depresiasi Peralatan dan Mesin",
+                                "code" => "5.1.12",
+                                "position" => "debit"
+                            ),
                         )
                     ),
                     "5.2" => array(
