@@ -108,10 +108,10 @@ class AccountResource extends Resource
             ->groups([
                 Group::make('classification.classification_name')
                     ->label('Klasifikasi')
-                    ->orderQueryUsing(function (Builder $query, string $direction) {
-                        //covert account_code to interger before ordering to avoid ordering 1, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9
-                        $query->orderByRaw('CAST(account_code AS UNSIGNED) ' . $direction);
-                    })
+                    // ->orderQueryUsing(function (Builder $query, string $direction) {
+                    //     //covert account_code to interger before ordering to avoid ordering 1, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9
+                    //     $query->orderByRaw('CAST(account_code AS UNSIGNED) ' . $direction);
+                    // })
                     ->collapsible(),
                 // Group::make('classification.parent.parent_name')
                 //     ->label('Parent')
